@@ -4,6 +4,8 @@ import AuthContext from "../context/AuthContext";
 import Home from "../pages/Home";
 import SignIn from "../pages/auth/SignIn";
 import Verify from "../pages/auth/Verify";
+import DashboardContext from "../context/DashboardContext";
+import Projects from "../pages/dashboard/Projects";
 
 const Routes = (): JSX.Element => {
   type routeProps = Array<{
@@ -49,7 +51,22 @@ const Routes = (): JSX.Element => {
       ],
     },
   ];
-  const router = createBrowserRouter([...pageRoutes,...authRoutes]);
+  const dashboardRoutes = [
+    {
+      path: "/dashboard",
+      element: 
+        <DashboardContext>
+          <Outlet />
+        </DashboardContext>,
+      children: [
+        {
+          path: "",
+          element: <Projects />,
+        }
+      ],
+    },
+  ];
+  const router = createBrowserRouter([...pageRoutes,...authRoutes,...dashboardRoutes]);
 
   return <RouterProvider router={router} />;
 };
