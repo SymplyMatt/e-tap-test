@@ -33,8 +33,11 @@ module.exports = {
       colors: {
         white: "#FFFFFF",
         recruitBlue: "#002147",
+        inputBorderActive: "#141812",
         borderGray: "#E1E4E8",
         lightBlack: "#B4B4B4",
+        textFade: "#ACACAC",
+        labelBlack: "#1C1C1C",
       },
       spacing: {
         1: "1px",
@@ -83,6 +86,7 @@ module.exports = {
       },
       borderRadius: {
         5: "5px",
+        8: "8px",
         10: "10px",
         15: "15px",
         16: "16px",

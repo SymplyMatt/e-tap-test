@@ -1,3 +1,5 @@
+import Button from "../components/common/Button"
+
 const Home = () => {
   return (
     <div className="h-screen w-screen px-40 py-20 text-recruitBlue flex flex-col items-center justify-center relative">
@@ -5,7 +7,7 @@ const Home = () => {
             <div className="font-inter font-semibold">LOGO</div>
             <div className="flex items-center gap-20">
                 <div className="font-semibold">Log in</div>
-                <div className="py-12 px-30 bg-recruitBlue text-white h-[55px] flex items-center justify-center cursor-pointer rounded-16">Create project</div>
+                <Button label="Create Project" onClick={()=>{}} disabled={false}/>
             </div>
         </div>
         <div className="flex flex-col justify-center items-center gap-20">
