@@ -1,12 +1,14 @@
+import { useNavigate } from "react-router-dom"
 import Button from "../components/common/Button"
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <div className="h-screen w-screen px-40 py-20 text-recruitBlue flex flex-col items-center justify-center relative">
         <div className="w-full flex justify-between absolute top-0 px-40 py-20">
-            <div className="font-inter font-semibold">LOGO</div>
+            <div className="font-inter font-semibold cursor-pointer" onClick={()=> navigate('/')}>LOGO</div>
             <div className="flex items-center gap-20">
-                <div className="font-semibold">Log in</div>
+                <div className="font-semibold cursor-pointer" onClick={()=> navigate('/auth/signin')}>Log in</div>
                 <Button label="Create Project" onClick={()=>{}} disabled={false}/>
             </div>
         </div>

@@ -1,10 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/common/Button"
 import Input from "../../components/common/Input"
 const Verify = () => {
+    const navigate = useNavigate();
   return (
     <div className="flex flex-col items-center justify-center text-center relative px-40 py-20 h-screen">
       <div className="w-full flex justify-between absolute top-0 px-40 py-20">
-        <div className="font-inter font-semibold">LOGO</div>
+        <div className="font-inter font-semibold cursor-pointer" onClick={()=> navigate('/')}>LOGO</div>
         <div className=""></div>
       </div>
       <div className="flex flex-col justify-center items-center gap-20 w-full mt-20">

@@ -1,18 +1,20 @@
 import Button from "../../components/common/Button"
 import Input from "../../components/common/Input"
 import google from '../../assets/images/google.svg'
+import { useNavigate } from "react-router-dom";
 const SignIn = () => {
+    const navigate = useNavigate();
   return (
     <div className="flex flex-col items-center justify-center text-center relative px-40 py-20 h-screen">
       <div className="w-full flex justify-center absolute top-0 px-40 py-20">
-        <div className="font-inter font-semibold">LOGO</div>
+        <div className="font-inter font-semibold cursor-pointer" onClick={()=> navigate('/')}>LOGO</div>
       </div>
       <div className="flex flex-col justify-center gap-20 w-[40%] mt-20">
         <div className="flex flex-col gap-10">
             <div className="font-hiragino font-extrabold text-28 leading-36.88 tracking-tight text-center items-center text-recruitBlue">
             Welcome back!
             </div>
-            <div className="font-poppins text-base font-normal leading-6 text-center text-textFade mt-[-10px]">New to [brand name]? <span className="text-black font-semibold cursor-pointer underline">Sign Up</span> </div>
+            <div className="font-poppins text-base font-normal leading-6 text-center text-textFade mt-[-10px]">New to [brand name]? <span className="text-black font-semibold cursor-pointer underline" onClick={()=> navigate('/auth/signup')}>Sign Up</span> </div>
         </div>
         <div className="w-full flex flex-col gap-20">
           <Input updateFunction={()=>{}} label="Email"/>
