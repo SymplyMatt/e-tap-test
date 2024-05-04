@@ -3,6 +3,7 @@ import SignUp from "../pages/auth/SignUp";
 import AuthContext from "../context/AuthContext";
 import Home from "../pages/Home";
 import SignIn from "../pages/auth/SignIn";
+import Verify from "../pages/auth/Verify";
 
 const Routes = (): JSX.Element => {
   type routeProps = Array<{
@@ -40,6 +41,10 @@ const Routes = (): JSX.Element => {
         {
           path: "signin",
           element: <SignIn />,
+        },
+        {
+          path: "verify",
+          element: <Verify />,
         },
       ],
     },

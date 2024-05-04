@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface InputProps {
   updateFunction: (value: string) => void;
   label: string;
   placeholder?: string;
+  inputExtraClass?: string;
 }
 
-function Input({ updateFunction, label, placeholder=label.toLowerCase() }: InputProps) {
+function Input({ updateFunction, label, placeholder=label.toLowerCase(), inputExtraClass='' }: InputProps) {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleFocus = () => {
@@ -23,7 +24,7 @@ function Input({ updateFunction, label, placeholder=label.toLowerCase() }: Input
       <input 
         type="text" 
         placeholder={isFocused ? '' : placeholder} 
-        className={`outline-none border-none w-full h-full cursor-pointer ${isFocused ? 'text-black' : 'text-lightBlack  text-14'}`}
+        className={`outline-none border-none w-full h-full cursor-pointer ${inputExtraClass} ${isFocused ? 'text-black' : 'text-lightBlack  text-14'}`}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={(e) => updateFunction(e.target.value)}
