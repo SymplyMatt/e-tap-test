@@ -14,7 +14,7 @@ const Home = () => {
             <div className="flex flex-col justify-center gap-10">
               <div className="flex justify-center p-10 border-solid border border-gray-borderGray rounded-xl gap-100">
                 <input type="text" className="outline-none border-none text-lightBlack " placeholder="Enter email address"/>
-                <div className="flex items-center justify-center bg-lightBlack h-[30px] w-[30px] rounded-50 text-white"><i className="fa-solid fa-arrow-right"></i></div>
+                <div className="flex items-center justify-center bg-lightBlack h-[30px] w-[30px] rounded-50 text-white cursor-pointer"><i className="fa-solid fa-arrow-right"></i></div>
               </div>
               <div className="text-center flex justify-center text-recruitBlue">*Sign up is required</div>
             </div>
