@@ -6,6 +6,7 @@ import SignIn from "../pages/auth/SignIn";
 import Verify from "../pages/auth/Verify";
 import DashboardContext from "../context/DashboardContext";
 import Projects from "../pages/dashboard/Projects";
+import CreateProject from "../pages/dashboard/CreateProject";
 
 const Routes = (): JSX.Element => {
   type routeProps = Array<{
@@ -62,7 +63,11 @@ const Routes = (): JSX.Element => {
         {
           path: "",
           element: <Projects />,
-        }
+        },
+        {
+          path: "new",
+          element: <CreateProject />,
+        },
       ],
     },
   ];

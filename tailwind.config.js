@@ -39,6 +39,7 @@ module.exports = {
         textFade: "#ACACAC",
         labelBlack: "#1C1C1C",
         dashboardColor: "#F8FBFF",
+        lightBlue: "#1976D2",
       },
       spacing: {
         1: "1px",
