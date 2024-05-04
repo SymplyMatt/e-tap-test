@@ -1,7 +1,8 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import SignUp from "../pages/auth/SignUp";
 import AuthContext from "../context/AuthContext";
 import Home from "../pages/Home";
+import SignIn from "../pages/auth/SignIn";
 
 const Routes = (): JSX.Element => {
   type routeProps = Array<{
@@ -25,16 +26,20 @@ const Routes = (): JSX.Element => {
       path: "/auth",
       element: 
         <AuthContext>
-          <SignUp />
+          <Outlet />
         </AuthContext>,
       children: [
         {
           path: "",
-          element: <SignUp />,
+          element: <SignIn />,
         },
         {
           path: "signup",
           element: <SignUp />,
+        },
+        {
+          path: "signin",
+          element: <SignIn />,
         },
       ],
     },
