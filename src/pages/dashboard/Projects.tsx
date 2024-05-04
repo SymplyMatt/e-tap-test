@@ -5,7 +5,7 @@ const Projects = () => {
   return (
     <Dashboard>
         <div className="text-20 font-medium flex gap-5 w-full justify-start cursor-pointer h-[65px] items-center px-20"> <img src={projects} alt="" className="h-35"/> <div className="">Projects</div> </div>
-        <div className="">Hi</div>
+        <div className=""></div>
     </Dashboard>
   )
 }

@@ -3,11 +3,13 @@ import Button from '../common/Button'
 import staff from "../../assets/images/staff.svg"
 import company from "../../assets/images/company.svg"
 import settings from "../../assets/images/settings.svg"
+import { useNavigate } from "react-router-dom"
 const Sidebar = () => {
+    const navigate = useNavigate(); 
   return (
         <div className="h-screen col-span-2 border border-borderGray flex flex-col items-center gap-10">
             <div className="flex flex-col gap-20 w-full h-150 items-center justify-between">
-                <div className="font-inter font-semibold cursor-pointer px-40 text-24 h-60 flex items-center justify-center w-full">LOGO</div>
+                <div className="font-inter font-semibold cursor-pointer px-40 text-24 h-60 flex items-center justify-center w-full" onClick={()=>navigate('/')}>LOGO</div>
                 <div className="w-full p-10">
                     <Button label="+  &nbsp;Create Project" onClick={()=>{}} disabled={false} extraClass="w-full"/>
                 </div>
