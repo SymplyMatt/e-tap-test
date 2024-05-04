@@ -35,7 +35,7 @@ const Verify = () => {
                     <Input updateFunction={()=>{}} label="" inputExtraClass="text-center"/>
                 </div>
             </div>
-            <Button label="Verify Account" onClick={()=>{}} disabled={false}/>
+            <Button label="Verify Account" onClick={()=>navigate('/projects')} disabled={false}/>
           <div className="font-poppins text-base font-normal leading-6 text-center text-textFade mt-[-10px]">Resend code in <span className="text-black font-semibold cursor-pointer">59:00</span> </div>
         </div>
       </div>

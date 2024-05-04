@@ -19,7 +19,7 @@ const SignIn = () => {
         <div className="w-full flex flex-col gap-20">
           <Input updateFunction={()=>{}} label="Email"/>
           <Input updateFunction={()=>{}} label="Password"/>
-          <Button label="Login" onClick={()=>{}} disabled={false}/>
+          <Button label="Login" onClick={()=>navigate('/projects')} disabled={false}/>
           <div className="font-poppins text-base font-normal leading-6 text-center text-recruitBlue underline mt-[-10px] cursor-pointer">Forgot password or email? </div>
         </div>
         <div className="w-full flex flex-col gap-10">

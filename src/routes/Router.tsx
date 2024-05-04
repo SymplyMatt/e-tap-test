@@ -53,7 +53,7 @@ const Routes = (): JSX.Element => {
   ];
   const dashboardRoutes = [
     {
-      path: "/dashboard",
+      path: "/projects",
       element: 
         <DashboardContext>
           <Outlet />
