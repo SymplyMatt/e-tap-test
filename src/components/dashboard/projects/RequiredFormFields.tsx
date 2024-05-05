@@ -62,7 +62,7 @@ const RequiredFormFields : React.FC<ComponentProps> =  ({step,setStep}) => {
                     <Select options={['Required', 'Optional']} updateFunction={()=>{}}/>
                 </div>
             </div>
-            <div className="h-[100px] w-full bg-black"></div>
+            <div className="h-[100px] w-full bg-inherit"></div>
         </div>
   )
 }
