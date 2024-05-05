@@ -1,6 +1,8 @@
 import Input from '../../common/Input'
 import Textarea from '../../common/Textarea'
 import circle_check from '../../../assets/images/circle_check.svg'
+import calendar from '../../../assets/images/calendar.svg'
+import calendar_fade from '../../../assets/images/calendar_fade.svg'
 import { useNavigate } from 'react-router-dom'
 
 interface ComponentProps {
@@ -13,14 +15,14 @@ const ProjectDetails : React.FC<ComponentProps> =  ({step,setStep}) => {
         <div className="my-20 py-20 create-project flex flex-col w-full gap-20">
             <div className="flex flex-col w-[40%] items-center m-auto gap-16">
                 <div className="w-full flex flex-col relative">
-                    <Input updateFunction={()=>{}} label="Email"/>
+                    <Input updateFunction={()=>{}} label="Project name"/>
                     <div className="absolute top-1/2 transform -translate-y-1/2 right-10 z-0 bg-dashboardColor"><img src={circle_check} alt="" className='h-20 w-20 z-10'/></div>
                 </div>
                 <Textarea updateFunction={()=>{}} label="Add description" placeholder='Add description'/>
                 <div className="flex flex-col gap-10 items-center">
                     <div className="grid grid-cols-3 justify-center w-full gap-10">
                         <div className="col-span-2 flex items-center">
-                            <Input updateFunction={()=>{}} label="Start date" type='date'/>
+                            <Input updateFunction={()=>{}} label="Start date" type='date' icon={calendar_fade}/>
                         </div>
                         <div className="col-span-1 flex items-center">
                             <Input updateFunction={()=>{}} label="Time" type='time'/>
@@ -28,7 +30,7 @@ const ProjectDetails : React.FC<ComponentProps> =  ({step,setStep}) => {
                     </div>
                     <div className="grid grid-cols-3 justify-center w-full gap-10">
                         <div className="col-span-2 flex items-center">
-                            <Input updateFunction={()=>{}} label="Start date" type='date'/>
+                            <Input updateFunction={()=>{}} label="Start date" type='date' icon={calendar_fade}/>
                         </div>
                         <div className="col-span-1 flex items-center">
                             <Input updateFunction={()=>{}} label="Time" type='time'/>
