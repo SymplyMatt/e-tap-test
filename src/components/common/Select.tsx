@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface InputProps {
   updateFunction?: (value: string) => void;
@@ -6,10 +6,13 @@ interface InputProps {
   extraClass?: string;
   value?: string;
   icon?: any;
+  inFocus? : boolean;
 }
 
-function Select({ updateFunction, extraClass='', options, value, icon }: InputProps) {
+function Select({ updateFunction, extraClass='', options, value, icon, inFocus }: InputProps) {
   const [isFocused, setIsFocused] = useState(false);
+  const inputRef = useRef<any>(null);
+
   useEffect(()=>{
     if(value){
       setIsFocused(true);
@@ -27,6 +30,11 @@ function Select({ updateFunction, extraClass='', options, value, icon }: InputPr
     updateFunction && updateFunction(value);
   }
 
+  useEffect(()=>{
+    if(inFocus && inputRef.current){
+      inputRef.current.focus();
+    }
+  },[])
   return (
     <div className={`relative flex items-center p-10 border border-solid bg-inherit rounded-8 w-full ${!value &&'cursor-pointer'} relative z-0 transition-all duration-300 ${isFocused ? 'border-gray-borderGray' : 'border-gray-borderGray'} ${isFocused ? 'border-inputBorderActive' : ''}`}>
         {icon && <img src={icon} alt="" className='h-[24px] w-[24px]'/>}
@@ -36,6 +44,7 @@ function Select({ updateFunction, extraClass='', options, value, icon }: InputPr
         onBlur={!value ? handleBlur : ()=>{}}
         disabled = {value ? true : false}
         onChange={(e) => updateValue(e.target.value)}
+        ref={inputRef}
         >
             {options ? options.map((option, index)=>(
                 <option value={option} key={index}>{option}</option>

@@ -31,7 +31,7 @@ const RequiredFormFields : React.FC<ComponentProps> =  ({step,setStep}) => {
             <div className="flex flex-col w-[50%] items-center m-auto gap-16">
                 <div className="grid grid-cols-2 justify-center w-full gap-20 items-center">
                     <div className="font-semibold flex gap-5 items-center"><img src={mail} alt="" className='h-[25px] w-[25px]'/> Email address</div>
-                    <Select options={['Required', 'Optional']} updateFunction={()=>{}}/>
+                    <Select options={['Required', 'Optional']} updateFunction={()=>{}} inFocus={false}/>
                 </div>
                 <div className="grid grid-cols-2 justify-center w-full gap-20 items-center">
                     <div className="font-semibold flex gap-5 items-center"><img src={phone} alt="" className='h-[25px] w-[25px]'/> Phone number</div>

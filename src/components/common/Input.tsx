@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 interface InputProps {
   updateFunction?: (value: string) => void;
   label?: string;
@@ -7,11 +7,14 @@ interface InputProps {
   type?: string;
   value?: string;
   icon? : any;
+  inFocus? : boolean;
 }
 
-function Input({ updateFunction, label, placeholder= label ? label.toLowerCase() : '', inputExtraClass='', type='text', value, icon }: InputProps) {
+function Input({ updateFunction, label, placeholder= label ? label.toLowerCase() : '', inputExtraClass='', type='text', value, icon, inFocus }: InputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const inputRef = useRef<any>(null);
+
   useEffect(()=>{
     if(value){
       setIsFocused(true);
@@ -30,6 +33,12 @@ function Input({ updateFunction, label, placeholder= label ? label.toLowerCase()
     setInputValue(value);
     updateFunction && updateFunction(value);
   }
+
+  useEffect(()=>{
+    if(inFocus && inputRef.current){
+      inputRef.current.focus();
+    }
+  },[])
   return (
     <div className={`relative flex items-center p-10 border border-solid bg-inherit rounded-8 w-full ${!value &&'cursor-pointer'} relative z-0 transition-all duration-300 gap-10 ${isFocused ? 'border-gray-borderGray' : 'border-gray-borderGray'} ${isFocused ? 'border-inputBorderActive' : ''}`}>
       {isFocused && <label className='flex text-left items-start absolute top-[-12px] z-10 bg-white text-14'>{label}</label>}
@@ -43,6 +52,7 @@ function Input({ updateFunction, label, placeholder= label ? label.toLowerCase()
         value={value ? value : inputValue }
         onChange={(e) => updateValue(e.target.value)}
         disabled = {value ? true : false}
+        ref={inputRef}
       />
     </div>
   );
