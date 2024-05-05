@@ -1,12 +1,14 @@
 import Input from '../../common/Input'
 import Textarea from '../../common/Textarea'
 import circle_check from '../../../assets/images/circle_check.svg'
+import { useNavigate } from 'react-router-dom'
 
 interface ComponentProps {
     step: number
     setStep: Function
 }
 const ProjectDetails : React.FC<ComponentProps> =  ({step,setStep}) => {
+    const navigate = useNavigate();
   return (
         <div className="my-20 py-20 create-project flex flex-col w-full gap-20">
             <div className="flex flex-col w-[40%] items-center m-auto gap-16">
@@ -34,8 +36,8 @@ const ProjectDetails : React.FC<ComponentProps> =  ({step,setStep}) => {
                     </div>
                 </div>
             </div>
-            <div className="px-20 flex w-full py-10  justify-between items-center border border-borderGray">
-                <div className="font-semibold text-recruitBlue cursor-pointer flex items-center gap-10"><i className="fa-solid fa-arrow-left"></i>Go Back</div>
+            <div className="px-20 flex w-full py-10  justify-between items-center border border-borderGray shadow">
+                <div className="font-semibold text-recruitBlue cursor-pointer flex items-center gap-10" onClick={()=>navigate(-1)}><i className="fa-solid fa-arrow-left"></i>Go Back</div>
                 <button className={`py-10 px-30 bg-recruitBlue text-white h-[45px] flex items-center justify-center cursor-pointer rounded-16 flex gap-10`} onClick={()=> setStep(step + 1)}>Continue <i className="fa-solid fa-arrow-right"></i></button>
             </div>
             <div className="h-[100px] w-full bg-inherit"></div>
