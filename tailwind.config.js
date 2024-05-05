@@ -40,6 +40,7 @@ module.exports = {
         labelBlack: "#1C1C1C",
         dashboardColor: "#F8FBFF",
         lightBlue: "#1976D2",
+        stepBlue: "#66B3FF",
       },
       spacing: {
         1: "1px",
