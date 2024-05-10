@@ -28,7 +28,7 @@ const CreateProject = () => {
                         <div className=""></div>
                         <div className="flex gap-10 items-center">
                             <Input value='https://brand.com/r/mDN5Qj'/>
-                            <button className={`whitespace-nowrap py-10 px-30 bg-recruitBlue text-white h-[38px] flex items-center justify-center cursor-pointer rounded-12 flex gap-10`}><i className="fa-regular fa-copy"></i> Copy link</button>
+                            <button className={`whitespace-nowrap py-10 px-30 bg-recruitBlue text-white h-[38px] flex items-center justify-center cursor-pointer rounded-12 flex gap-10`} onClick={()=> setShowOverlay(false)}><i className="fa-regular fa-copy"></i> Copy link</button>
                         </div>
                     </div>
                 </div>
