@@ -8,8 +8,9 @@ import Select from '../../common/Select'
 interface ComponentProps {
     step: number
     setStep: Function
+    setShowOverlay: Function
 }
-const Publish : React.FC<ComponentProps> =  () => {
+const Publish : React.FC<ComponentProps> =  ({setShowOverlay}) => {
   return (
         <div className="my-20 py-20 create-project flex flex-col w-full gap-20">
             <div className="flex flex-col w-[40%] items-center m-auto gap-16 mb-[100px]">
@@ -44,7 +45,7 @@ const Publish : React.FC<ComponentProps> =  () => {
                         </div>
                     </div>
                 </div>
-                <button className={`py-12 px-24 bg-recruitBlue text-white h-[45px] flex items-center justify-center cursor-pointer rounded-16 flex gap-10 w-[200px] mt-20`}>Publish</button>
+                <button className={`py-12 px-24 bg-recruitBlue text-white h-[45px] flex items-center justify-center cursor-pointer rounded-16 flex gap-10 w-[200px] mt-20`} onClick={()=>setShowOverlay(true)}>Publish</button>
             </div>
 
             <div className="h-[100px] w-full bg-inherit"></div>

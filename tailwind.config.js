@@ -41,6 +41,7 @@ module.exports = {
         dashboardColor: "#F8FBFF",
         lightBlue: "#1976D2",
         stepBlue: "#66B3FF",
+        blackLight: "rgba(0, 0, 0, 0.462)",
       },
       spacing: {
         1: "1px",
@@ -95,6 +96,7 @@ module.exports = {
         5: "5px",
         8: "8px",
         10: "10px",
+        12: "12px",
         15: "15px",
         16: "16px",
         20: "20px",
