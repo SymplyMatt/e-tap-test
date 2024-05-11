@@ -14,9 +14,16 @@ body{
     overflow-y: auto;
 
 }
+.project_list{
+    height: calc(100vh - 230px);
+    overflow-y: auto;
+}
 ::-webkit-scrollbar {
     display: none !important;
 }
 .shadow{
     box-shadow: 0px -2px 12px 0px #0000001A;
+}
+.w-fit-content{
+    width: fit-content;
 }

@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
 
-const Projects = () => {
+const Project = () => {
   const navigate = useNavigate(); 
   const [isEmpty, setIsEmpty] = useState(false);
   return (
@@ -117,4 +117,4 @@ const Projects = () => {
   )
 }
 
-export default Projects
+export default Project

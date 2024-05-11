@@ -42,6 +42,10 @@ module.exports = {
         lightBlue: "#1976D2",
         stepBlue: "#66B3FF",
         blackLight: "rgba(0, 0, 0, 0.462)",
+        activeBg: "#CFFFD1",
+        activeText: "#4CAF50",
+        endedBg: "#E0E0E0",
+        activeText: "#4CAF50",
       },
       spacing: {
         1: "1px",

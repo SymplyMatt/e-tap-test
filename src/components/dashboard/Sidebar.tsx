@@ -11,12 +11,12 @@ const Sidebar = () => {
             <div className="flex flex-col gap-20 w-full h-150 items-center justify-between">
                 <div className="font-inter font-semibold cursor-pointer px-40 text-24 h-60 flex items-center justify-center w-full" onClick={()=>navigate('/')}>LOGO</div>
                 <div className="w-full p-10">
-                    <Button label="+  &nbsp;Create Project" onClick={()=>navigate('/projects/new')} disabled={false} extraClass="w-full"/>
+                    <Button label="+  &nbsp;Create Project" onClick={()=>navigate('/projects/new')} disabled={false} extraClass="w-full bg-recruitBlue"/>
                 </div>
             </div>
             <div className="flex flex-col items-center w-full px-10 gap-20">
                 <div className="border-t border-borderGray w-full px-10 py-20 flex flex-col items-center gap-20">
-                    <div className="text-base font-medium flex gap-10 w-full justify-start cursor-pointer"> <img src={projects} alt="" /> <div className="">Projects</div> </div>
+                    <div className="text-base font-medium flex gap-10 w-full justify-start cursor-pointer" onClick={()=> navigate('/projects')}> <img src={projects} alt="" /> <div className="">Projects</div> </div>
                     <div className="text-base font-medium flex gap-10 w-full justify-start cursor-pointer"> <img src={staff} alt="" />Staff Members</div>
                     <div className="text-base font-medium flex gap-10 w-full justify-start cursor-pointer"> <img src={company} alt="" />Company Profile</div>
                 </div>
