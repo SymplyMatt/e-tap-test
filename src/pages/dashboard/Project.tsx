@@ -32,7 +32,7 @@ const Project = () => {
                 <div className={`py-10  ${currentTab.includes('attendance') ? 'border-b-2 border-recruitBlue text-recruitBlue' : 'text-lightBlack'} w-fit-content flex items-center gap-10 cursor-pointer`}  onClick={()=> setCurrentTab('attendance')}>Attendance</div>
                 <div className={`py-10  ${currentTab == 'settings' ? 'border-b-2 border-recruitBlue text-recruitBlue' : 'text-lightBlack'} w-fit-content flex items-center gap-10 cursor-pointer`}  onClick={()=> setCurrentTab('settings')}>Settings</div>
             </div>
-            <Button label="+  &nbsp;Create Attendance" onClick={()=>setCurrentTab('attendance')} extraClass="bg-recruitBlue relative top-[-10px]"/>
+            {currentTab == 'attendance-history' && <Button label="+  &nbsp;Create Attendance" onClick={()=>setCurrentTab('attendance')} extraClass="bg-recruitBlue relative top-[-10px]"/>}
           </div>
           {currentTab == 'overview' && <ProjectOverview />}
           {currentTab == 'team' && <TeamMembers />}
