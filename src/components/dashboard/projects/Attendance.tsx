@@ -2,8 +2,10 @@ import Input from '../../common/Input'
 import circle_check from '../../../assets/images/circle_check.svg'
 import { useNavigate } from 'react-router-dom'
 import barcode from '../../../assets/images/barcode.svg'
-
-const Attendance = () => {
+interface DashboardLayoutProps {
+    setCurrentTab: Function;
+}
+const Attendance: React.FC<DashboardLayoutProps> = ({setCurrentTab}) => {
     const navigate = useNavigate();
   return (
     <div className="my-20 py-20 create-project flex flex-col w-full gap-20">
@@ -23,7 +25,7 @@ const Attendance = () => {
         <div className="flex flex-col w-full">
             <div className="flex w-full py-10  justify-between items-center border-t border-borderGray shadow">
                 <div className="font-semibold text-recruitBlue cursor-pointer flex items-center gap-10"><i className="fa-solid fa-arrow-left"></i>Go Back</div>
-                <button className={`py-10 px-30 bg-recruitBlue text-white h-[45px] flex items-center justify-center cursor-pointer rounded-16 flex gap-10`}>Continue <i className="fa-solid fa-arrow-right"></i></button>
+                <button className={`py-10 px-30 bg-recruitBlue text-white h-[45px] flex items-center justify-center cursor-pointer rounded-16 flex gap-10`} onClick={()=>setCurrentTab('attendance-history')}>Continue <i className="fa-solid fa-arrow-right"></i></button>
             </div>
             <div className="bg-white flex flex-col px-10 py-10 gap-20 w-full rounded-12">
                 <div className="flex grid-cols-2 gap-20 items-end">
