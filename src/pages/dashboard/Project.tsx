@@ -1,10 +1,10 @@
 import Dashboard from './Dashboard'
-import projects from "../../assets/images/projects.svg"
 import edit from '../../assets/images/edit.svg'
 import { useNavigate } from 'react-router-dom'
 import ProjectOverview from '../../components/dashboard/projects/ProjectOverview'
 import { useState } from 'react'
 import TeamMembers from '../../components/dashboard/projects/TeamMembers'
+import Attendance from '../../components/dashboard/projects/Attendance'
 
 
 const Project = () => {
@@ -17,8 +17,7 @@ const Project = () => {
         <div className="h-[25px] w-full"></div>
         <div className="flex w-full justify-between items-center h-[65px]">
           <div className="flex items-center">
-            <img src={projects} alt="" className="h-35"/>    
-            <div className="">Projects</div> 
+            <div className="">Project Name</div> 
           </div>
           <button className={`whitespace-nowrap py-10 px-30 bg-lightBlue text-white h-[45px] flex items-center justify-center cursor-pointer rounded-12 flex gap-10`}> <img src={edit} alt="" /> Edit</button>
         </div>
@@ -33,6 +32,7 @@ const Project = () => {
           </div>
           {currentTab == 'overview' && <ProjectOverview />}
           {currentTab == 'team' && <TeamMembers />}
+          {currentTab == 'attendance' && <Attendance />}
         </div>
       </div>
     </Dashboard>
