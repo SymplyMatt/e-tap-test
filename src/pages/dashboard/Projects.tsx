@@ -47,7 +47,6 @@ const Projects = () => {
             <div className="py-10 w-fit-content flex items-center gap-10 cursor-pointer text-lightBlack">Ended <span className='bg-[#F1F1F1] h-full text-[10px] py-[3px] px-[4px] rounded-5 flex items-center justify-center text-lightBlack font-semibold'>20</span></div>
           </div>
           <div className="flex flex-col w-full gap-20">
-
             <div className="bg-white flex flex-col px-20 py-20 gap-20 rounded-12">
               <div className="flex grid-cols-2 gap-20 items-end">
                   <img src={barcode} alt="" className='w-[180px] h-[180px]'/>
@@ -71,14 +70,13 @@ const Projects = () => {
                       <div className="flex items-center text-14 text-recruitBlue gap-10"><img src={team_members} alt="" /> 2 Team Members</div>
                     </div>
                     <div className="flex gap-20 items-center">
-                      <div className="flex items-center justify-center w-[180px] border-[1.4px] border-recruitBlue p-5 h-[40px] rounded-8 gap-10 cursor-pointer cursor-pointer"> Manage Project <i className="fa-solid fa-arrow-right"></i></div>
+                      <div className="flex items-center justify-center w-[180px] border-[1.4px] border-recruitBlue p-5 h-[40px] rounded-8 gap-10 cursor-pointer cursor-pointer" onClick={()=>navigate('/projects/id')}> Manage Project <i className="fa-solid fa-arrow-right"></i></div>
                       <i className="fa-regular fa-share-from-square text-[24px] cursor-pointer"></i> 
                       <i className="fa-solid fa-ellipsis-vertical text-[24px] text-recruitBlue cursor-pointer"></i>
                     </div>
                   </div>
               </div>
             </div>
-
             <div className="bg-white flex flex-col px-20 py-20 gap-20 rounded-12">
               <div className="flex grid-cols-2 gap-20 items-end">
                   <img src={barcode} alt="" className='w-[180px] h-[180px]'/>
@@ -102,7 +100,7 @@ const Projects = () => {
                       <div className="flex items-center text-14 text-recruitBlue gap-10"><img src={team_members} alt="" /> 2 Team Members</div>
                     </div>
                     <div className="flex gap-20 items-center">
-                      <div className="flex items-center justify-center w-[180px] border-[1.4px] border-recruitBlue p-5 h-[40px] rounded-8 gap-10 cursor-pointer cursor-pointer"> Manage Project <i className="fa-solid fa-arrow-right"></i></div>
+                      <div className="flex items-center justify-center w-[180px] border-[1.4px] border-recruitBlue p-5 h-[40px] rounded-8 gap-10 cursor-pointer cursor-pointer" onClick={()=>navigate('/projects/id')}> Manage Project <i className="fa-solid fa-arrow-right"></i></div>
                       <i className="fa-regular fa-share-from-square text-[24px] cursor-pointer"></i> 
                       <i className="fa-solid fa-ellipsis-vertical text-[24px] text-recruitBlue cursor-pointer"></i>
                     </div>

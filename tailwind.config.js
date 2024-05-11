@@ -46,6 +46,7 @@ module.exports = {
         activeText: "#4CAF50",
         endedBg: "#E0E0E0",
         activeText: "#4CAF50",
+        declineText: "#EB5757",
       },
       spacing: {
         1: "1px",
