@@ -1,12 +1,10 @@
 import Input from '../../common/Input'
 import circle_check from '../../../assets/images/circle_check.svg'
-import { useNavigate } from 'react-router-dom'
 import barcode from '../../../assets/images/barcode.svg'
 interface DashboardLayoutProps {
     setCurrentTab: Function;
 }
 const Attendance: React.FC<DashboardLayoutProps> = ({setCurrentTab}) => {
-    const navigate = useNavigate();
   return (
     <div className="my-20 py-20 create-project flex flex-col w-full gap-20">
         <div className="flex flex-col w-[40%] items-center m-auto gap-16">

@@ -7,12 +7,11 @@ import Button from '../../components/common/Button'
 import barcode from '../../assets/images/barcode.svg'
 import project_line from '../../assets/images/project_line.svg'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
 
 
 const Projects = () => {
   const navigate = useNavigate(); 
-  const [isEmpty, setIsEmpty] = useState(false);
+  const isEmpty = false;
   return (
     <Dashboard>
       <div className="text-20 font-medium flex flex-col gap-5 w-full justify-start cursor-pointer h-[90px] px-20"> 

@@ -1,12 +1,10 @@
 import barcode from "../../../assets/images/barcode.svg"
 import project_line from "../../../assets/images/project_line.svg"
 import team_members from "../../../assets/images/team_members.svg"
-import { useNavigate } from 'react-router-dom'
 interface Props {
     setCurrentTab: Function;
 }
 const AttendanceHistory: React.FC<Props> = ({setCurrentTab}) => {
-    const navigate = useNavigate();
   return (
     <div className="flex flex-col py-30 gap-30 mb-[100px]">
         <div className="text-recruitBlue text-24">Attendance History</div>
