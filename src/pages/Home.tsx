@@ -20,7 +20,7 @@ const Home = () => {
             <div className="font-inter font-semibold cursor-pointer" onClick={()=> navigate('/')}>LOGO</div>
             <div className="flex items-center gap-20">
                 <div className="font-semibold cursor-pointer" onClick={()=> navigate('/auth/signin')}>Log in</div>
-                <Button label="Create Project" onClick={()=>{}} disabled={false}/>
+                <Button label="Create Project" onClick={()=>{}} disabled={loading}/>
             </div>
         </div>
         <div className="flex flex-col justify-center items-center gap-20">
