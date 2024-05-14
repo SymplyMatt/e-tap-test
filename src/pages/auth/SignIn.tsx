@@ -2,14 +2,33 @@ import Button from "../../components/common/Button"
 import Input from "../../components/common/Input"
 import google from '../../assets/images/google.svg'
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useEffect, useState } from "react";
 const SignIn = () => {
     const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [disabled, setDisabled] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const onSubmit = () =>{
+      setLoading(true);
+      setTimeout(()=>{
+        toast.error('Error connecting to server!!!');
+        setLoading(false);
+      }, 500);
+    }
+
+    useEffect(()=>{
+      setDisabled(!(email && password))
+    },[email, password])
+
   return (
     <div className="flex flex-col items-center justify-center text-center relative px-40 py-20 h-screen">
       <div className="w-full flex justify-center absolute top-0 px-40 py-20">
         <div className="font-inter font-semibold cursor-pointer" onClick={()=> navigate('/')}>LOGO</div>
       </div>
-      <div className="flex flex-col justify-center gap-20 w-[40%] mt-20">
+      <div className="flex flex-col justify-center gap-20 w-[40%] mmd:w-[30%] mt-20">
         <div className="flex flex-col gap-10">
             <div className="font-hiragino font-extrabold text-28 leading-36.88 tracking-tight text-center items-center text-recruitBlue">
             Welcome back!
@@ -17,9 +36,9 @@ const SignIn = () => {
             <div className="font-poppins text-base font-normal leading-6 text-center text-textFade mt-[-10px]">New to [brand name]? <span className="text-black font-semibold cursor-pointer underline" onClick={()=> navigate('/auth/signup')}>Sign Up</span> </div>
         </div>
         <div className="w-full flex flex-col gap-20">
-          <Input updateFunction={()=>{}} label="Email"/>
-          <Input updateFunction={()=>{}} label="Password"/>
-          <Button label="Login" onClick={()=>navigate('/projects')} disabled={false}/>
+          <Input updateFunction={(e)=>setEmail(e)} label="Email"/>
+          <Input updateFunction={(e)=>setPassword(e)} label="Password"/>
+          <Button label="Login" onClick={()=>onSubmit()} disabled={disabled || loading}/>
           <div className="font-poppins text-base font-normal leading-6 text-center text-recruitBlue underline mt-[-10px] cursor-pointer">Forgot password or email? </div>
         </div>
         <div className="w-full flex flex-col gap-10">
@@ -28,6 +47,7 @@ const SignIn = () => {
           <div className="border border-solid border-borderGray rounded-8 h-[45px] flex justify-center items-center px-10 w-full font-semibold gap-10 cursor-pointer">Sign in with magic link</div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   )
 }
