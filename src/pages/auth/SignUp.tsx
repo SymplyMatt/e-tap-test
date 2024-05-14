@@ -32,7 +32,7 @@ const SignUp = () => {
         <div className="flex items-center gap-20">
         </div>
       </div>
-      <div className="flex flex-col justify-center  gap-20 w-[40%]">
+      <div className="flex flex-col justify-center  gap-20 w-[40%] mmd:w-[30%]">
         <div className="font-hiragino font-extrabold text-28 leading-36.88 tracking-tight text-left items-start text-recruitBlue">
           Now, create your account
         </div>
