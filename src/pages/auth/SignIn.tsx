@@ -5,22 +5,32 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from "react";
+import utils from "../../utils/utils";
+import makeRequest from "../../services/request";
 const SignIn = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [disabled, setDisabled] = useState(true);
     const [loading, setLoading] = useState(false);
-    const onSubmit = () =>{
+    const onSubmit = async () =>{
+      if( !utils.isValidEmail(email)){
+        toast.error('Enter a valid email!');
+        return
+      }
       setLoading(true);
-      setTimeout(()=>{
-        toast.error('Error connecting to server!!!');
-        setLoading(false);
-      }, 500);
+      const res = await makeRequest('POST', '/login','',{email, password});
+      if(res.type !== 'success'){
+        toast.error('Incorrect username or password!');
+      }else{
+        navigate('/auth/verify', { replace: true, state: { auth : true  } });
+      }
+      console.log('res: ', res);
+      setLoading(false);
     }
 
     useEffect(()=>{
-      setDisabled(!(email && password))
+      setDisabled(!(email && password));
     },[email, password])
 
   return (
@@ -41,11 +51,11 @@ const SignIn = () => {
           <Button label="Login" onClick={()=>onSubmit()} disabled={disabled || loading}/>
           <div className="font-poppins text-base font-normal leading-6 text-center text-recruitBlue underline mt-[-10px] cursor-pointer">Forgot password or email? </div>
         </div>
-        <div className="w-full flex flex-col gap-10">
+        {/* <div className="w-full flex flex-col gap-10">
           <div className="flex items-center justify-center gap-10"><div className="h-[1px] w-full bg-borderGray"></div>Or <div className="h-[1px] w-full bg-borderGray"></div></div>
           <div className="border border-solid border-borderGray rounded-8 h-[45px] flex justify-center items-center px-10 w-full font-semibold gap-10 cursor-pointer"><img src={google} alt="" /> Sign up with Google</div>
           <div className="border border-solid border-borderGray rounded-8 h-[45px] flex justify-center items-center px-10 w-full font-semibold gap-10 cursor-pointer">Sign in with magic link</div>
-        </div>
+        </div> */}
       </div>
       <ToastContainer />
     </div>

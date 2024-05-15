@@ -48,6 +48,12 @@ const SignUp = () => {
     setLoading(true);
     const payload = {...inputValues, fullName: `${inputValues.firstName} ${inputValues.lastName}`, sessionHash : location.state?.sessionHash}
     const res = await makeRequest('POST', '/register','',payload);
+    if(res.type === 'success'){
+      toast.success('Account creation successful!');
+      navigate('/projects', {replace : true});
+    }else{
+      toast.error('Account creation failed');
+    }
     console.log('res: ', res);
     setLoading(false);
   }
