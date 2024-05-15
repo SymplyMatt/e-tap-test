@@ -4,7 +4,7 @@ type RequestType = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
 const BASE_URL = 'http://94.229.79.27:4136/api/v1/organization';
 interface ResponseData {
-  type : 'success' | 'error',
+  type : 'success' | 'error' | 'failed',
   data: any
 }
 
@@ -26,7 +26,7 @@ export default async function makeRequest(
     };
 
     const response: AxiosResponse = await axios(config);
-    const successResponse: ResponseData = {type : 'success', data : response.data} as ResponseData;
+    const successResponse: ResponseData = {type : response.data.isSuccessful ? 'success' : 'failed', data : response.data} as ResponseData;
     console.log('success: ', successResponse);
     return successResponse;
   } catch (error) {

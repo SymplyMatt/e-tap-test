@@ -9,9 +9,10 @@ interface InputProps {
   icon? : any;
   inFocus? : boolean;
   regex?: RegExp;
+  single?: boolean;
 }
 
-function Input({ updateFunction, label, placeholder= label ? label.toLowerCase() : '', inputExtraClass='', type='text', value, icon, inFocus, regex = /.*/ }: InputProps) {
+function Input({ updateFunction, label, placeholder= label ? label.toLowerCase() : '', inputExtraClass='', type='text', value, icon, inFocus, regex = /.*/, single }: InputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<any>(null);
@@ -32,8 +33,13 @@ function Input({ updateFunction, label, placeholder= label ? label.toLowerCase()
 
   const updateValue = (value : string) =>{
     if(regex.test(value)){
-      setInputValue(value);
-      updateFunction && updateFunction(value);
+      if(single){
+        setInputValue(value.charAt(value.length - 1));
+        updateFunction && updateFunction(value.charAt(value.length - 1));
+      }else{
+        setInputValue(value);
+        updateFunction && updateFunction(value);
+      }
     }
   }
 
