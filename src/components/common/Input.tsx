@@ -8,9 +8,10 @@ interface InputProps {
   value?: string;
   icon? : any;
   inFocus? : boolean;
+  regex?: RegExp;
 }
 
-function Input({ updateFunction, label, placeholder= label ? label.toLowerCase() : '', inputExtraClass='', type='text', value, icon, inFocus }: InputProps) {
+function Input({ updateFunction, label, placeholder= label ? label.toLowerCase() : '', inputExtraClass='', type='text', value, icon, inFocus, regex = /.*/ }: InputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<any>(null);
@@ -30,8 +31,10 @@ function Input({ updateFunction, label, placeholder= label ? label.toLowerCase()
   };
 
   const updateValue = (value : string) =>{
-    setInputValue(value);
-    updateFunction && updateFunction(value);
+    if(regex.test(value)){
+      setInputValue(value);
+      updateFunction && updateFunction(value);
+    }
   }
 
   useEffect(()=>{
@@ -41,7 +44,7 @@ function Input({ updateFunction, label, placeholder= label ? label.toLowerCase()
   },[])
   return (
     <div className={`relative flex items-center p-10 border border-solid bg-inherit rounded-8 w-full ${!value &&'cursor-pointer'} relative z-0 transition-all duration-300 gap-10 ${isFocused ? 'border-gray-borderGray' : 'border-gray-borderGray'} ${isFocused ? 'border-inputBorderActive' : ''}`}>
-      {isFocused && <label className='flex text-left items-start absolute top-[-12px] z-10 bg-dashboardColor text-14'>{label}</label>}
+      {isFocused && <label className='flex text-left items-start absolute top-[-12px] z-10 bg-white text-14'>{label}</label>}
       {icon && <img src={icon} alt="" className='h-[24px] w-[24px]'/>}
       <input 
         type={isFocused ? type : 'text'} 

@@ -2,10 +2,10 @@ import axios, { AxiosResponse, AxiosError } from 'axios';
 
 type RequestType = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
-const BASE_URL = '';
+const BASE_URL = 'http://94.229.79.27:4136/api/v1/organization';
 interface ResponseData {
   type : 'success' | 'error',
-  data: AxiosResponse | AxiosError
+  data: any
 }
 
 export default async function makeRequest(
@@ -26,10 +26,11 @@ export default async function makeRequest(
     };
 
     const response: AxiosResponse = await axios(config);
-    const successResponse: ResponseData = {type : 'success', data : response} as ResponseData;
+    const successResponse: ResponseData = {type : 'success', data : response.data} as ResponseData;
     console.log('success: ', successResponse);
     return successResponse;
   } catch (error) {
+    
     if (axios.isAxiosError(error)) {
       const axiosError: AxiosError = error;
       if (axiosError.response) {
@@ -44,7 +45,6 @@ export default async function makeRequest(
       console.error('Error:', error);
     }
     const errorResponse: ResponseData = {type : 'error', data : error} as ResponseData;
-    console.log('failure: ', errorResponse);
     return errorResponse
   }
 }
