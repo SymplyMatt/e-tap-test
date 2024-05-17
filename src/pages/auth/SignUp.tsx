@@ -76,25 +76,25 @@ const SignUp = () => {
           <div className="flex items-center gap-20">
           </div>
         </div>
-        <div className="flex flex-col justify-center  gap-20 w-[40%] mmd:w-[30%]">
+        <div className="flex flex-col justify-center  gap-20 w-[90%] sm-tab:w-[70%] mm:w-[60%] md:w-[40%] mmd:w-[30%]">
           <div className="font-hiragino font-extrabold text-28 leading-36.88 tracking-tight text-left items-start text-recruitBlue">
             Now, create your account
           </div>
           <div className="w-full flex flex-col gap-20">
-            <div className="flex gap-10 w-full">
+            <div className="flex flex-col phone-big:flex-row gap-10 w-full">
               <Input updateFunction={(e)=>updateValue('firstName',e)} label="First Name" regex={/^[a-zA-Z]+$/}/>
               <Input updateFunction={(e)=>updateValue('lastName',e)} label="Last Name" regex={/^[a-zA-Z]+$/}/>
             </div>
-            <div className="flex gap-10 w-full">
+            <div className="flex flex-col phone-big:flex-row gap-10 w-full">
               <Input updateFunction={(e)=>updateValue('phoneNumber',e)} label="Phone Number"/>
               <Input value={location.state?.email}/>
             </div>
-            <div className="flex gap-10 w-full">
+            <div className="flex flex-col phone-big:flex-row gap-10 w-full">
               <Input updateFunction={(e)=>updateValue('dateOfBirth',e)} label="Date of Birth" type="date"/>
               <Select options={['Male', 'Female']} updateFunction={(e)=>updateValue('gender',e)} inFocus={false}/>
             </div>
             <Input updateFunction={(e)=>updateValue('address',e)} label="Address"/>
-            <div className="flex gap-10 w-full">
+            <div className="flex flex-col phone-big:flex-row gap-10 w-full">
               <Input updateFunction={(e)=>updateValue('password',e)} label="Password" type="password"/>
               <Input updateFunction={(e)=>updateValue('confirmPassword',e)} label="Re-Enter Password" placeholder="Re-Enter Password" type="password"/>
             </div>
