@@ -1,6 +1,5 @@
 import Button from "../../components/common/Button"
 import Input from "../../components/common/Input"
-import google from '../../assets/images/google.svg'
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';

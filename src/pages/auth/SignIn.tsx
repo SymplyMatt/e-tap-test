@@ -1,6 +1,5 @@
 import Button from "../../components/common/Button"
 import Input from "../../components/common/Input"
-import google from '../../assets/images/google.svg'
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,7 +22,7 @@ const SignIn = () => {
       if(res.type !== 'success'){
         toast.error('Incorrect username or password!');
       }else{
-        navigate('/auth/verify', { replace: true, state: { auth : true  } });
+        navigate('/projects', { replace: true, state: { auth : true  } });
       }
       console.log('res: ', res);
       setLoading(false);

@@ -24,8 +24,8 @@ const Home = () => {
     console.log('res: ', res);
   }
   return (
-    <div className="h-screen w-screen px-40 py-20 text-recruitBlue flex flex-col items-center justify-center relative">
-        <div className="w-full flex justify-between absolute top-0 px-40 py-20">
+    <div className="h-screen w-screen mm:px-40 px-10 py-20 text-recruitBlue flex flex-col items-center justify-center relative">
+        <div className="w-full flex justify-between absolute top-0 mm:px-40 px-10 py-20 items-center">
             <div className="font-inter font-semibold cursor-pointer" onClick={()=> navigate('/')}>LOGO</div>
             <div className="flex items-center gap-20">
                 <div className="font-semibold cursor-pointer" onClick={()=> navigate('/auth/signin')}>Log in</div>
@@ -33,7 +33,7 @@ const Home = () => {
             </div>
         </div>
         <div className="flex flex-col justify-center items-center gap-20">
-            <div className="text-recruitBlue font-extrabold text-[60px] text-center big-text font-hiragino-sans">The simplest way to manage project teams</div>
+            <div className="text-recruitBlue font-extrabold text-[40px] sm:text-[60px] text-center sm:big-text font-hiragino-sans">The simplest way to manage project teams</div>
             <div className="text-recruitBlue max-w-[700px] flex justify-center items-center m-auto text-center">A tool for project managers to easily track project lifespan and team members engagement during the course of the project </div>
             <div className="flex flex-col justify-center gap-10">
               <div className="flex justify-center p-10 border-solid border border-gray-borderGray rounded-xl gap-100">
