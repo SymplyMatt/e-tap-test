@@ -14,6 +14,7 @@ const Verify = () => {
   const [showResent, setShowResent]= useState(false);
   const [inputValues, setInputValues] = useState<Array<string>>(['','','','','','']);
   const [disabled, setDisabled] = useState(false);
+  const [sessionHash, setSessionHash] = useState<string>('');
   const updateValue = (index: number, value: string) => {
     const updatedInputValues : Array<string> = [...inputValues];
     updatedInputValues[index] = value;
@@ -29,6 +30,8 @@ const Verify = () => {
   useEffect(()=>{
     if(!location.state?.sessionHash || !location.state?.email ){
       navigate('/', {replace : true, state: null});
+    }else{
+      setSessionHash(location.state?.sessionHash);
     }
   },[]);
   useEffect(()=>{
@@ -36,29 +39,29 @@ const Verify = () => {
   },[inputValues])
   const resendCode = async () =>{
     setLoading(true);
-    const res = await makeRequest('POST', '/resendotp',null,{hash:location.state?.sessionHash });
+    const res = await makeRequest('POST', '/sendverification',null,{email : location.state?.email, phoneNumber: 'test'});
     setLoading(false);
     if(res.type === 'success'){
       setShowResent(true);
+      setSessionHash(res.data.data.sessionHash);
       setTimeout(()=>{
         setShowResent(false);
         setSeconds(60);
       },1000);
     }
-    console.log('res: ', res);
   }
   const verify = async () =>{
     setLoading(true);
-    const res = await makeRequest('POST', '/validateotp',null,{sessionHash:location.state?.sessionHash, code: inputValues.join('') });
-    console.log('res: ', res);
+    const res = await makeRequest('POST', '/validateotp',null,{sessionHash, code: inputValues.join('') });
     setLoading(false);
     if(res.type === 'success'){
       toast.success('Account Verification successful!');
       setTimeout(()=>{
-        navigate('/auth/signup', { replace: true, state: { sessionHash : location.state?.sessionHash ,email : location.state?.email  } });
+        navigate('/auth/signup', { replace: true, state: { sessionHash,email : location.state?.email  } });
       },200);
     }else if(res.type === 'failed'){
-      toast.error(res.data?.message || '');
+      toast.error('Incorrect token, a new one has been sent');
+      resendCode();
     }
   }
 
