@@ -37,7 +37,7 @@ const SignIn = () => {
       <div className="w-full flex justify-center absolute top-0 px-40 py-20">
         <div className="font-inter font-semibold cursor-pointer" onClick={()=> navigate('/')}>LOGO</div>
       </div>
-      <div className="flex flex-col justify-center gap-20 w-[40%] mmd:w-[30%] mt-20">
+      <div className="flex flex-col justify-center gap-20 w-[90%] sm-tab:w-[70%] mm:w-[60%] md:w-[40%] mmd:w-[30%] mt-20">
         <div className="flex flex-col gap-10">
             <div className="font-hiragino font-extrabold text-28 leading-36.88 tracking-tight text-center items-center text-recruitBlue">
             Welcome back!
