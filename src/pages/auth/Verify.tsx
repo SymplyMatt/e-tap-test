@@ -70,7 +70,7 @@ const Verify = () => {
           <div className=""></div>
         </div>
         <div className="flex flex-col justify-center items-center gap-20 w-full mt-20">
-          <div className="flex flex-col gap-10 w-[60%]">
+          <div className="flex flex-col gap-10 w-[95%] mm:w-[60%]">
               <div className="font-hiragino font-extrabold text-28 leading-36.88 tracking-tight text-center items-center text-recruitBlue">
               Check your email
               </div>
