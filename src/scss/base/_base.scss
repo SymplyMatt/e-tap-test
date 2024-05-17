@@ -3,10 +3,14 @@ body{
     font-family: Poppins, Courier, monospace;
 }
 .big-text{
-    line-height: 68.79px;
-    letter-spacing: 2.25px;
-    // font-family: 'Hiragino Sans';
-    // src: local('Hiragino Sans'), url('/src/assets/hiragino_sans/hiragino_sans.woff') format('woff');
+    
+    
+    @media (MIN-width: 640px) {
+        line-height: 68.79px;
+        letter-spacing: 2.25px;
+        // font-family: 'Hiragino Sans';
+        // src: local('Hiragino Sans'), url('/src/assets/hiragino_sans/hiragino_sans.woff') format('woff');
+      }
 }
 .create-project{
     height: calc(100vh - 150px);
