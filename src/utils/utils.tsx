@@ -67,4 +67,114 @@ export default class utils {
     
       return `${hours}:${minutes}`;
     }
+    static createErrorNotification(error : string, time: number) {
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'p-20 flex items-center bg-errorBg rounded-12 text-white relative w-[400px] justify-between slide-in';
+  
+      const p1 = document.createElement('p');
+      const p2 = document.createElement('p');
+      p1.innerHTML = 'ERROR!';
+      p1.className = 'text-[#AA2924] font-bold text-[18px]';
+      p2.innerHTML = error;
+      p2.className = 'text-[#C4736F]';
+  
+      const textContainer = document.createElement('div');
+      textContainer.className = 'flex flex-col justify-between p-0 h-full';
+      textContainer.appendChild(p1);
+      textContainer.appendChild(p2);
+  
+      const cancel = document.createElement('div');
+      cancel.className = 'flex items-center cursor-pointer text-[28px] text-[#CB9B99]';
+      cancel.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+  
+      const errorIconContainer = document.createElement('div');
+      errorIconContainer.className = 'flex items-center justify-center p-10 w-[40px] h-[40px] rounded-50 bg-[#E1B0AC]';
+      const errorIcon = document.createElement('i');
+      errorIcon.className = 'fa-solid fa-xmark text-[#AA2924] text-[28px]';
+      errorIconContainer.appendChild(errorIcon);
+  
+      const infoContainer = document.createElement('div');
+      infoContainer.className = 'flex gap-10 items-center justify-center h-full';
+      infoContainer.appendChild(errorIconContainer);
+      infoContainer.appendChild(textContainer);
+  
+      errorDiv.appendChild(infoContainer);
+      errorDiv.appendChild(cancel);
+  
+      const notificationContainer = document.querySelector('.notification-container');
+      if (notificationContainer) {
+        notificationContainer.appendChild(errorDiv);
+        setTimeout(() => {
+          errorDiv.classList.add('slide-out');
+          errorDiv.addEventListener('animationend', () => {
+            if (notificationContainer.contains(errorDiv)) {
+              notificationContainer.removeChild(errorDiv);
+            }
+          });
+        }, time);
+        cancel.addEventListener('click', () => {
+          errorDiv.classList.add('slide-out');
+          errorDiv.addEventListener('animationend', () => {
+            if (notificationContainer.contains(errorDiv)) {
+              notificationContainer.removeChild(errorDiv);
+            }
+          });
+        });
+      }
+    }
+    static createSuccessNotification(message : string, time: number) {
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'p-20 flex items-center bg-successBg rounded-12 text-white relative w-[400px] justify-between slide-in';
+  
+      const p1 = document.createElement('p');
+      const p2 = document.createElement('p');
+      p1.innerHTML = 'SUCCESS!';
+      p1.className = 'text-[#637A5D] font-bold text-[18px]';
+      p2.innerHTML = message;
+      p2.className = 'text-[#AEC8A5]';
+  
+      const textContainer = document.createElement('div');
+      textContainer.className = 'flex flex-col justify-between p-0 h-full';
+      textContainer.appendChild(p1);
+      textContainer.appendChild(p2);
+  
+      const cancel = document.createElement('div');
+      cancel.className = 'flex items-center cursor-pointer text-[28px] text-[#AEC8A5]';
+      cancel.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+  
+      const errorIconContainer = document.createElement('div');
+      errorIconContainer.className = 'flex items-center justify-center p-10 w-[40px] h-[40px] rounded-50 bg-[#C7E0B9]';
+      const errorIcon = document.createElement('i');
+      errorIcon.className = 'fa-solid fa-xmark text-[#637A5D] text-[28px]';
+      errorIconContainer.appendChild(errorIcon);
+  
+      const infoContainer = document.createElement('div');
+      infoContainer.className = 'flex gap-10 items-center justify-center h-full';
+      infoContainer.appendChild(errorIconContainer);
+      infoContainer.appendChild(textContainer);
+  
+      errorDiv.appendChild(infoContainer);
+      errorDiv.appendChild(cancel);
+  
+      const notificationContainer = document.querySelector('.notification-container');
+      if (notificationContainer) {
+        notificationContainer.appendChild(errorDiv);
+        setTimeout(() => {
+          errorDiv.classList.add('slide-out');
+          errorDiv.addEventListener('animationend', () => {
+            if (notificationContainer.contains(errorDiv)) {
+              notificationContainer.removeChild(errorDiv);
+            }
+          });
+        }, time);
+        cancel.addEventListener('click', () => {
+          errorDiv.classList.add('slide-out');
+          errorDiv.addEventListener('animationend', () => {
+            if (notificationContainer.contains(errorDiv)) {
+              notificationContainer.removeChild(errorDiv);
+            }
+          });
+        });
+      }
+    }
 }

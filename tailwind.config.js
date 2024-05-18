@@ -3,6 +3,9 @@ module.exports = {
   content: ["./public/**/*.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      maxWidth: {
+        '300': '300px',
+      },
       backgroundColor: {
         blue: "#3490dc",
       },
@@ -48,6 +51,8 @@ module.exports = {
         endedBg: "#E0E0E0",
         activeText: "#4CAF50",
         declineText: "#EB5757",
+        errorBg: "#EEC8C5",
+        successBg: "#DDF4D8",
       },
       spacing: {
         1: "1px",
