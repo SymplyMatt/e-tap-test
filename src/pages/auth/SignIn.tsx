@@ -20,7 +20,7 @@ const SignIn = () => {
       setLoading(true);
       const res = await makeRequest('POST', '/login','',{email, password});
       if(res.type !== 'success'){
-        toast.error('Incorrect username or password!');
+        utils.createErrorNotification('Incorrect username or password!', 2000);
       }else{
         navigate('/projects', { replace: true, state: { auth : true  } });
       }
@@ -57,6 +57,7 @@ const SignIn = () => {
         </div> */}
       </div>
       <ToastContainer />
+      <div className="flex flex-col absolute top-[100px] right-[30px] notification-container gap-20"></div>
     </div>
   )
 }

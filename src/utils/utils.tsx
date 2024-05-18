@@ -74,9 +74,9 @@ export default class utils {
       const p1 = document.createElement('p');
       const p2 = document.createElement('p');
       p1.innerHTML = 'ERROR!';
-      p1.className = 'text-[#AA2924] font-bold text-[18px]';
+      p1.className = 'text-[#AA2924] font-bold text-[18px] text-left';
       p2.innerHTML = error;
-      p2.className = 'text-[#C4736F]';
+      p2.className = 'text-[#C4736F] text-left';
   
       const textContainer = document.createElement('div');
       textContainer.className = 'flex flex-col justify-between p-0 h-full';

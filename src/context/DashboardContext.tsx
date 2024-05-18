@@ -1,32 +1,23 @@
-import { createContext, useState, PropsWithChildren, useEffect} from 'react';
+import { createContext, useState, PropsWithChildren} from 'react';
 
 
 interface ContextValue {
-    formInputs: FormInputs;
+    token: string | null;
+    setToken : Function;
 }
 
-export interface FormInputs {
-    phone: string;
-}
 export const Context = createContext<ContextValue>({
-    formInputs: {
-        phone: '',
-    }
+    token : null,
+    setToken : ()=>{}
 });
 
 const DashboardContext = ({ children }: PropsWithChildren<{}>) => {
-    const [formInputs, setFormInputs] = useState<FormInputs>({
-        phone: '',
-    });
+    const [token, setToken] = useState<string | null>(null);
 
-    useEffect(()=>{
-        setFormInputs({
-            phone: '',
-        });
-    },[]);
     
     const value: ContextValue = {
-        formInputs,
+        token,
+        setToken
     };
 
   return (

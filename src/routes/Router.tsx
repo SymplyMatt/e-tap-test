@@ -8,6 +8,7 @@ import DashboardContext from "../context/DashboardContext";
 import Projects from "../pages/dashboard/Projects";
 import CreateProject from "../pages/dashboard/CreateProject";
 import Project from "../pages/dashboard/Project";
+import DashboardMiddleware from "../pages/dashboard/DashboardMiddleware";
 
 const Routes = (): JSX.Element => {
   type routeProps = Array<{
@@ -22,7 +23,7 @@ const Routes = (): JSX.Element => {
     },
     {
       path: "*",
-      element: <SignUp />,
+      element: <Home />,
     },
   ];
 
@@ -58,7 +59,7 @@ const Routes = (): JSX.Element => {
       path: "/projects",
       element: 
         <DashboardContext>
-          <Outlet />
+          <DashboardMiddleware />
         </DashboardContext>,
       children: [
         {
