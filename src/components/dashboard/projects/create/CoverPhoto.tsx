@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import registration_details from '../../../../assets/images/registration_details.svg';
 import select_photo from '../../../../assets/images/select_photo.svg';
 import utils from '../../../../utils/utils';
@@ -11,15 +10,14 @@ interface ComponentProps {
     inputValues: inputs;
 }
 
-const CoverPhoto: React.FC<ComponentProps> = ({ step, setStep }) => {
-  const [image64, setImage64] = useState<string>('');
+const CoverPhoto: React.FC<ComponentProps> = ({ step, setStep,updateValue, inputValues }) => {
 
   const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       try {
         const base64String = await utils.convertImageToBase64(file);
-        setImage64(`data:image/jpeg;base64,${base64String}`);
+        updateValue('logoUrl', `data:image/jpeg;base64,${base64String}`);
       } catch (error) {
         console.error("Error converting image to base64:", error);
       }
@@ -34,7 +32,7 @@ const CoverPhoto: React.FC<ComponentProps> = ({ step, setStep }) => {
           <div className="font-normal">Set the required details you want from each applicant</div>
         </div>
         <div className="flex items-center justify-center flex-col gap-5">
-          <img src={image64 ? image64 : registration_details} alt="" className='h-[200px] rounded-8' />
+          <img src={inputValues.logoUrl ? inputValues.logoUrl : registration_details} alt="" className='h-[200px] rounded-8' />
           <div className="rounded-8 font-normal text-14 border border-borderGray py-5 px-10 flex gap-5 items-center justify-center cursor-pointer relative">
             <img src={select_photo} alt="" className='cursor-pointer' />
             Select cover image
@@ -50,7 +48,7 @@ const CoverPhoto: React.FC<ComponentProps> = ({ step, setStep }) => {
         <div className="font-semibold text-recruitBlue cursor-pointer flex items-center gap-10" onClick={() => setStep(step - 1)}>
           <i className="fa-solid fa-arrow-left"></i>Go Back
         </div>
-        <button className={`py-10 px-30 bg-recruitBlue text-white h-[45px] flex items-center justify-center cursor-pointer rounded-16 flex gap-10`} onClick={() => setStep(step + 1)}>
+        <button className={`py-10 px-30 bg-recruitBlue text-white h-[45px] flex items-center justify-center cursor-pointer rounded-16 flex gap-10 ${!(inputValues.logoUrl) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`} onClick={() => setStep(step + 1)} disabled={!(inputValues.logoUrl)}>
           Continue <i className="fa-solid fa-arrow-right"></i>
         </button>
       </div>

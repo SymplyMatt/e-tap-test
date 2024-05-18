@@ -10,9 +10,10 @@ interface InputProps {
   inFocus? : boolean;
   regex?: RegExp;
   single?: boolean;
+  disabled?:boolean;
 }
 
-function Input({ updateFunction, label, placeholder= label ? label.toLowerCase() : '', inputExtraClass='', type='text', value, icon, inFocus, regex = /.*/, single }: InputProps) {
+function Input({ updateFunction, label, placeholder= label ? label.toLowerCase() : '', inputExtraClass='', type='text', value, icon, inFocus, regex = /.*/, single, disabled=false }: InputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<any>(null);
@@ -21,7 +22,7 @@ function Input({ updateFunction, label, placeholder= label ? label.toLowerCase()
     if(value){
       setIsFocused(true);
     }
-  },[])
+  },[]);
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -56,7 +57,7 @@ function Input({ updateFunction, label, placeholder= label ? label.toLowerCase()
     }
   },[])
   return (
-    <div className={`relative flex items-center p-10 border border-solid bg-inherit rounded-8 w-full ${!value &&'cursor-pointer'} relative z-0 transition-all duration-300 gap-10 ${isFocused ? 'border-gray-borderGray' : 'border-gray-borderGray'} ${isFocused || inputValue ? 'border-inputBorderActive' : ''}`}>
+    <div className={`relative flex items-center p-10 border border-solid bg-inherit rounded-8 w-full ${!value &&'cursor-pointer'} relative z-0 transition-all duration-300 gap-10 ${isFocused ? 'border-gray-borderGray' : 'border-gray-borderGray'} ${isFocused || Boolean(inputValue) ? 'border-inputBorderActive' : ''}`}>
       {isFocused && <label className='flex text-left items-start absolute top-[-12px] z-10 bg-white text-14 bg-inherit'>{label}</label>}
       {icon && <img src={icon} alt="" className='h-[24px] w-[24px]'/>}
       <input 
@@ -67,7 +68,7 @@ function Input({ updateFunction, label, placeholder= label ? label.toLowerCase()
         onBlur={!value && !inputValue ? handleBlur : ()=>{}}
         value={value ? value : inputValue }
         onChange={(e) => updateValue(e.target.value)}
-        disabled = {value ? true : false}
+        disabled = {disabled ? true : false}
         ref={inputRef}
       />
     </div>

@@ -6,9 +6,10 @@ interface InputProps {
   placeholder?: string;
   inputExtraClass?: string;
   value?: string;
+  disabled?: boolean
 }
 
-function Textarea({ updateFunction, label, placeholder= label ? label.toLowerCase() : '', inputExtraClass='', value }: InputProps) {
+function Textarea({ updateFunction, label, placeholder= label ? label.toLowerCase() : '', inputExtraClass='', value, disabled=false }: InputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
@@ -37,7 +38,7 @@ function Textarea({ updateFunction, label, placeholder= label ? label.toLowerCas
         onBlur={!value && !inputValue ? handleBlur : ()=>{}}
         value={value ? value : inputValue }
         onChange={(e) => updateValue(e.target.value)}
-        disabled = {value ? true : false}
+        disabled = {disabled ? true : false}
       ></textarea>
     </div>
   );

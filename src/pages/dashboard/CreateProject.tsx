@@ -9,9 +9,9 @@ export interface inputs{
     name: string,
     description: string,
     logoUrl: string,
-    noOfParticipants: number,
-    startDate: string,
-    endDate: string
+    noOfParticipants: number | null,
+    startDate: Date | null,
+    endDate: Date | null
 }
 const CreateProject = () => {
     const [step, setStep] = useState<number>(1);
@@ -20,9 +20,9 @@ const CreateProject = () => {
         "name": "",
         "description": "",
         "logoUrl": "",
-        "noOfParticipants": 0,
-        "startDate": "",
-        "endDate": ""
+        "noOfParticipants": null,
+        "startDate": null,
+        "endDate": null
     });
     const updateValue = (key : keyof inputs, value : string) => {
         setInputValues({...inputValues, [key]: value});
@@ -33,7 +33,7 @@ const CreateProject = () => {
             <>
                 {step === 1 && <ProjectDetails step={step} setStep={setStep} inputValues={inputValues} updateValue={updateValue}/>}
                 {step === 2 && <CoverPhoto step={step} setStep={setStep} inputValues={inputValues} updateValue={updateValue}/>}
-                {step === 3 && <Publish step={step} setStep={setStep} setShowOverlay={setShowOverlay} inputValues={inputValues} updateValue={updateValue}/>}
+                {step === 3 && <Publish step={step} setStep={setStep} setShowOverlay={setShowOverlay} inputValues={inputValues}/>}
             </>
             {showOverlay && <Overlay setShowOverlay={setShowOverlay}/>}
         </Dashboard>
