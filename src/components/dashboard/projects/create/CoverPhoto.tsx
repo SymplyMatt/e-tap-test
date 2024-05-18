@@ -14,7 +14,7 @@ const CoverPhoto : React.FC<ComponentProps> =  ({step,setStep}) => {
                 </div>
                 <div className="flex items-center justify-center  flex-col gap-5">
                     <img src={registration_details} alt="" className='h-[200px]'/>
-                    <div className="rounded-8 font-normal text-14 border border-borderGray py-5 px-10 flex gap-5 items-center justify-center cursor-pointer relative"><img src={select_photo} alt="" />
+                    <div className="rounded-8 font-normal text-14 border border-borderGray py-5 px-10 flex gap-5 items-center justify-center cursor-pointer relative"><img src={select_photo} alt="" className='cursor-pointer'/>
                         Select cover image
                         <input type="file" className='absolute h-full w-full top-0 opacity-0 cursor-pointer' />
                     </div>
