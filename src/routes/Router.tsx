@@ -1,7 +1,7 @@
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import SignUp from "../pages/auth/SignUp";
 import AuthContext from "../context/AuthContext";
-import Home from "../pages/Home";
+import Home from "../pages/home/Home";
 import SignIn from "../pages/auth/SignIn";
 import Verify from "../pages/auth/Verify";
 import DashboardContext from "../context/DashboardContext";
@@ -9,30 +9,32 @@ import Projects from "../pages/dashboard/Projects";
 import CreateProject from "../pages/dashboard/CreateProject";
 import Project from "../pages/dashboard/Project";
 import DashboardMiddleware from "../pages/dashboard/DashboardMiddleware";
+import AuthMiddleware from "../pages/auth/AuthMiddleware";
 
 const Routes = (): JSX.Element => {
-  type routeProps = Array<{
-    path: string;
-    element: JSX.Element;
-  }>;
-
-  const pageRoutes: routeProps = [
+  const pageRoutes = [
     {
       path: "/",
-      element: <Home />,
-    },
-    {
-      path: "*",
-      element: <Home />,
+      element: 
+          <AuthMiddleware />,
+      children: [
+        {
+          path: "",
+          element: <Home />,
+        },
+        {
+          path: "*",
+          element: <Home />,
+        },
+      ],
     },
   ];
-
   const authRoutes = [
     {
       path: "/auth",
       element: 
         <AuthContext>
-          <Outlet />
+          <AuthMiddleware />
         </AuthContext>,
       children: [
         {

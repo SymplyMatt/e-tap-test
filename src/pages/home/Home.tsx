@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom"
-import Button from "../components/common/Button"
+import Button from "../../components/common/Button"
 import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import utils from "../utils/utils";
-import makeRequest from "../services/request";
+import utils from "../../utils/utils";
+import makeRequest from "../../services/request";
 const Home = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -21,7 +21,6 @@ const Home = () => {
       const {sessionHash} = res?.data.data || '';
       navigate('/auth/verify', { replace: true, state: { sessionHash,email  } });
     }
-    console.log('res: ', res);
   }
   return (
     <div className="h-screen w-screen mm:px-40 px-10 py-20 text-recruitBlue flex flex-col items-center justify-center relative">

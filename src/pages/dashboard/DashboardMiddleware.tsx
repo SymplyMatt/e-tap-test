@@ -11,7 +11,7 @@ const DashboardMiddleware: React.FC = () => {
     if(!token){
         if (location.state?.userInfo || localStorage.getItem('userInfo')) {
             const userInfo = localStorage.getItem('userInfo');
-            const token = location.state?.userInfo.token ? location.state?.userInfo.token : userInfo ? JSON.parse(userInfo)?.token : null;
+            const token = location.state?.userInfo.accessToken ? location.state?.userInfo.accessToken : userInfo ? JSON.parse(userInfo)?.accessToken : null;
             if(token){
                 setToken(token);
                 setIsAuthenticated(true);

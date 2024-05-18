@@ -22,9 +22,9 @@ const SignIn = () => {
       if(res.type !== 'success'){
         utils.createErrorNotification('Incorrect username or password!', 2000);
       }else{
-        navigate('/projects', { replace: true, state: { auth : true  } });
+        localStorage.setItem('userInfo',JSON.stringify(res.data.data));
+        navigate('/projects', { replace: true, state: { userInfo : res.data.data  } });
       }
-      console.log('res: ', res);
       setLoading(false);
     }
 
@@ -46,7 +46,7 @@ const SignIn = () => {
         </div>
         <div className="w-full flex flex-col gap-20">
           <Input updateFunction={(e)=>setEmail(e)} label="Email"/>
-          <Input updateFunction={(e)=>setPassword(e)} label="Password"/>
+          <Input updateFunction={(e)=>setPassword(e)} label="Password" type="password"/>
           <Button label="Login" onClick={()=>onSubmit()} disabled={disabled || loading}/>
           <div className="font-poppins text-base font-normal leading-6 text-center text-recruitBlue underline mt-[-10px] cursor-pointer">Forgot password or email? </div>
         </div>

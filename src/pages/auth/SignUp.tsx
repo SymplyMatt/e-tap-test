@@ -2,8 +2,6 @@ import Button from "../../components/common/Button"
 import Input from "../../components/common/Input"
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from "react";
 import Select from "../../components/common/Select";
 import utils from "../../utils/utils";
@@ -37,21 +35,23 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const onSubmit = async () =>{
     if( !utils.isValidEmail(inputValues.email)){
-      toast.error('Enter a valid email!');
+      utils.createErrorNotification('Enter a valid email!!', 2000);
       return
     }
     if(inputValues.password !== inputValues.confirmPassword){
-      toast.error('Passwords dont match!');
+      utils.createErrorNotification('Passwords dont match!!', 2000);
       return
     }
     setLoading(true);
     const payload = {...inputValues, fullName: `${inputValues.firstName} ${inputValues.lastName}`, sessionHash : location.state?.sessionHash}
     const res = await makeRequest('POST', '/register','',payload);
     if(res.type === 'success'){
-      toast.success('Account creation successful!');
-      navigate('/projects', {replace : true});
+      setTimeout(()=>{
+        utils.createSuccessNotification('Account creation successful!', 1000);
+        navigate('/projects', {replace : true});
+      }, 1000)
     }else{
-      toast.error('Account creation failed');
+      utils.createErrorNotification('Account creation failed!', 2000);
     }
     console.log('res: ', res);
     setLoading(false);
@@ -106,7 +106,6 @@ const SignUp = () => {
             <div className="border border-solid border-borderGray rounded-8 h-[45px] flex justify-center items-center px-10 w-full font-semibold gap-10 cursor-pointer"><img src={google} alt="" /> Sign up with Google</div>
           </div> */}
         </div>
-        <ToastContainer />
       </div>}
     </>
   )
