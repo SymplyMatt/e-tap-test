@@ -3,6 +3,7 @@ import Textarea from '../../../common/Textarea'
 import circle_check from '../../../../assets/images/circle_check.svg'
 import calendar from '../../../../assets/images/calendar.svg'
 import group from '../../../../assets/images/group.svg'
+import registration_details from '../../../../assets/images/registration_details.svg';
 
 interface ComponentProps {
     step: number
@@ -13,6 +14,7 @@ const Publish : React.FC<ComponentProps> =  ({setShowOverlay}) => {
   return (
         <div className="my-20 py-20 create-project flex flex-col w-full gap-20">
             <div className="flex flex-col w-[40%] items-center m-auto gap-16 mb-[100px]">
+                <img src={registration_details} alt="" className='h-[200px] rounded-8 mb-[30px]' />
                 <div className="w-full flex flex-col relative">
                     <Input label="Project name" value='project name'/>
                     <div className="absolute top-1/2 transform -translate-y-1/2 right-10 z-0 bg-dashboardColor"><img src={circle_check} alt="" className='h-20 w-20 z-10'/></div>
