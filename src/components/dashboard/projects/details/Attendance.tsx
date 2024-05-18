@@ -1,6 +1,6 @@
-import Input from '../../common/Input'
-import circle_check from '../../../assets/images/circle_check.svg'
-import barcode from '../../../assets/images/barcode.svg'
+import Input from '../../../common/Input'
+import circle_check from '../../../../assets/images/circle_check.svg'
+import barcode from '../../../../assets/images/barcode.svg'
 interface DashboardLayoutProps {
     setCurrentTab: Function;
 }

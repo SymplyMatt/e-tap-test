@@ -57,10 +57,10 @@ function Input({ updateFunction, label, placeholder= label ? label.toLowerCase()
   },[])
   return (
     <div className={`relative flex items-center p-10 border border-solid bg-inherit rounded-8 w-full ${!value &&'cursor-pointer'} relative z-0 transition-all duration-300 gap-10 ${isFocused ? 'border-gray-borderGray' : 'border-gray-borderGray'} ${isFocused || inputValue ? 'border-inputBorderActive' : ''}`}>
-      {isFocused && <label className='flex text-left items-start absolute top-[-12px] z-10 bg-white text-14'>{label}</label>}
+      {isFocused && <label className='flex text-left items-start absolute top-[-12px] z-10 bg-white text-14 bg-inherit'>{label}</label>}
       {icon && <img src={icon} alt="" className='h-[24px] w-[24px]'/>}
       <input 
-        type={isFocused ? type : 'text'} 
+        type={type == 'number' ? type : isFocused ? type : 'text'} 
         placeholder={isFocused ? '' : placeholder} 
         className={`outline-none border-none w-full h-full ${!value &&'cursor-pointer'} bg-inherit ${inputExtraClass} ${isFocused || inputValue ? 'text-black' : 'text-lightBlack  text-14'} z-0`}
         onFocus={!value ? handleFocus : ()=>{}}

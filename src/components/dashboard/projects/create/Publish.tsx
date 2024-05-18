@@ -3,7 +3,6 @@ import Textarea from '../../../common/Textarea'
 import circle_check from '../../../../assets/images/circle_check.svg'
 import calendar from '../../../../assets/images/calendar.svg'
 import group from '../../../../assets/images/group.svg'
-import Select from '../../../common/Select'
 
 interface ComponentProps {
     step: number
@@ -38,10 +37,10 @@ const Publish : React.FC<ComponentProps> =  ({setShowOverlay}) => {
                     </div>
                     <div className="grid grid-cols-3 justify-center w-full gap-10">
                         <div className="col-span-2 flex items-center">
-                            <Select value='Team Slots' icon={group}/>
+                        <div className={`h-[45px] p-10 border border-solid bg-inherit rounded-8 w-full border-inputBorderActive text-black text-base flex items-center`}> <img src={group} alt="" /> Project Participants</div>
                         </div>
                         <div className="col-span-1 flex items-center">
-                            <Input value=' '/>
+                            <Input value='3'/>
                         </div>
                     </div>
                 </div>

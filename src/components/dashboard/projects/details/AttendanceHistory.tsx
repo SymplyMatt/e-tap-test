@@ -1,6 +1,6 @@
-import barcode from "../../../assets/images/barcode.svg"
-import project_line from "../../../assets/images/project_line.svg"
-import team_members from "../../../assets/images/team_members.svg"
+import barcode from "../../../../assets/images/barcode.svg"
+import project_line from "../../../../assets/images/project_line.svg"
+import team_members from "../../../../assets/images/team_members.svg"
 interface Props {
     setCurrentTab: Function;
 }

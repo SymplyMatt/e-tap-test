@@ -1,11 +1,11 @@
-import barcode from '../../../assets/images/barcode.svg'
-import group from '../../../assets/images//group_team.svg'
-import calendar_month from '../../../assets/images/calendar_month.svg'
-import sort from '../../../assets/images/sort.svg'
-import project_line from '../../../assets/images/project_line.svg'
-import approve from '../../../assets/images/approve.svg'
-import decline from '../../../assets/images/decline.svg'
-import Input from '../../common/Input'
+import barcode from '../../../../assets/images/barcode.svg'
+import group from '../../../../assets/images//group_team.svg'
+import calendar_month from '../../../../assets/images/calendar_month.svg'
+import sort from '../../../../assets/images/sort.svg'
+import project_line from '../../../../assets/images/project_line.svg'
+import approve from '../../../../assets/images/approve.svg'
+import decline from '../../../../assets/images/decline.svg'
+import Input from '../../../common/Input'
 const ProjectOverview = () => {
   return (
     <div className="flex flex-col w-full gap-30">

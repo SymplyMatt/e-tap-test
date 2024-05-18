@@ -5,13 +5,13 @@ interface DashboardLayoutProps {
     children?: [ReactNode, ReactNode, ReactNode?];
     background?: String;
 }
-const Dashboard: React.FC<DashboardLayoutProps> = ({children = [<></>, <></>, <></>], background='dashboardColor'}) => {
+const Dashboard: React.FC<DashboardLayoutProps> = ({children = [<></>, <></>, <></>]}) => {
     const [header, content, overlay] = children;
 return (
     <>
         {<div className="grid grid-cols-10 w-screen h-screen relative">
             <Sidebar />
-            <div className={`h-screen bg-${background} col-span-8 relative overflow-hidden`}>
+            <div className={`h-screen bg-white col-span-8 relative overflow-hidden`}>
                 <div className="flex flex-col justify-between">
                     <TopMain />
                     {header}

@@ -1,5 +1,5 @@
-import sort from '../../../assets/images/sort.svg'
-import check_bold from '../../../assets/images/check_bold.svg'
+import sort from '../../../../assets/images/sort.svg'
+import check_bold from '../../../../assets/images/check_bold.svg'
 
 const AttendanceDetails = () => {
   return (

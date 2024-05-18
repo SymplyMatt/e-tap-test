@@ -1,11 +1,11 @@
 import Dashboard from './Dashboard'
 import edit from '../../assets/images/edit.svg'
-import ProjectOverview from '../../components/dashboard/projects/ProjectOverview'
+import ProjectOverview from '../../components/dashboard/projects/details/ProjectOverview'
 import { useState } from 'react'
-import TeamMembers from '../../components/dashboard/projects/TeamMembers'
-import Attendance from '../../components/dashboard/projects/Attendance'
-import AttendanceHistory from '../../components/dashboard/projects/AttendanceHistory'
-import AttendanceDetails from '../../components/dashboard/projects/AttendanceDetails'
+import TeamMembers from '../../components/dashboard/projects/details/TeamMembers'
+import Attendance from '../../components/dashboard/projects/details/Attendance'
+import AttendanceHistory from '../../components/dashboard/projects/details/AttendanceHistory'
+import AttendanceDetails from '../../components/dashboard/projects/details/AttendanceDetails'
 import Button from '../../components/common/Button'
 
 

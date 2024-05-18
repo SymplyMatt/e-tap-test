@@ -1,6 +1,6 @@
-import sort from '../../../assets/images/sort.svg'
-import approve from '../../../assets/images/approve.svg'
-import decline from '../../../assets/images/decline.svg'
+import sort from '../../../../assets/images/sort.svg'
+import approve from '../../../../assets/images/approve.svg'
+import decline from '../../../../assets/images/decline.svg'
 
 const TeamMembers = () => {
   return (

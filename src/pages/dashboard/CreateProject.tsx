@@ -2,8 +2,7 @@ import Dashboard from './Dashboard'
 import ProjectDetails from '../../components/dashboard/projects/create/ProjectDetails'
 import { useState } from 'react'
 import Steps from '../../components/dashboard/projects/create/Steps';
-import RequiredFormFields from '../../components/dashboard/projects/create/RequiredFormFields';
-import FormSettings from '../../components/dashboard/projects/create/FormSettings';
+import CoverPhoto from '../../components/dashboard/projects/create/CoverPhoto';
 import Publish from '../../components/dashboard/projects/create/Publish';
 import Input from '../../components/common/Input';
 import barcode from '../../assets/images/barcode.svg'
@@ -15,9 +14,8 @@ const CreateProject = () => {
             <Steps step={step} setStep={setStep}/>
             <>
                 {step === 1 && <ProjectDetails step={step} setStep={setStep}/>}
-                {step === 2 && <RequiredFormFields step={step} setStep={setStep}/>}
-                {step === 3 && <FormSettings step={step} setStep={setStep}/>}
-                {step === 4 && <Publish step={step} setStep={setStep} setShowOverlay={setShowOverlay}/>}
+                {step === 2 && <CoverPhoto step={step} setStep={setStep}/>}
+                {step === 3 && <Publish step={step} setStep={setStep} setShowOverlay={setShowOverlay}/>}
             </>
             {showOverlay && <div className="bg-white flex flex-col p-30 shadow gap-20 w-[70%] rounded-12">
                 <div className="flex grid-cols-2 gap-20 items-end">
