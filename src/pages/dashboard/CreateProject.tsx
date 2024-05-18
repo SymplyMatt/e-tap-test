@@ -1,10 +1,10 @@
 import Dashboard from './Dashboard'
-import ProjectDetails from '../../components/dashboard/projects/ProjectDetails'
+import ProjectDetails from '../../components/dashboard/projects/create/ProjectDetails'
 import { useState } from 'react'
-import Steps from '../../components/dashboard/projects/Steps';
-import RequiredFormFields from '../../components/dashboard/projects/RequiredFormFields';
-import FormSettings from '../../components/dashboard/projects/FormSettings';
-import Publish from '../../components/dashboard/projects/Publish';
+import Steps from '../../components/dashboard/projects/create/Steps';
+import RequiredFormFields from '../../components/dashboard/projects/create/RequiredFormFields';
+import FormSettings from '../../components/dashboard/projects/create/FormSettings';
+import Publish from '../../components/dashboard/projects/create/Publish';
 import Input from '../../components/common/Input';
 import barcode from '../../assets/images/barcode.svg'
 const CreateProject = () => {
