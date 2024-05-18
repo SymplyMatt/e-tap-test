@@ -4,10 +4,13 @@ import circle_check from '../../../../assets/images/circle_check.svg'
 import calendar from '../../../../assets/images/calendar.svg'
 import group from '../../../../assets/images/group.svg'
 import registration_details from '../../../../assets/images/registration_details.svg';
+import { inputs } from '../../../../pages/dashboard/CreateProject'
 
 interface ComponentProps {
-    step: number
-    setStep: Function
+    step: number;
+    setStep: Function;
+    updateValue: Function;
+    inputValues: inputs;
     setShowOverlay: Function
 }
 const Publish : React.FC<ComponentProps> =  ({setShowOverlay}) => {

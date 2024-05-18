@@ -4,10 +4,13 @@ import circle_check from '../../../../assets/images/circle_check.svg'
 import calendar_fade from '../../../../assets/images/calendar_fade.svg'
 import group_fade from '../../../../assets/images/group_fade.svg'
 import { useNavigate } from 'react-router-dom'
+import { inputs } from '../../../../pages/dashboard/CreateProject'
 
 interface ComponentProps {
-    step: number
-    setStep: Function
+    step: number;
+    setStep: Function;
+    updateValue: Function;
+    inputValues: inputs;
 }
 const ProjectDetails : React.FC<ComponentProps> =  ({step,setStep}) => {
     const navigate = useNavigate();

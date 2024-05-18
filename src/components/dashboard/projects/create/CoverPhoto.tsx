@@ -2,14 +2,16 @@ import { useState } from 'react';
 import registration_details from '../../../../assets/images/registration_details.svg';
 import select_photo from '../../../../assets/images/select_photo.svg';
 import utils from '../../../../utils/utils';
+import { inputs } from '../../../../pages/dashboard/CreateProject';
 
 interface ComponentProps {
-  step: number;
-  setStep: Function;
+    step: number;
+    setStep: Function;
+    updateValue: Function;
+    inputValues: inputs;
 }
 
 const CoverPhoto: React.FC<ComponentProps> = ({ step, setStep }) => {
-  const [image, setImage] = useState<any>('');
   const [image64, setImage64] = useState<string>('');
 
   const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,8 +19,6 @@ const CoverPhoto: React.FC<ComponentProps> = ({ step, setStep }) => {
     if (file) {
       try {
         const base64String = await utils.convertImageToBase64(file);
-        setImage(URL.createObjectURL(file));
-        
         setImage64(`data:image/jpeg;base64,${base64String}`);
       } catch (error) {
         console.error("Error converting image to base64:", error);
