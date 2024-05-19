@@ -15,7 +15,7 @@ import Skeleton from '../../components/dashboard/projects/Skeleton'
 
 
 const Projects = () => {
-  const { token, user} = useContext(Context);
+  const { user } = useContext(Context);
   const navigate = useNavigate(); 
   const [projects, setProjects] = useState([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
@@ -23,16 +23,13 @@ const Projects = () => {
     async function getAllProjects() {
       try {
         setLoadingProjects(true);
-        const res = await makeRequest('GET', `/projects/get-by-projectid?OrganizationId=${user?.organizationId}`, token);
+        const res = await makeRequest('GET', `/projects/get-all`, user?.token);
         setLoadingProjects(false);
         if(res.type === 'success'){
-          setProjects(res.data.data);
+          setProjects(res.data.data.results);
         }else{
-          if(res.data.message.toLowerCase() == 'record not found'){
-            setProjects([]);
-          }else{
-            utils.createErrorNotification(res.data.message, 1000);
-          }
+          utils.createErrorNotification(res.data.message, 1000);
+          setProjects([]);
         }
       } catch (error) {
         console.log('error: ', error);

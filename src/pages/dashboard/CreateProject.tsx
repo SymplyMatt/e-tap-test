@@ -16,7 +16,7 @@ export interface inputs{
     endDate: Date | null
 }
 const CreateProject = () => {
-    const { token,user} = useContext(Context);
+    const { user} = useContext(Context);
     const [step, setStep] = useState<number>(1);
     const [showOverlay, setShowOverlay] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
@@ -34,7 +34,7 @@ const CreateProject = () => {
     const createProject = async ()=> {
         try {
             setLoading(true);
-            const res = await makeRequest('POST', '/projects/create', token, {...inputValues, organizationId : user?.organizationId, startDate : inputValues.startDate?.toISOString(), endDate : inputValues.endDate?.toISOString()});
+            const res = await makeRequest('POST', '/projects/create', user?.token, {...inputValues, organizationId : user?.organizationId, startDate : inputValues.startDate?.toISOString(), endDate : inputValues.endDate?.toISOString()});
             setLoading(false);
             console.log('res: ', res);
         } catch (error) {
