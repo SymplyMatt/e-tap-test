@@ -26,7 +26,6 @@ const DashboardMiddleware: React.FC = () => {
                     can : decodedToken['can'],
                     exp : decodedToken["exp"]
                   });
-                console.log('decoded token: ', decodedToken);
                 setToken(token);
                 setIsAuthenticated(true);
             }else{

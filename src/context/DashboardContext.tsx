@@ -14,7 +14,7 @@ interface userInfo{
 interface ContextValue {
     token: string | null;
     setToken : Function;
-    user: any | null;
+    user: userInfo | null;
     setUser : Function;
 }
 
