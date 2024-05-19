@@ -2,7 +2,7 @@ import axios, { AxiosResponse, AxiosError } from 'axios';
 
 type RequestType = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
-const BASE_URL = 'http://94.229.79.27:4136/api/v1/organization';
+const BASE_URL = 'http://94.229.79.27:4136/api/v1';
 interface ResponseData {
   type : 'success' | 'error' | 'failed',
   data: any

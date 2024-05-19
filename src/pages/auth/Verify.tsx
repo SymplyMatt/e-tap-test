@@ -39,7 +39,7 @@ const Verify = () => {
   },[inputValues])
   const resendCode = async () =>{
     setLoading(true);
-    const res = await makeRequest('POST', '/sendverification',null,{email : location.state?.email, phoneNumber: 'test'});
+    const res = await makeRequest('POST', '/organization/sendverification',null,{email : location.state?.email, phoneNumber: 'test'});
     setLoading(false);
     if(res.type === 'success'){
       setShowResent(true);
@@ -52,7 +52,7 @@ const Verify = () => {
   }
   const verify = async () =>{
     setLoading(true);
-    const res = await makeRequest('POST', '/validateotp',null,{sessionHash, code: inputValues.join('') });
+    const res = await makeRequest('POST', '/organization/validateotp',null,{sessionHash, code: inputValues.join('') });
     setLoading(false);
     if(res.type === 'success'){
       toast.success('Account Verification successful!');

@@ -1,5 +1,5 @@
 import Dashboard from './Dashboard'
-import projects from "../../assets/images/projects.svg"
+import projects_icon from "../../assets/images/projects.svg"
 import calendar_clock from "../../assets/images/calendar_clock.svg"
 import search from "../../assets/images/search.svg"
 import team_members from "../../assets/images/team_members.svg"
@@ -7,17 +7,45 @@ import Button from '../../components/common/Button'
 import barcode from '../../assets/images/barcode.svg'
 import project_line from '../../assets/images/project_line.svg'
 import { useNavigate } from 'react-router-dom'
+import { useContext, useEffect, useState } from 'react'
+import makeRequest from '../../services/request'
+import { Context } from '../../context/DashboardContext'
+import utils from '../../utils/utils'
+import Skeleton from '../../components/dashboard/projects/Skeleton'
 
 
 const Projects = () => {
+  const { token, user} = useContext(Context);
   const navigate = useNavigate(); 
-  const isEmpty = false;
+  const [projects, setProjects] = useState([]);
+  const [loadingProjects, setLoadingProjects] = useState(true);
+  useEffect(()=>{
+    async function getAllProjects() {
+      try {
+        setLoadingProjects(true);
+        const res = await makeRequest('GET', `/projects/get-by-projectid?OrganizationId=${user?.organizationId}`, token);
+        setLoadingProjects(false);
+        if(res.type === 'success'){
+          setProjects(res.data.data);
+        }else{
+          if(res.data.message.toLowerCase() == 'record not found'){
+            setProjects([]);
+          }else{
+            utils.createErrorNotification(res.data.message, 1000);
+          }
+        }
+      } catch (error) {
+        console.log('error: ', error);
+      }
+    }
+    getAllProjects();
+  },[]);
   return (
     <Dashboard>
       <div className="text-20 font-medium flex flex-col gap-5 w-full justify-start cursor-pointer h-[90px] px-20"> 
         <div className="h-[25px] w-full"></div>
         <div className="flex h-[65px] items-center">
-          <img src={projects} alt="" className="h-35"/>    
+          <img src={projects_icon} alt="" className="h-35"/>    
           <div className="">Projects</div> 
         </div>
       </div>
@@ -32,14 +60,14 @@ const Projects = () => {
             <Button label="+  &nbsp;Create Project" onClick={()=>navigate('/projects/new')}/>
           </div>
         </div>
-        {isEmpty && <div className="flex flex-col gap-20 px-20 font-bold">
+        {!loadingProjects && projects.length === 0 && <div className="flex flex-col gap-20 px-20 font-bold">
           <div className="font-hiragino text-[32px]">Create and manage projects</div>
           <div className="font-normal w-[80%]">Create unlimited projects with link and QR Code invite and keep track of how many team members join them while tracking the length of each project. Also take attendance at your convenience.</div>
           <div className="font-normal">
             <Button label="+  &nbsp;Create Project" onClick={()=>navigate('/projects/new')}/>
           </div>
         </div>}
-        {!isEmpty && <div className="flex flex-col px-20 gap-30 mb-[100px]">
+        {!loadingProjects && projects.length > 1 && <div className="flex flex-col px-20 gap-30 mb-[100px]">
           <div className="flex flex gap-40 border-b border-borderGray w-full">
             <div className="py-10 border-b-2  border-recruitBlue w-fit-content flex items-center gap-10 cursor-pointer">All <span className='bg-recruitBlue text-white h-full text-[10px] py-[3px] px-[4px] rounded-5 flex items-center justify-center'>20</span></div>
             <div className="py-10 w-fit-content flex items-center gap-10 cursor-pointer text-lightBlack">Active <span className='bg-[#F1F1F1] h-full text-[10px] py-[3px] px-[4px] rounded-5 flex items-center justify-center text-lightBlack font-semibold'>20</span></div>
@@ -108,6 +136,11 @@ const Projects = () => {
             </div>
 
           </div>
+        </div>}
+        {loadingProjects && <div className='flex flex-col gap-30'>
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
         </div>}
       </div>
     </Dashboard>

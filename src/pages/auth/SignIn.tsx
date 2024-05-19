@@ -18,7 +18,7 @@ const SignIn = () => {
         return
       }
       setLoading(true);
-      const res = await makeRequest('POST', '/login','',{email, password});
+      const res = await makeRequest('POST', '/organization/login','',{email, password});
       if(res.type !== 'success'){
         utils.createErrorNotification('Incorrect username or password!', 2000);
       }else{

@@ -44,7 +44,7 @@ const SignUp = () => {
     }
     setLoading(true);
     const payload = {...inputValues, fullName: `${inputValues.firstName} ${inputValues.lastName}`, sessionHash : location.state?.sessionHash}
-    const res = await makeRequest('POST', '/register','',payload);
+    const res = await makeRequest('POST', '/organization/register','',payload);
     if(res.type === 'success'){
       setTimeout(()=>{
         utils.createSuccessNotification('Account creation successful!', 1000);
