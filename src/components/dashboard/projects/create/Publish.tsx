@@ -10,11 +10,10 @@ interface ComponentProps {
     step: number;
     setStep: Function;
     inputValues: inputs;
-    setShowOverlay: Function;
     onSubmit: Function;
     loading: boolean;
 }
-const Publish : React.FC<ComponentProps> =  ({setShowOverlay, inputValues, onSubmit, loading}) => {
+const Publish : React.FC<ComponentProps> =  ({inputValues, onSubmit, loading}) => {
   return (
         <div className="my-20 py-20 create-project flex flex-col w-full gap-20">
             <div className="flex flex-col w-[40%] items-center m-auto gap-16 mb-[100px]">

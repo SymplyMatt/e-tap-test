@@ -58,7 +58,7 @@ const CreateProject = () => {
             <>
                 {step === 1 && <ProjectDetails step={step} setStep={setStep} inputValues={inputValues} updateValue={updateValue}/>}
                 {step === 2 && <CoverPhoto step={step} setStep={setStep} inputValues={inputValues} updateValue={updateValue}/>}
-                {step === 3 && <Publish step={step} setStep={setStep} setShowOverlay={setShowOverlay} inputValues={inputValues} onSubmit={createProject} loading={loading}/>}
+                {step === 3 && <Publish step={step} setStep={setStep} inputValues={inputValues} onSubmit={createProject} loading={loading}/>}
             </>
             {showOverlay && <Overlay setShowOverlay={setShowOverlay}/>}
         </Dashboard>
