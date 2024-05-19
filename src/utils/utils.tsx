@@ -184,5 +184,22 @@ export default class utils {
           return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
       }).join(''));
       return JSON.parse(jsonPayload);
-  }
+    }
+    static formatDateAndTime(date : Date) {
+      const options : any = { 
+        weekday: 'long', 
+        month: 'long', 
+        day: 'numeric', 
+        hour: 'numeric', 
+        minute: 'numeric', 
+        hour12: true 
+      };
+      return new Intl.DateTimeFormat('en-US', options).format(date);
+    }
+    static capitalizeEachWord(input: string): string {
+      return input
+          .split(' ')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+          .join(' ');
+    }
 }

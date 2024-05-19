@@ -7,6 +7,8 @@ import Publish from '../../components/dashboard/projects/create/Publish';
 import Overlay from '../../components/dashboard/projects/create/Overlay';
 import makeRequest from '../../services/request';
 import { Context } from '../../context/DashboardContext';
+import utils from '../../utils/utils';
+import { useNavigate } from 'react-router-dom';
 export interface inputs{
     name: string,
     description: string,
@@ -16,6 +18,7 @@ export interface inputs{
     endDate: Date | null
 }
 const CreateProject = () => {
+    const navigate = useNavigate();
     const { user} = useContext(Context);
     const [step, setStep] = useState<number>(1);
     const [showOverlay, setShowOverlay] = useState<boolean>(false);
@@ -36,9 +39,17 @@ const CreateProject = () => {
             setLoading(true);
             const res = await makeRequest('POST', '/projects/create', user?.token, {...inputValues, organizationId : user?.organizationId, startDate : inputValues.startDate?.toISOString(), endDate : inputValues.endDate?.toISOString()});
             setLoading(false);
-            console.log('res: ', res);
+            if(res.type === 'success'){
+                console.log('i was successful');
+                utils.createSuccessNotification('Request successful!', 1000);
+            }else{
+                utils.createErrorNotification(res.data.message, 1000);
+            }
         } catch (error) {
-            
+            utils.createErrorNotification("An error occured...", 1000);
+            console.log(error);
+        }finally{
+            navigate('/projects', {replace : true});
         }
     }
     return (
