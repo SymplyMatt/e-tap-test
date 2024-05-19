@@ -1,9 +1,9 @@
-import Input from '../../common/Input'
-import Textarea from '../../common/Textarea'
+import Input from '../common/Input'
+import Textarea from '../common/Textarea'
 import circle_check from '../../../assets/images/circle_check.svg'
 import calendar from '../../../assets/images/calendar.svg'
 import group from '../../../assets/images/group.svg'
-import Select from '../../common/Select'
+import Select from '../common/Select'
 
 interface ComponentProps {
     step: number

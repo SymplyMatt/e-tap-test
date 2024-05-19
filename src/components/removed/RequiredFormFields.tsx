@@ -6,7 +6,7 @@ import gender from '../../../assets/images/gender.svg'
 import marital_status from '../../../assets/images/marital_status.svg'
 import child from '../../../assets/images/child.svg'
 import select_photo from '../../../assets/images/select_photo.svg'
-import Select from '../../common/Select'
+import Select from '../common/Select'
 interface ComponentProps {
     step: number
     setStep: Function

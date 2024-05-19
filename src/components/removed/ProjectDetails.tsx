@@ -1,5 +1,5 @@
-import Input from '../../common/Input'
-import Textarea from '../../common/Textarea'
+import Input from '../common/Input'
+import Textarea from '../common/Textarea'
 import circle_check from '../../../assets/images/circle_check.svg'
 import calendar_fade from '../../../assets/images/calendar_fade.svg'
 import { useNavigate } from 'react-router-dom'
