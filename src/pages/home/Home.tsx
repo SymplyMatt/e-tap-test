@@ -8,11 +8,11 @@ const Home = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const onSubmit = async () =>{
-    setLoading(true);
     if( !utils.isValidEmail(email)){
       utils.createErrorNotification('Enter a valid email!', 2000);
       return
     }
+    setLoading(true);
     const res = await makeRequest('POST', '/organization/sendverification',null,{email, phoneNumber: 'test'});
     setLoading(false);
     if(res.type === 'success'){
@@ -28,7 +28,7 @@ const Home = () => {
             <div className="font-inter font-semibold cursor-pointer" onClick={()=> navigate('/')}>LOGO</div>
             <div className="flex items-center gap-20">
                 <div className="font-semibold cursor-pointer" onClick={()=> navigate('/auth/signin')}>Log in</div>
-                <Button label="Create Project" onClick={()=>{}} disabled={loading}/>
+                <Button label="Create Project" onClick={()=> navigate('/auth/signin')} disabled={loading}/>
             </div>
         </div>
         <div className="flex flex-col justify-center items-center gap-20 mmd:w-[80%]">
