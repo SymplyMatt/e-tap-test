@@ -33,7 +33,7 @@ const DateFilterDropdown = () => {
         <i className={`fa-solid ${showDropDown ? 'fa-caret-up' : 'fa-caret-down'}`}></i>
       </div>
       {showDropDown && (
-        <div className="overflow-visible bg-white flex flex-col border border-borderGray z-10 shadow w-full items-center justify-center rounded-8 mt-10">
+        <div className="overflow-visible bg-white flex flex-col border border-borderGray z-10 shadow w-full items-center justify-center rounded-8 mt-10 dropdown-menu">
           <div className="p-10 hover:bg-borderGray w-full flex items-center justify-center cursor-pointer">
             Last 24 hours
           </div>

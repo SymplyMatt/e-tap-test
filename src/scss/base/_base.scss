@@ -74,3 +74,16 @@ body{
       transform: rotate(360deg);
     }
   }
+  @keyframes dropdownMenu {
+    from {
+      height: 50px;
+      opacity: 0;
+    }
+    to {
+      height: fit-content; 
+      opacity: 1;
+    }
+  }
+  .dropdown-menu{
+    animation: dropdownMenu 0.1s forwards;
+  }
