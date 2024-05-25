@@ -2,14 +2,15 @@ import { useContext, useEffect, useRef, useState } from "react";
 import bell from "../../assets/images/bell.svg";
 import { Context } from "../../context/DashboardContext";
 import utils from "../../utils/utils";
+import { useNavigate } from "react-router-dom";
 
 const TopMain = () => {
-  const { user } = useContext(Context);
+  const { user, setUser } = useContext(Context);
   const roledropdownRef = useRef<HTMLDivElement>(null);
   const userdropdownRef = useRef<HTMLDivElement>(null);
   const [showRoleDropDown, setShowRoleDropDown] = useState<boolean>(false);
   const [showUserDropDown, setShowUserDropDown] = useState<boolean>(false);
-
+  const navigate = useNavigate();
   const handleClickOutside = (event: MouseEvent) => {
     if (roledropdownRef.current && !roledropdownRef.current.contains(event.target as Node)) {
       setShowRoleDropDown(false);
@@ -29,7 +30,11 @@ const TopMain = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showRoleDropDown, showUserDropDown]);
-
+  const logout = () =>{
+    localStorage.clear();
+    setUser(null);
+    navigate('/auth/signin');
+  }
   return (
     <div className="h-60 flex items-center px-20 w-full justify-between border-b border-borderGray">
       <div className="flex flex-col items-center h-[45px]" ref={roledropdownRef}>
@@ -64,15 +69,15 @@ const TopMain = () => {
               className="flex items-center justify-center gap-10 cursor-pointer h-full"
               onClick={() => setShowUserDropDown(!showUserDropDown)}
             >
-              {user?.fullName} <i className="fa-solid fa-caret-down"></i>
+              {user?.fullName} <i className={`fa-solid ${showUserDropDown ? "fa-caret-up" : "fa-caret-down"}`}></i>
             </div>
             {showUserDropDown && (
               <div className="overflow-visible bg-white flex flex-col border border-borderGray z-10 shadow w-full items-center justify-center rounded-8 dropdown-menu absolute top-[60px]">
                 <div className="p-10 hover:bg-borderGray w-full flex items-center justify-center cursor-pointer">
-                  Action
+                  Settings
                 </div>
-                <div className="p-10 hover:bg-borderGray w-full flex items-center justify-center cursor-pointer">
-                  Action
+                <div className="p-10 hover:bg-borderGray w-full flex items-center justify-center cursor-pointer" onClick={()=>logout()}>
+                  Logout
                 </div>
               </div>
             )}
