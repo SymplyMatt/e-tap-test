@@ -31,16 +31,10 @@ const TopMain = () => {
         {showRoleDropDown && (
         <div className="overflow-visible bg-white flex flex-col border border-borderGray z-10 shadow w-full items-center justify-center rounded-8 mt-10 dropdown-menu">
           <div className="p-10 hover:bg-borderGray w-full flex items-center justify-center cursor-pointer">
-            Last 24 hours
+            Action
           </div>
           <div className="p-10 hover:bg-borderGray w-full flex items-center justify-center cursor-pointer">
-            Last 7 days
-          </div>
-          <div className="p-10 hover:bg-borderGray w-full flex items-center justify-center cursor-pointer">
-            One month
-          </div>
-          <div className="p-10 hover:bg-borderGray w-full flex items-center justify-center cursor-pointer">
-            One year
+            Another Action
           </div>
         </div>
       )}
