@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import Button from "../../components/common/Button"
 import { useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import utils from "../../utils/utils";
 import makeRequest from "../../services/request";
 const Home = () => {
@@ -12,7 +10,7 @@ const Home = () => {
   const onSubmit = async () =>{
     setLoading(true);
     if( !utils.isValidEmail(email)){
-      toast.error('Enter a valid email!');
+      utils.createErrorNotification('Enter a valid email!', 2000);
       return
     }
     const res = await makeRequest('POST', '/organization/sendverification',null,{email, phoneNumber: 'test'});
@@ -20,6 +18,8 @@ const Home = () => {
     if(res.type === 'success'){
       const {sessionHash} = res?.data.data || '';
       navigate('/auth/verify', { replace: true, state: { sessionHash,email  } });
+    }else if(res.type === 'error' && res.data.message.includes('already exists')){
+      utils.createErrorNotification('Email already exists already', 2000);
     }
   }
   return (
@@ -42,7 +42,7 @@ const Home = () => {
               <div className="text-center flex justify-center text-recruitBlue">*Sign up is required</div>
             </div>
         </div>
-        <ToastContainer />
+        <div className="flex flex-col absolute top-[100px] right-[30px] notification-container gap-20"></div>
     </div>
   )
 }

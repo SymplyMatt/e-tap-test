@@ -25,7 +25,7 @@ export default async function makeRequest(
       data: body,
     };
     if(type === 'POST'){
-      console.log('data: ', body);
+      // console.log('data: ', body);
       
     }
 
@@ -40,6 +40,8 @@ export default async function makeRequest(
       if (axiosError.response) {
         console.error('Error:', axiosError.response.status);
         console.error('Data:', axiosError.response.data);
+        const errorResponse: ResponseData = {type : 'error', data : axiosError.response.data} as ResponseData;
+        return errorResponse
       } else if (axiosError.request) {
         console.error('Error:', axiosError.request);
       } else {
