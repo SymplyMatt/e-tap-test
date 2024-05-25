@@ -98,7 +98,7 @@ const SignUp = () => {
               <Input updateFunction={(e)=>updateValue('password',e)} label="Password" type="password"/>
               <Input updateFunction={(e)=>updateValue('confirmPassword',e)} label="Re-Enter Password" placeholder="Re-Enter Password" type="password"/>
             </div>
-            <Button label="Create Account" onClick={()=>!loading && onSubmit()} disabled={disabled || loading}/>
+            <Button label="Create Account" onClick={()=>!loading && onSubmit()} disabled={disabled || loading} loading={loading}/>
             <div className="font-poppins text-base font-normal leading-6 text-center text-textFade mt-[-10px]">Already have an account? <span className="text-black font-semibold cursor-pointer" onClick={()=> navigate('/auth/signin')}>Log In</span> </div>
           </div>
           {/* <div className="w-full flex flex-col gap-10">
