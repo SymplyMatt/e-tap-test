@@ -6,22 +6,16 @@ import { useNavigate } from "react-router-dom";
 
 const TopMain = () => {
   const { user, setUser } = useContext(Context);
-  const roledropdownRef = useRef<HTMLDivElement>(null);
   const userdropdownRef = useRef<HTMLDivElement>(null);
-  const [showRoleDropDown, setShowRoleDropDown] = useState<boolean>(false);
   const [showUserDropDown, setShowUserDropDown] = useState<boolean>(false);
   const navigate = useNavigate();
   const handleClickOutside = (event: MouseEvent) => {
-    if (roledropdownRef.current && !roledropdownRef.current.contains(event.target as Node)) {
-      setShowRoleDropDown(false);
-    }
     if (userdropdownRef.current && !userdropdownRef.current.contains(event.target as Node)) {
       setShowUserDropDown(false);
     }
   };
-
   useEffect(() => {
-    if (showRoleDropDown || showUserDropDown) {
+    if ( showUserDropDown) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -29,7 +23,7 @@ const TopMain = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [showRoleDropDown, showUserDropDown]);
+  }, [showUserDropDown]);
   const logout = () =>{
     localStorage.clear();
     setUser(null);
@@ -37,24 +31,11 @@ const TopMain = () => {
   }
   return (
     <div className="h-60 flex items-center px-20 w-full justify-between border-b border-borderGray">
-      <div className="flex flex-col items-center h-[45px]" ref={roledropdownRef}>
+      <div className="flex flex-col items-center h-[45px]">
         <div
-          className="border border-borderGray px-16 py-10 rounded-8 flex gap-10 items-center cursor-pointer font-semibold h-full"
-          onClick={() => setShowRoleDropDown(!showRoleDropDown)}
-        >
-          {utils.camelCaseToFirstLast(user?.role || "")}{" "}
-          <i className={`fa-solid ${showRoleDropDown ? "fa-caret-up" : "fa-caret-down"}`}></i>
+          className="border border-borderGray px-16 py-10 rounded-8 flex gap-10 items-center cursor-pointer font-semibold h-full">
+          {utils.camelCaseToFirstLast(user?.role || "")}
         </div>
-        {showRoleDropDown && (
-          <div className="overflow-visible bg-white flex flex-col border border-borderGray z-10 shadow w-full items-center justify-center rounded-8 mt-10 dropdown-menu">
-            <div className="p-10 hover:bg-borderGray w-full flex items-center justify-center cursor-pointer">
-              Action
-            </div>
-            <div className="p-10 hover:bg-borderGray w-full flex items-center justify-center cursor-pointer">
-              Another Action
-            </div>
-          </div>
-        )}
       </div>
       <div className="flex items-center justify-center gap-20 h-full">
         <div className="cursor-pointer">
