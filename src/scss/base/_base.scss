@@ -60,4 +60,17 @@ body{
   .slide-out {
     animation: slide-out 0.3s ease-in forwards;
   }
-    
+  .spinner {
+    width: 35px;
+    height: 35px;
+    animation: rotate 2s linear infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @keyframes rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }

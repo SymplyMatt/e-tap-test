@@ -47,7 +47,7 @@ const SignIn = () => {
         <div className="w-full flex flex-col gap-20">
           <Input updateFunction={(e)=>setEmail(e)} label="Email"/>
           <Input updateFunction={(e)=>setPassword(e)} label="Password" type="password"/>
-          <Button label="Login" onClick={()=>onSubmit()} disabled={disabled || loading}/>
+          <Button label="Login" onClick={()=>onSubmit()} disabled={disabled || loading} loading={loading}/>
           <div className="font-poppins text-base font-normal leading-6 text-center text-recruitBlue underline mt-[-10px] cursor-pointer">Forgot password or email? </div>
         </div>
         {/* <div className="w-full flex flex-col gap-10">
