@@ -1,7 +1,6 @@
 import Dashboard from './Dashboard'
 import projects_icon from "../../assets/images/projects.svg"
-import calendar_clock from "../../assets/images/calendar_clock.svg"
-import search from "../../assets/images/search.svg"
+import search_icon from "../../assets/images/search.svg"
 import Button from '../../components/common/Button'
 import { useNavigate } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
@@ -10,13 +9,14 @@ import { Context } from '../../context/DashboardContext'
 import utils from '../../utils/utils'
 import Skeleton from '../../components/dashboard/projects/Skeleton'
 import ProjectItem from '../../components/dashboard/projects/details/ProjectItem'
-
+import DateFilterDropdown from '../../components/dashboard/projects/DateFilterDropdown'
 
 const Projects = () => {
   const { user } = useContext(Context);
   const navigate = useNavigate(); 
   const [projects, setProjects] = useState([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
+  const [search, setSearch] = useState<string>('');
   useEffect(()=>{
     async function getAllProjects() {
       try {
@@ -47,11 +47,10 @@ const Projects = () => {
       <div className="w-full flex flex-col gap-20 create-project">
         <div className="flex w-full justify-between items-center px-20">
           <div className="flex items-center gap-10">
-            <div className="border border-borderGray px-16 py-10 rounded-8 flex gap-10 items-center cursor-pointer font-normal bg-white"><img src={search } alt=""/> <input type="text" placeholder='Search project' className='outline-none border-none bg-inherit text-borderGray cursor-pointer'/></div>
-            <Button label="Search" onClick={()=>{}} extraClass='bg-lightBlue'/>
+            <div className="border border-borderGray px-16 py-10 rounded-8 flex gap-10 items-center cursor-pointer font-normal bg-white"><img src={search_icon } alt=""/> <input type="text" placeholder='Search project' className={`outline-none border-none bg-inherit ${search ? 'text-black' : 'text-borderGray'}  cursor-pointer`} value={search} onChange={(e)=>setSearch(e.currentTarget.value)}/></div>
           </div>
           <div className="flex items-center gap-10">
-            <div className="border border-borderGray px-16 py-10 rounded-8 flex gap-10 items-center cursor-pointer font-semibold"><img src={calendar_clock} alt=""/> Filter by Date Created</div>
+            <DateFilterDropdown />
             <Button label="+  &nbsp;Create Project" onClick={()=>navigate('/projects/new')}/>
           </div>
         </div>
@@ -70,9 +69,8 @@ const Projects = () => {
           </div>
           <div className="flex flex-col w-full gap-20">
             {projects.map((project : any, index : number )=>(
-              <ProjectItem key={index} project={project}/>
+              <ProjectItem key={index} project={project} search={search}/>
             ))}
-
           </div>
         </div>}
         {loadingProjects && <div className='flex flex-col gap-30'>

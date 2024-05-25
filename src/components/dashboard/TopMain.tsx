@@ -9,7 +9,7 @@ const TopMain = () => {
         <div className="flex items-center justify-center gap-20">
             <div className="cursor-pointer"><img src={bell} alt="" /></div>
             <div className="flex items-center justify-center gap-10">
-                <div className="h-30 w-30 bg-recruitBlue font-semibold rounded-50 text-white flex justify-center items-center cursor-pointer">M</div>
+                <div className="h-30 w-30 bg-recruitBlue font-semibold rounded-50 text-white flex justify-center items-center cursor-pointer">{user?.fullName.substring(0,1)}</div>
                 <div className="flex items-center justify-center gap-10 cursor-pointer">{user?.fullName} <i className="fa-solid fa-caret-down"></i></div>
             </div>
         </div>

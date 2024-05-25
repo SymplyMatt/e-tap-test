@@ -15,12 +15,13 @@ export interface Project{
     endDate: Date,
 }
 export interface ComponentProps{
-    project : Project
+    project : Project;
+    search : string;
 }
-const ProjectItem : React.FC<ComponentProps> =   ({project}) => {
+const ProjectItem : React.FC<ComponentProps> =   ({project, search}) => {
     const navigate = useNavigate();
   return (
-    <div className="bg-white flex flex-col px-20 py-20 gap-20 rounded-12">
+    <div className={`bg-white flex flex-col px-20 py-20 gap-20 rounded-12 ${search && !project.name.toLowerCase().includes(search) && 'hidden'}`}>
         <div className="flex grid-cols-2 gap-20 items-end">
             <img src={barcode} alt="" className='w-[180px] h-[180px]'/>
             <div className="flex gap-10 justify-between align-center h-full w-full">
