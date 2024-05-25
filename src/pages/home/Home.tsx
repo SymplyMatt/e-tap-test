@@ -15,7 +15,7 @@ const Home = () => {
       toast.error('Enter a valid email!');
       return
     }
-    const res = await makeRequest('POST', '/sendverification',null,{email, phoneNumber: 'test'});
+    const res = await makeRequest('POST', '/organization/sendverification',null,{email, phoneNumber: 'test'});
     setLoading(false);
     if(res.type === 'success'){
       const {sessionHash} = res?.data.data || '';

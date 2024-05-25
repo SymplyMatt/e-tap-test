@@ -37,7 +37,7 @@ const Projects = () => {
   },[]);
   return (
     <Dashboard>
-      <div className="text-20 font-medium flex flex-col gap-5 w-full justify-start cursor-pointer h-[90px] px-20"> 
+      <div className="text-20 font-medium flex flex-col gap-5 w-full justify-start h-[90px] px-20"> 
         <div className="h-[25px] w-full"></div>
         <div className="flex h-[65px] items-center">
           <img src={projects_icon} alt="" className="h-35"/>    
