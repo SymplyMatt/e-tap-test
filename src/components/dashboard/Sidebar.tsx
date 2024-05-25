@@ -8,10 +8,9 @@ const Sidebar = () => {
     const navigate = useNavigate(); 
   return (
         <div className="h-screen col-span-2 border border-borderGray flex flex-col items-center overflow-hidden">
-            <div className="flex flex-col gap-20 w-full h-150 items-center justify-between">
-                <div className="font-inter font-semibold cursor-pointer px-40 text-24 h-60 flex items-center justify-center w-full" onClick={()=>navigate('/')}>LOGO</div>
+            <div className="flex flex-col gap-20 w-full h-100 items-center justify-between">
+                <div className="font-inter font-semibold cursor-pointer py-10 px-40 text-24 h-60 flex items-center justify-center w-full" onClick={()=>navigate('/')}>LOGO</div>
                 <div className="w-full p-10">
-                    <Button label="+  &nbsp;Create Project" onClick={()=>navigate('/projects/new')} disabled={false} extraClass="w-full bg-recruitBlue"/>
                 </div>
             </div>
             <div className="flex flex-col items-center w-full px-10 gap-20">
