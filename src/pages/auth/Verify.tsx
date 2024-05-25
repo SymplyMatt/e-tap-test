@@ -101,7 +101,7 @@ const Verify = () => {
                       <Input updateFunction={(e)=>updateValue(5,e)} label="" inputExtraClass="text-center" regex={/^(?:[0-9]+|)$/} single={true}/>
                   </div>
               </div>
-              <Button label="Verify Account" onClick={()=>verify()} disabled={disabled || loading}/>
+              <Button label="Verify Account" onClick={()=>verify()} disabled={disabled || loading} loading={loading}/>
               <>
                 {!showResent ? <>
                   {seconds > 0 && <div className="font-poppins text-base font-normal leading-6 text-center text-textFade mt-[-10px]">Resend code in <span className="text-black font-semibold cursor-pointer">00:{`${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`}</span> </div>}
