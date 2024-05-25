@@ -49,7 +49,7 @@ const Publish : React.FC<ComponentProps> =  ({inputValues, onSubmit, loading}) =
                         </div>
                     </div>
                 </div>
-                <button className={`py-12 px-24 bg-recruitBlue text-white h-[45px] flex items-center justify-center cursor-pointer rounded-16 flex gap-10 w-[200px] mt-20 ${loading && 'opacity-50'}`} onClick={()=>onSubmit()} disabled={loading}>Publish</button>
+                <button className={`py-12 px-24 bg-recruitBlue text-white h-[45px] flex items-center justify-center cursor-pointer rounded-16 flex gap-10 w-[200px] mt-20 ${loading && 'opacity-50'}`} onClick={()=>onSubmit()} disabled={loading}>{!loading ?  'Publish' : <i className="fa-solid fa-spinner spinner"></i>}</button>
             </div>
 
             <div className="h-[100px] w-full bg-inherit"></div>

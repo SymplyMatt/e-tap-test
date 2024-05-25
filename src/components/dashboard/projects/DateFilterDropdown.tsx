@@ -6,7 +6,7 @@ export interface ComponentProps{
     projects : Project[];
     setProjects : Function;
 }
-const DateFilterDropdown : React.FC<ComponentProps> = ({projects, setProjects}) => {
+const DateFilterDropdown : React.FC<ComponentProps> = ({projects}) => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
     console.log('projects: ', projects);
