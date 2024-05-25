@@ -1,10 +1,16 @@
 import { useState, useRef, useEffect } from "react";
 import calendar_clock from "../../../assets/images/calendar_clock.svg";
+import { Project } from "./details/ProjectItem";
 
-const DateFilterDropdown = () => {
+export interface ComponentProps{
+    projects : Project[];
+    setProjects : Function;
+}
+const DateFilterDropdown : React.FC<ComponentProps> = ({projects, setProjects}) => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
+    console.log('projects: ', projects);
+    
   const handleClickOutside = (event: MouseEvent) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
       setShowDropDown(false);
@@ -29,7 +35,7 @@ const DateFilterDropdown = () => {
         className="h-full border border-borderGray px-16 py-10 rounded-8 flex gap-10 items-center cursor-pointer font-semibold flex items-center"
         onClick={() => setShowDropDown(!showDropDown)}
       >
-        <img src={calendar_clock} alt="" /> Filter by Date{" "}
+        <img src={calendar_clock} alt="" /> Filter by Date
         <i className={`fa-solid ${showDropDown ? 'fa-caret-up' : 'fa-caret-down'}`}></i>
       </div>
       {showDropDown && (
