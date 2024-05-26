@@ -21,7 +21,7 @@ const Projects = () => {
     async function getAllProjects() {
       try {
         setLoadingProjects(true);
-        const res = await makeRequest('GET', `/projects/get-all`, user?.token);
+        const res = await makeRequest('GET', `/projects/get-all-organization-projects`, user?.token);
         setLoadingProjects(false);
         if(res.type === 'success'){
           setProjects(res.data.data.results);
