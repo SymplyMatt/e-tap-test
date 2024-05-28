@@ -25,6 +25,7 @@ const Projects = () => {
         setLoadingProjects(false);
         if(res.type === 'success'){
           setProjects(res.data.data.results);
+          console.log('projects: ', res.data.data.results);
         }else{
           utils.createErrorNotification(res.data.message, 1000);
           setProjects([]);

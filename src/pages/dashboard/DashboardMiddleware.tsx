@@ -12,7 +12,7 @@ const DashboardMiddleware: React.FC = () => {
     if(!user){
         if (location.state?.userInfo || localStorage.getItem('userInfo')) {
             const userInfo = localStorage.getItem('userInfo');
-            const token = location.state?.userInfo.accessToken ? location.state?.userInfo.accessToken : userInfo ? JSON.parse(userInfo)?.accessToken : null;
+            const token = location.state?.userInfo?.accessToken ? location.state?.userInfo?.accessToken : userInfo ? JSON.parse(userInfo)?.accessToken : null;
             
             if(token){
                 const decodedToken = utils.decodeJWT(token);

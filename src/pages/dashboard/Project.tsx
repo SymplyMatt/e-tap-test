@@ -1,24 +1,36 @@
 import Dashboard from './Dashboard'
 import edit from '../../assets/images/edit.svg'
 import ProjectOverview from '../../components/dashboard/projects/details/ProjectOverview'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import TeamMembers from '../../components/dashboard/projects/details/TeamMembers'
 import Attendance from '../../components/dashboard/projects/details/Attendance'
 import AttendanceHistory from '../../components/dashboard/projects/details/AttendanceHistory'
 import AttendanceDetails from '../../components/dashboard/projects/details/AttendanceDetails'
 import Button from '../../components/common/Button'
+import { Project as ProjectDetails } from '../../components/dashboard/projects/details/ProjectItem'
+import { useLocation, useNavigate } from 'react-router-dom'
+import utils from '../../utils/utils'
 
 
 const Project = () => {
   const [currentTab, setCurrentTab] = useState('overview');
+  const [projectInfo, setProjectInfo] = useState<ProjectDetails | null>(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+  useEffect(()=>{
+    if(location.state?.project){
+      setProjectInfo(location.state?.project);
+    }else{
+      navigate('/projects', {replace : true});
+    }
+  },[])
   return (
     <Dashboard background={'white'}>
-      
       <div className="text-20 font-medium flex flex-col gap-5 w-full justify-start cursor-pointer h-[90px] px-20"> 
         <div className="h-[25px] w-full"></div>
         <div className="flex w-full justify-between items-center h-[65px]">
           <div className="flex items-center">
-            <div className="">Project Name</div> 
+            <div className="">{utils.capitalizeEachWord(projectInfo?.name || '') || ''}</div> 
           </div>
           {currentTab == 'overview' && <button className={`whitespace-nowrap py-10 px-30 bg-lightBlue text-white h-[45px] flex items-center justify-center cursor-pointer rounded-12 flex gap-10`}> <img src={edit} alt="" /> Edit</button>}
         </div>
@@ -34,11 +46,13 @@ const Project = () => {
             </div>
             {currentTab == 'attendance-history' && <Button label="+  &nbsp;Create Attendance" onClick={()=>setCurrentTab('attendance')} extraClass="bg-recruitBlue relative top-[-10px]"/>}
           </div>
-          {currentTab == 'overview' && <ProjectOverview />}
-          {currentTab == 'team' && <TeamMembers />}
-          {currentTab == 'attendance' && <Attendance setCurrentTab={setCurrentTab} />}
-          {currentTab == 'attendance-history' && <AttendanceHistory setCurrentTab={setCurrentTab}/>}
-          {currentTab == 'attendance-details' && <AttendanceDetails/>}
+          {projectInfo && <>
+            {currentTab == 'overview' && <ProjectOverview project={projectInfo as ProjectDetails}/>}
+            {currentTab == 'team' && <TeamMembers />}
+            {currentTab == 'attendance' && <Attendance setCurrentTab={setCurrentTab} />}
+            {currentTab == 'attendance-history' && <AttendanceHistory setCurrentTab={setCurrentTab}/>}
+            {currentTab == 'attendance-details' && <AttendanceDetails/>}
+          </>}
         </div>
       </div>
     </Dashboard>

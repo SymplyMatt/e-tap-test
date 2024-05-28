@@ -6,7 +6,12 @@ import project_line from '../../../../assets/images/project_line.svg'
 import approve from '../../../../assets/images/approve.svg'
 import decline from '../../../../assets/images/decline.svg'
 import Input from '../../../common/Input'
-const ProjectOverview = () => {
+import { Project } from './ProjectItem'
+import utils from '../../../../utils/utils'
+interface Props {
+    project : Project
+  }
+function ProjectOverview ({ project }: Props) {
   return (
     <div className="flex flex-col w-full gap-30">
         <div className="bg-white flex flex-col py-10 gap-20 w-full rounded-12">
@@ -42,12 +47,12 @@ const ProjectOverview = () => {
                             <img src={project_line} alt="" className='h-full flex items-center'/>
                             </div>
                             <div className="flex flex-col gap-10 justify-between text-recruitBlue font-semibold">
-                            <div className="">Start</div>
-                            <div className="">End</div>
+                                <div className="">Start</div>
+                                <div className="">End</div>
                             </div>
                             <div className="flex flex-col gap-10 justify-between whitespace-nowrap ml-20">
-                            <div className="whitespace-nowrap">Saturday, March 16, 1:30 PM</div>
-                            <div className="whitespace-nowrap">Mar 23, 4:00 PM</div>
+                                <div className="whitespace-nowrap">{utils.formatDateAndTime(new Date(project.startDate))}</div>
+                                <div className="whitespace-nowrap">{utils.formatDateAndTime(new Date(project.endDate))}</div>
                             </div>
                         </div>
                         <div className=""></div>
