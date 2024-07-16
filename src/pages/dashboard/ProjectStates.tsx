@@ -21,7 +21,7 @@ const ProjectStates: React.FC<ComponentProps> = ({states=[]}) => {
         pathname: location.pathname,
         search: `?${params.toString()}`
     });
-};
+  };
 useEffect(()=>{
   if(!stateParam){
     addQueryParam('All');
