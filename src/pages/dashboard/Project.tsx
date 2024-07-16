@@ -7,10 +7,9 @@ import Attendance from '../../components/dashboard/projects/details/Attendance'
 import AttendanceHistory from '../../components/dashboard/projects/details/AttendanceHistory'
 import AttendanceDetails from '../../components/dashboard/projects/details/AttendanceDetails'
 import Button from '../../components/common/Button'
-import { Project as ProjectDetails } from '../../components/dashboard/projects/details/ProjectItem'
 import { useLocation, useNavigate } from 'react-router-dom'
 import utils from '../../utils/utils'
-
+import { Project as ProjectDetails } from '../../utils/interfaces'
 
 const Project = () => {
   const [currentTab, setCurrentTab] = useState('overview');

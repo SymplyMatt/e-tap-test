@@ -8,9 +8,10 @@ import makeRequest from '../../services/request'
 import { Context } from '../../context/DashboardContext'
 import utils from '../../utils/utils'
 import Skeleton from '../../components/dashboard/projects/Skeleton'
-import ProjectItem, { Project } from '../../components/dashboard/projects/details/ProjectItem'
+import ProjectItem from '../../components/dashboard/projects/details/ProjectItem'
 import DateFilterDropdown from '../../components/dashboard/projects/DateFilterDropdown'
-import ProjectStates, { State } from './ProjectStates'
+import ProjectStates from './ProjectStates'
+import { Project, State } from '../../utils/interfaces'
 
 const Projects = () => {
   const { user } = useContext(Context);

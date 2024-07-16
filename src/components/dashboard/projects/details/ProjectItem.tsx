@@ -4,26 +4,9 @@ import project_line from '../../../../assets/images/project_line.svg';
 import team_members from "../../../../assets/images/team_members.svg";
 import utils from '../../../../utils/utils';
 import { useMemo } from 'react';
+import { ProjectItemProps } from '../../../../utils/interfaces';
 
-export interface Project {
-    name: string;
-    description: string;
-    logoUrl: string;
-    projectState: string;
-    id: number;
-    organizationId: number;
-    noOfParticipants: number;
-    startDate: Date;
-    endDate: Date;
-    dateCreated: Date;
-}
-
-export interface ComponentProps {
-    project: Project;
-    search: string;
-}
-
-const ProjectItem: React.FC<ComponentProps> = ({ project, search }) => {
+const ProjectItem: React.FC<ProjectItemProps> = ({ project, search }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);

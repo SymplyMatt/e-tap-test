@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import calendar_clock from "../../../assets/images/calendar_clock.svg";
-import { Project } from "./details/ProjectItem";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Project } from "../../../utils/interfaces";
 
 export interface ComponentProps {
   projects: Project[];
@@ -18,7 +18,7 @@ const DateFilterDropdown: React.FC<ComponentProps> = () => {
     const to = new Date();
     const params = new URLSearchParams(location.search);
 
-    params.set('from', from.toISOString()); // Use ISO string format for dates
+    params.set('from', from.toISOString()); 
     params.set('to', to.toISOString());
 
     navigate({

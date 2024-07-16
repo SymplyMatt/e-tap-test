@@ -9,14 +9,8 @@ import makeRequest from '../../services/request';
 import { Context } from '../../context/DashboardContext';
 import utils from '../../utils/utils';
 import { useNavigate } from 'react-router-dom';
-export interface inputs{
-    name: string,
-    description: string,
-    logoUrl: string,
-    noOfParticipants: number | null,
-    startDate: Date | null,
-    endDate: Date | null
-}
+import { inputs } from '../../utils/interfaces';
+
 const CreateProject = () => {
     const navigate = useNavigate();
     const { user} = useContext(Context);

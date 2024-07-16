@@ -1,15 +1,9 @@
 import { useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import utils from "../../utils/utils";
+import { ProjectStatesComponentProps } from "../../utils/interfaces";
 
-export interface State {
-  name: string;
-  length: number
-}
-interface ComponentProps {
-  states?: State[];
-}
-const ProjectStates: React.FC<ComponentProps> = ({states=[]}) => {
+const ProjectStates: React.FC<ProjectStatesComponentProps> = ({states=[]}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);

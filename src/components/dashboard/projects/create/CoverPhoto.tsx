@@ -1,17 +1,9 @@
 import registration_details from '../../../../assets/images/registration_details.svg';
 import select_photo from '../../../../assets/images/select_photo.svg';
+import { CoverPhotoComponentProps } from '../../../../utils/interfaces';
 import utils from '../../../../utils/utils';
-import { inputs } from '../../../../pages/dashboard/CreateProject';
 
-interface ComponentProps {
-    step: number;
-    setStep: Function;
-    updateValue: Function;
-    inputValues: inputs;
-}
-
-const CoverPhoto: React.FC<ComponentProps> = ({ step, setStep,updateValue, inputValues }) => {
-
+const CoverPhoto: React.FC<CoverPhotoComponentProps> = ({ step, setStep,updateValue, inputValues }) => {
   const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {

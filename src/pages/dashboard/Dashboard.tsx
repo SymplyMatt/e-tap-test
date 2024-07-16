@@ -1,10 +1,7 @@
-import { ReactNode } from "react";
 import Sidebar from "../../components/dashboard/Sidebar"
 import TopMain from "../../components/dashboard/TopMain"
-interface DashboardLayoutProps {
-    children?: [ReactNode, ReactNode, ReactNode?];
-    background?: String;
-}
+import { DashboardLayoutProps } from "../../utils/interfaces";
+
 const Dashboard: React.FC<DashboardLayoutProps> = ({children = [<></>, <></>, <></>]}) => {
     const [header, content, overlay] = children;
 return (
