@@ -8,15 +8,17 @@ import makeRequest from '../../services/request'
 import { Context } from '../../context/DashboardContext'
 import utils from '../../utils/utils'
 import Skeleton from '../../components/dashboard/projects/Skeleton'
-import ProjectItem from '../../components/dashboard/projects/details/ProjectItem'
+import ProjectItem, { Project } from '../../components/dashboard/projects/details/ProjectItem'
 import DateFilterDropdown from '../../components/dashboard/projects/DateFilterDropdown'
+import ProjectStates, { State } from './ProjectStates'
 
 const Projects = () => {
   const { user } = useContext(Context);
   const navigate = useNavigate(); 
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
   const [search, setSearch] = useState<string>('');
+  const [states, setStates] = useState<Array<State>>([]);
   useEffect(()=>{
     async function getAllProjects() {
       try {
@@ -36,6 +38,16 @@ const Projects = () => {
     }
     getAllProjects();
   },[]);
+  useEffect(()=>{
+    let states : string[] = ['All',...new Set(projects.map(i => i.projectState))];
+    let statesObj : State[] = states.map((state : string) => {
+      return {
+        name : state,
+        length : state === 'All' ? projects.length : projects.filter(i => i.projectState === state).length
+      }
+    });
+    setStates(statesObj);
+  },[projects]);
   return (
     <Dashboard>
       <div className="text-20 font-medium flex flex-col gap-5 w-full justify-start h-[90px] px-20"> 
@@ -63,11 +75,7 @@ const Projects = () => {
           </div>
         </div>}
         {!loadingProjects && projects.length > 0 && <div className="flex flex-col px-20 gap-30 mb-[100px]">
-          <div className="flex flex gap-40 border-b border-borderGray w-full">
-            <div className="py-10 border-b-2  border-recruitBlue w-fit-content flex items-center gap-10 cursor-pointer">All <span className='bg-recruitBlue text-white h-full text-[10px] py-[3px] px-[4px] rounded-5 flex items-center justify-center'>20</span></div>
-            <div className="py-10 w-fit-content flex items-center gap-10 cursor-pointer text-lightBlack">Active <span className='bg-[#F1F1F1] h-full text-[10px] py-[3px] px-[4px] rounded-5 flex items-center justify-center text-lightBlack font-semibold'>20</span></div>
-            <div className="py-10 w-fit-content flex items-center gap-10 cursor-pointer text-lightBlack">Ended <span className='bg-[#F1F1F1] h-full text-[10px] py-[3px] px-[4px] rounded-5 flex items-center justify-center text-lightBlack font-semibold'>20</span></div>
-          </div>
+          <ProjectStates states={states}/>
           <div className="flex flex-col w-full gap-20">
             {projects.map((project : any, index : number )=>(
               <ProjectItem key={index} project={project} search={search}/>

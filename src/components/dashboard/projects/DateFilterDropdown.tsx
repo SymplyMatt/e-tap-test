@@ -9,7 +9,6 @@ export interface ComponentProps{
 const DateFilterDropdown : React.FC<ComponentProps> = ({projects}) => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-    console.log('projects: ', projects);
     
   const handleClickOutside = (event: MouseEvent) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {

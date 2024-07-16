@@ -31,7 +31,6 @@ export default async function makeRequest(
 
     const response: AxiosResponse = await axios(config);
     const successResponse: ResponseData = {type : response.data.isSuccessful ? 'success' : 'failed', data : response.data} as ResponseData;
-    console.log('success: ', successResponse);
     return successResponse;
   } catch (error) {
     

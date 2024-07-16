@@ -206,4 +206,10 @@ export default class utils {
       const result = str.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/([A-Z])([A-Z][a-z])/g, '$1 $2');
       return result.replace(/\b\w/g, char => char.toUpperCase());
     }
+    static camelCaseToNormal = (camelCaseStr: string): string => {
+      return camelCaseStr
+        .replace(/([A-Z])/g, ' $1')
+        .toLowerCase()
+        .replace(/^\w/, c => c.toUpperCase());
+    };
 }
