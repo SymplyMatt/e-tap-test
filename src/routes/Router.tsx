@@ -57,7 +57,7 @@ const Routes = (): JSX.Element => {
   ];
   const subjectRoutes = [
     {
-      path: "/projects",
+      path: "/subjects",
       element: 
         <DashboardContext>
           <DashboardMiddleware />
