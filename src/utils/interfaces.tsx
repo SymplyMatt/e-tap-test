@@ -16,6 +16,7 @@ export interface Project {
 export interface ProjectItemProps {
     project: Project;
     search: string;
+    index: number;
 }
 export interface inputs{
     name: string,

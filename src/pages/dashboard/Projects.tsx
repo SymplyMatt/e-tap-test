@@ -79,7 +79,7 @@ const Projects = () => {
           <ProjectStates states={states}/>
           <div className="flex flex-col w-full gap-20">
             {projects.map((project : any, index : number )=>(
-              <ProjectItem key={index} project={project} search={search}/>
+              <ProjectItem key={index} project={project} search={search} index={index}/>
             ))}
           </div>
         </div>}
