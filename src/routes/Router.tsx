@@ -10,6 +10,7 @@ import CreateProject from "../pages/dashboard/CreateProject";
 import Project from "../pages/dashboard/Project";
 import DashboardMiddleware from "../pages/dashboard/DashboardMiddleware";
 import AuthMiddleware from "../pages/auth/AuthMiddleware";
+import Topics from "../pages/dashboard/Topics";
 
 const Routes = (): JSX.Element => {
   const pageRoutes = [
@@ -56,7 +57,7 @@ const Routes = (): JSX.Element => {
       ],
     },
   ];
-  const dashboardRoutes = [
+  const subjectRoutes = [
     {
       path: "/projects",
       element: 
@@ -67,19 +68,30 @@ const Routes = (): JSX.Element => {
         {
           path: "",
           element: <Projects />,
-        },
-        {
-          path: "new",
-          element: <CreateProject />,
-        },
-        {
-          path: ":id",
-          element: <Project />,
-        },
+        }
       ],
     },
   ];
-  const router = createBrowserRouter([...pageRoutes,...authRoutes,...dashboardRoutes]);
+  const topicRoutes = [
+    {
+      path: "/topics",
+      element: 
+        <DashboardContext>
+          <DashboardMiddleware />
+        </DashboardContext>,
+      children: [
+        {
+          path: "",
+          element: <Projects />,
+        },
+        {
+          path: ":id",
+          element: <Topics />,
+        }
+      ],
+    },
+  ];
+  const router = createBrowserRouter([...pageRoutes,...authRoutes,...subjectRoutes,...topicRoutes]);
 
   return <RouterProvider router={router} />;
 };

@@ -30,7 +30,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ project, index }) => {
     ]
 
     return (
-        <div className={`bg-white flex flex-col px-20 py-20 gap-20 rounded-12`}>
+        <div className={`bg-white flex flex-col py-20 gap-20 rounded-12`}>
             <div className="flex grid-cols-2 gap-20 items-end">
                 <img src={img} alt="" className="w-[180px] h-[180px] rounded-50 object-cover" />
                 <div className="flex gap-10 justify-between align-center h-full w-full">
@@ -65,7 +65,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ project, index }) => {
                     <div className="flex gap-20 items-center">
                         <div
                             className="flex items-center justify-center w-[180px] border-[1.4px] border-recruitBlue p-5 h-[40px] rounded-8 gap-10 cursor-pointer"
-                            onClick={() => navigate(`/projects/${project.id}`, { state: { project } })}
+                            onClick={() => navigate(`/topics/${project.id}`, { state: { project } })}
                         >
                             View Subject <i className="fa-solid fa-arrow-right"></i>
                         </div>
