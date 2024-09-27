@@ -58,7 +58,7 @@ const DateFilterDropdown: React.FC<ComponentProps> = () => {
         className="h-full border border-borderGray px-16 py-10 rounded-8 flex gap-10 items-center cursor-pointer font-semibold flex items-center"
         onClick={() => setShowDropDown(!showDropDown)}
       >
-        <img src={calendar_clock} alt="" /> Filter by Date
+        <img src={calendar_clock} alt="" /> Filter by Status
         <i className={`fa-solid ${showDropDown ? 'fa-caret-up' : 'fa-caret-down'}`}></i>
       </div>
       {showDropDown && (

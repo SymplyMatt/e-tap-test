@@ -19,7 +19,7 @@ const Projects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
   const [search, setSearch] = useState<string>('');
-  const [states, setStates] = useState<Array<State>>([]);
+  const [states, setStates] = useState<Array<State>>([{name: 'All',length: 5},{name: 'Completed',length: 5},{name: 'In Progress',length: 5},{name: 'Not Started',length: 5}]);
   useEffect(()=>{
     async function getAllProjects() {
       try {
@@ -28,7 +28,6 @@ const Projects = () => {
         setLoadingProjects(false);
         if(res.type === 'success'){
           setProjects(res.data.data.results);
-          console.log('projects: ', res.data.data.results);
         }else{
           utils.createErrorNotification(res.data.message, 1000);
           setProjects([]);
@@ -39,16 +38,6 @@ const Projects = () => {
     }
     getAllProjects();
   },[]);
-  useEffect(()=>{
-    let states : string[] = ['All',...new Set(projects.map(i => i.projectState))];
-    let statesObj : State[] = states.map((state : string) => {
-      return {
-        name : state,
-        length : state === 'All' ? projects.length : projects.filter(i => i.projectState === state).length
-      }
-    });
-    setStates(statesObj);
-  },[projects]);
   return (
     <Dashboard>
       <div className="text-20 font-medium flex flex-col gap-5 w-full justify-start h-[90px] px-20"> 
@@ -65,16 +54,8 @@ const Projects = () => {
           </div>
           <div className="flex items-center gap-10">
             <DateFilterDropdown projects={projects} setProjects={setProjects}/>
-            <Button label="+  &nbsp;Create Project" onClick={()=>navigate('/projects/new')}/>
           </div>
         </div>
-        {!loadingProjects && projects.length === 0 && <div className="flex flex-col gap-20 px-20 font-bold">
-          <div className="font-hiragino text-[32px]">Create and manage projects</div>
-          <div className="font-normal w-[80%]">Create unlimited projects with link and QR Code invite and keep track of how many team members join them while tracking the length of each project. Also take attendance at your convenience.</div>
-          <div className="font-normal">
-            <Button label="+  &nbsp;Create Project" onClick={()=>navigate('/projects/new')}/>
-          </div>
-        </div>}
         {!loadingProjects && projects.length > 0 && <div className="flex flex-col px-20 gap-30 mb-[100px]">
           <ProjectStates states={states}/>
           <div className="flex flex-col w-full gap-20">
