@@ -67,7 +67,7 @@ const LessonItem: React.FC<ProjectItemProps> = ({ project, index }) => {
                             className="flex items-center justify-center w-[180px] border-[1.4px] border-recruitBlue p-5 h-[40px] rounded-8 gap-10 cursor-pointer"
                             onClick={() => navigate(`/topics/${project.id}`, { state: { project } })}
                         >
-                            Start Lesson <i className="fa-solid fa-arrow-right"></i>
+                            View Topics <i className="fa-solid fa-arrow-right"></i>
                         </div>
                     </div>
                 </div>

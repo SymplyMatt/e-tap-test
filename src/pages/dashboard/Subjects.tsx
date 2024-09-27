@@ -7,9 +7,9 @@ import makeRequest from '../../services/request'
 import { Context } from '../../context/DashboardContext'
 import utils from '../../utils/utils'
 import Skeleton from '../../components/dashboard/projects/Skeleton'
-import ProjectItem from '../../components/dashboard/projects/details/LessonItem'
+import SubjectItem from '../../components/dashboard/projects/details/SubjectItem'
 import DateFilterDropdown from '../../components/dashboard/projects/DateFilterDropdown'
-import ProjectStates from './LessonStates'
+import LessonStates from './LessonStates'
 import { Project, State } from '../../utils/interfaces'
 
 const Lessons = () => {
@@ -56,10 +56,10 @@ const Lessons = () => {
           </div>
         </div>
         {!loadingProjects && projects.length > 0 && <div className="flex flex-col px-20 gap-30 mb-[100px]">
-          <ProjectStates states={states}/>
+          <LessonStates states={states}/>
           <div className="flex flex-col w-full gap-20">
             {projects.map((project : any, index : number )=>(
-              <ProjectItem key={index} project={project} search={search} index={index}/>
+              <SubjectItem key={index} project={project} search={search} index={index}/>
             ))}
           </div>
         </div>}

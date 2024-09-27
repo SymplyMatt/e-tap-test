@@ -1,13 +1,11 @@
 import Dashboard from './Dashboard'
-import edit from '../../assets/images/edit.svg'
-import ProjectOverview from '../../components/dashboard/projects/details/LessonOverview'
+import LessonOverview from '../../components/dashboard/projects/details/LessonOverview'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import utils from '../../utils/utils'
 import { Project as ProjectDetails } from '../../utils/interfaces'
 
 const Lesson = () => {
-  const [currentTab, setCurrentTab] = useState('overview');
   const [projectInfo, setProjectInfo] = useState<ProjectDetails | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
@@ -32,7 +30,7 @@ const Lesson = () => {
         <div className="flex flex-col px-20 gap-20 mb-[100px]">
           <div className="flex  gap-40 border-b border-borderGray w-full justify-between"></div>
           {projectInfo && <>
-            <ProjectOverview project={projectInfo as ProjectDetails}/>
+            <LessonOverview project={projectInfo as ProjectDetails}/>
           </>}
         </div>
       </div>
