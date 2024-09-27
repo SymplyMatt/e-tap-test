@@ -5,7 +5,7 @@ interface Props {
   project: Project;
 }
 
-function ProjectOverview({ project }: Props) {
+function LessonOverview({ project }: Props) {
   return (
     <div className="flex flex-col w-full gap-30">
       <div className="bg-white flex flex-col py-10 gap-40 w-full rounded-12">
@@ -32,4 +32,4 @@ function ProjectOverview({ project }: Props) {
   );
 }
 
-export default ProjectOverview;
+export default LessonOverview;

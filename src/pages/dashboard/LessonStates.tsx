@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import utils from "../../utils/utils";
 import { ProjectStatesComponentProps } from "../../utils/interfaces";
 
-const ProjectStates: React.FC<ProjectStatesComponentProps> = ({states=[]}) => {
+const LessonStates: React.FC<ProjectStatesComponentProps> = ({states=[]}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -30,4 +30,4 @@ useEffect(()=>{
   )
 }
 
-export default ProjectStates
+export default LessonStates

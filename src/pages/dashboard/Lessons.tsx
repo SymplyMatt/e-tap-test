@@ -1,19 +1,18 @@
 import Dashboard from './Dashboard'
 import projects_icon from "../../assets/images/projects.svg"
 import search_icon from "../../assets/images/search.svg"
-import Button from '../../components/common/Button'
 import { useNavigate } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
 import makeRequest from '../../services/request'
 import { Context } from '../../context/DashboardContext'
 import utils from '../../utils/utils'
 import Skeleton from '../../components/dashboard/projects/Skeleton'
-import ProjectItem from '../../components/dashboard/projects/details/ProjectItem'
+import ProjectItem from '../../components/dashboard/projects/details/LessonItem'
 import DateFilterDropdown from '../../components/dashboard/projects/DateFilterDropdown'
-import ProjectStates from './ProjectStates'
+import ProjectStates from './LessonStates'
 import { Project, State } from '../../utils/interfaces'
 
-const Projects = () => {
+const Lessons = () => {
   const { user } = useContext(Context);
   const navigate = useNavigate(); 
   const [projects, setProjects] = useState<Project[]>([]);
@@ -74,4 +73,4 @@ const Projects = () => {
   )
 }
 
-export default Projects
+export default Lessons

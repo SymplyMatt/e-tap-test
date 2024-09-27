@@ -4,8 +4,8 @@ import AuthContext from "../context/AuthContext";
 import SignIn from "../pages/auth/SignIn";
 import Verify from "../pages/auth/Verify";
 import DashboardContext from "../context/DashboardContext";
-import Projects from "../pages/dashboard/Projects";
-import Project from "../pages/dashboard/Project";
+import Lessons from "../pages/dashboard/Lessons";
+import Lesson from "../pages/dashboard/Lesson";
 import DashboardMiddleware from "../pages/dashboard/DashboardMiddleware";
 import AuthMiddleware from "../pages/auth/AuthMiddleware";
 import Topics from "../pages/dashboard/Topics";
@@ -19,11 +19,11 @@ const Routes = (): JSX.Element => {
       children: [
         {
           path: "",
-          element: <Projects />,
+          element: <Lessons />,
         },
         {
           path: "*",
-          element: <Projects />,
+          element: <Lesson />,
         },
       ],
     },
@@ -65,7 +65,7 @@ const Routes = (): JSX.Element => {
       children: [
         {
           path: "",
-          element: <Projects />,
+          element: <Lessons />,
         }
       ],
     },
@@ -80,7 +80,7 @@ const Routes = (): JSX.Element => {
       children: [
         {
           path: "",
-          element: <Projects />,
+          element: <Lessons />,
         },
         {
           path: ":id", 
@@ -95,7 +95,7 @@ const Routes = (): JSX.Element => {
             },
             {
               path: ":subId", 
-              element: <Project />, 
+              element: <Lesson />, 
             },
           ],
         }

@@ -1,12 +1,12 @@
 import Dashboard from './Dashboard'
 import edit from '../../assets/images/edit.svg'
-import ProjectOverview from '../../components/dashboard/projects/details/ProjectOverview'
+import ProjectOverview from '../../components/dashboard/projects/details/LessonOverview'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import utils from '../../utils/utils'
 import { Project as ProjectDetails } from '../../utils/interfaces'
 
-const Project = () => {
+const Lesson = () => {
   const [currentTab, setCurrentTab] = useState('overview');
   const [projectInfo, setProjectInfo] = useState<ProjectDetails | null>(null);
   const location = useLocation();
@@ -40,4 +40,4 @@ const Project = () => {
   )
 }
 
-export default Project
+export default Lesson

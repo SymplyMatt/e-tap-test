@@ -3,7 +3,7 @@ import project_line from '../../../../assets/images/project_line.svg';
 import utils, { img } from '../../../../utils/utils';
 import { ProjectItemProps } from '../../../../utils/interfaces';
 
-const ProjectItem: React.FC<ProjectItemProps> = ({ project, index }) => {
+const LessonItem: React.FC<ProjectItemProps> = ({ project, index }) => {
     const navigate = useNavigate();
     const subjects = [
         'Biology',
@@ -76,4 +76,4 @@ const ProjectItem: React.FC<ProjectItemProps> = ({ project, index }) => {
     );
 };
 
-export default ProjectItem;
+export default LessonItem;

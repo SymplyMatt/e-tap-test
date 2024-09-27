@@ -9,7 +9,7 @@ import { Context } from '../../context/DashboardContext'
 import utils from '../../utils/utils'
 import Skeleton from '../../components/dashboard/projects/Skeleton'
 import DateFilterDropdown from '../../components/dashboard/projects/DateFilterDropdown'
-import ProjectStates from './ProjectStates'
+import ProjectStates from './LessonStates'
 import { Project, State } from '../../utils/interfaces'
 import TopicItem from '../../components/dashboard/projects/details/TopicItem'
 
