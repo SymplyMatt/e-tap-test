@@ -15,9 +15,6 @@ return (
                 </div>
                 {content}
             </div>
-            { overlay && <div className={`absolute h-screen w-screen bg-blackLight flex justify-center items-center`}>
-                {overlay}
-            </div>}
             <div className="flex flex-col absolute top-[100px] right-[30px] notification-container gap-20"></div>
         </div>
     </>

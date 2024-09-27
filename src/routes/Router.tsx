@@ -1,7 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import SignUp from "../pages/auth/SignUp";
 import AuthContext from "../context/AuthContext";
-import Home from "../pages/home/Home";
 import SignIn from "../pages/auth/SignIn";
 import Verify from "../pages/auth/Verify";
 import DashboardContext from "../context/DashboardContext";
@@ -20,11 +19,11 @@ const Routes = (): JSX.Element => {
       children: [
         {
           path: "",
-          element: <Home />,
+          element: <Projects />,
         },
         {
           path: "*",
-          element: <Home />,
+          element: <Projects />,
         },
       ],
     },

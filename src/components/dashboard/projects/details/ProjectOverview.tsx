@@ -1,5 +1,3 @@
-import barcode from '../../../../assets/images/barcode.svg'
-import Input from '../../../common/Input'
 import { Project } from '../../../../utils/interfaces'
 import { biologyTopics, img } from '../../../../utils/utils'
 
