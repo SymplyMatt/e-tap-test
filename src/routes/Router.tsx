@@ -6,7 +6,6 @@ import SignIn from "../pages/auth/SignIn";
 import Verify from "../pages/auth/Verify";
 import DashboardContext from "../context/DashboardContext";
 import Projects from "../pages/dashboard/Projects";
-import CreateProject from "../pages/dashboard/CreateProject";
 import Project from "../pages/dashboard/Project";
 import DashboardMiddleware from "../pages/dashboard/DashboardMiddleware";
 import AuthMiddleware from "../pages/auth/AuthMiddleware";
@@ -85,8 +84,21 @@ const Routes = (): JSX.Element => {
           element: <Projects />,
         },
         {
-          path: ":id",
-          element: <Topics />,
+          path: ":id", 
+          element: 
+            <DashboardContext>
+              <DashboardMiddleware />
+            </DashboardContext>,
+          children: [
+            {
+              path: "", 
+              element: <Topics />, 
+            },
+            {
+              path: ":subId", 
+              element: <Project />, 
+            },
+          ],
         }
       ],
     },

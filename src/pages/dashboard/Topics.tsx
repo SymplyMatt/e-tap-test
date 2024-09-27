@@ -14,8 +14,7 @@ import { Project, State } from '../../utils/interfaces'
 import TopicItem from '../../components/dashboard/projects/details/TopicItem'
 
 const Topics = () => {
-  const { user } = useContext(Context);
-  const navigate = useNavigate(); 
+  const { user } = useContext(Context); 
   const [projects, setProjects] = useState<Project[]>([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
   const [search, setSearch] = useState<string>('');
