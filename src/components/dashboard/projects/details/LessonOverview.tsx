@@ -13,38 +13,90 @@ function LessonOverview({ topic }: Props) {
   const location = useLocation();
   const [lesson, setLesson] = useState<any>(null);
   const [hasLoadedProgress, setHasLoadedProgress] = useState(false);
-  useEffect(()=>{
-    console.log(location.state?.lesson);
-    if(location.state?.lesson){
+  const updateIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  useEffect(() => {
+    if (location.state?.lesson) {
       setLesson(location.state.lesson);
-    }else{
-      async function createLesson(){
-        console.log(`attempting to create lesson`);
-        const res: any = await makeRequest('POST', `/lessons/start`,null,{topicId: topic.id});
-        console.log(`create lesson: `, res);
-        if(res.status === 200){
-          const newLesson = res.data;
-          setLesson(newLesson);
-        }else{
+    } else {
+      async function createLesson() {
+        const res: any = await makeRequest('POST', '/lessons/start', null, { topicId: topic.id });
+        if (res.status === 200) {
+          setLesson(res.data);
+        } else {
           utils.createErrorNotification('Unable to start lesson', 1000);
         }
       }
-      createLesson()
+      createLesson();
     }
     setHasLoadedProgress(true);
-  },[]);
-  async function updateProgress(){
-    const res: any = await makeRequest('POST', `/lessons/update-progress`,null,{"lessonId": lesson.id,"progress": 199});
-    console.log('updated progress: ', res);
-    if(res.status !== 200) utils.createErrorNotification('Unable to update lesson progress', 1000);
+  }, [location.state, topic.id]);
+
+  async function updateProgress(progress: number) {
+    if (!lesson) return;
+    const res: any = await makeRequest('POST', '/lessons/update-progress', null, { lessonId: lesson.id, progress : Math.floor(progress) });
+    if (res.status !== 200) utils.createErrorNotification('Unable to update lesson progress', 1000);
   }
+
+
   useEffect(() => {
-    if(!lesson || !hasLoadedProgress) return
-    const progress = !lesson.progress ? 0 : lesson.progress === topic.duration ? 0 : lesson?.progress;
+    if (!lesson || !hasLoadedProgress) return;
+    const progress = lesson.progress === topic.duration ? 0 : lesson.progress || 0;
     if (videoRef.current) {
       videoRef.current.currentTime = progress;
     }
-  }, [topic, lesson, hasLoadedProgress]);
+  }, [lesson, hasLoadedProgress, topic.duration]);
+
+
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (videoElement) {
+      const handleSeek = () => {
+        if (videoElement) {
+          updateProgress(videoElement.currentTime);
+        }
+      };
+
+      const handleVideoEnd = () => {
+        if (videoElement) {
+          updateProgress(videoElement.duration);
+        }
+      };
+
+      const startProgressUpdates = () => {
+        if (!updateIntervalRef.current) {
+          updateIntervalRef.current = setInterval(() => {
+            if (videoElement && !videoElement.paused && !videoElement.ended) {
+              updateProgress(videoElement.currentTime);
+            }
+          }, 10000); 
+        }
+      };
+
+
+      const stopProgressUpdates = () => {
+        if (updateIntervalRef.current) {
+          clearInterval(updateIntervalRef.current);
+          updateIntervalRef.current = null;
+        }
+        if (videoElement) {
+          updateProgress(videoElement.currentTime); 
+        }
+      };
+
+      videoElement.addEventListener('seeked', handleSeek);
+      videoElement.addEventListener('ended', handleVideoEnd);
+      videoElement.addEventListener('play', startProgressUpdates);
+      videoElement.addEventListener('pause', stopProgressUpdates);
+
+      return () => {
+        videoElement.removeEventListener('seeked', handleSeek);
+        videoElement.removeEventListener('ended', handleVideoEnd);
+        videoElement.removeEventListener('play', startProgressUpdates);
+        videoElement.removeEventListener('pause', stopProgressUpdates);
+        stopProgressUpdates(); 
+      };
+    }
+  }, [lesson, topic.duration]);
 
   return (
     <div className="flex flex-col w-full gap-30">
@@ -59,12 +111,7 @@ function LessonOverview({ topic }: Props) {
         </div>
 
         <div className="w-full">
-          <video
-            ref={videoRef}
-            id="cloudinaryVideo"
-            className="w-full h-auto"
-            controls
-          >
+          <video ref={videoRef} id="cloudinaryVideo" className="w-full h-auto" controls>
             <source src={topic.video} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
