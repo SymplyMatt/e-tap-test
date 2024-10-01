@@ -3,7 +3,6 @@ import Input from "../../components/common/Input"
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import Select from "../../components/common/Select";
 import utils from "../../utils/utils";
 import makeRequest from "../../services/request";
 interface inputs{
