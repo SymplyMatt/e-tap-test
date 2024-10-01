@@ -53,7 +53,6 @@ const SignUp = () => {
     }else{
       utils.createErrorNotification('Account creation failed!', 2000);
     }
-    console.log('res: ', res);
     setLoading(false);
   }
   const updateValue = (key : keyof inputs, value : string) => {

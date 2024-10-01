@@ -14,7 +14,6 @@ const LessonItem: React.FC<SubjectItemProps> = ({ subject, index }) => {
         async function getLessonProgress(){
             const res:any = await makeRequest('GET',`/lessons/get/subject/user?subjectId=${subject.id}`);
             if(res.status == 200){
-                console.log('res from lesson:  ', res.data.lessons);
                 setUserProgress(res.data.lessons.map((i:any) => i.progress).reduce((acc : number, curr:number) => acc + curr, 0));
             }
 

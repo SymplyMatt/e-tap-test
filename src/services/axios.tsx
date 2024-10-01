@@ -24,7 +24,6 @@ export default async function makeRequest(
     };
 
     const response: AxiosResponse = await axios(config);
-    console.log('response: ', response);
     return response;
   } catch (error) {
     console.log('error: ', error);

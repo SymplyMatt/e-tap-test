@@ -20,7 +20,6 @@ const SignIn = () => {
       }
       setLoading(true);
       const res:AxiosResponse | any = await makeRequest('POST', '/auth/login','',{email, firstName:password, role: 'student'});
-      console.log('res: ', res);
       if(res.status === 200){
         navigate('/subjects', {state:{user: res.data.user}})
       }else{

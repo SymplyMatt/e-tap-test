@@ -24,10 +24,6 @@ export default async function makeRequest(
       },
       data: body,
     };
-    if(type === 'POST'){
-      // console.log('data: ', body);
-      
-    }
 
     const response: AxiosResponse = await axios(config);
     const successResponse: ResponseData = {type : response.data.isSuccessful ? 'success' : 'failed', data : response.data} as ResponseData;

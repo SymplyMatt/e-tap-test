@@ -18,6 +18,10 @@ export interface ProjectItemProps {
     search: string;
     index: number;
 }
+export interface TopicItemProps {
+    topic: Topic;
+    search: string;
+}
 export interface SubjectItemProps {
     subject: Subject;
     index: number
