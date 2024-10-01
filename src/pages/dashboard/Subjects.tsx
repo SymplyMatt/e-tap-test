@@ -57,7 +57,7 @@ const Lessons = () => {
         {!loadingProjects && subjects.length > 0 && <div className="flex flex-col px-20 gap-30 mb-[100px]">
           <LessonStates states={states}/>
           <div className="flex flex-col w-full gap-20">
-            {subjects.map((subject : any, index : number )=>(
+            {subjects.filter(i=>i.topics.length).map((subject : any, index : number )=>(
               <SubjectItem key={index} subject={subject} index={index}/>
             ))}
           </div>
