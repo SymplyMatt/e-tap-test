@@ -18,6 +18,10 @@ export interface ProjectItemProps {
     search: string;
     index: number;
 }
+export interface SubjectItemProps {
+    subject: Subject;
+    index: number
+}
 export interface inputs{
     name: string,
     description: string,
@@ -45,4 +49,26 @@ export interface State {
   }
 export interface ProjectStatesComponentProps {
 states?: State[];
+}
+
+
+export interface Topic{
+    banner: string;
+    createdAt: Date;
+    createdBy: string;
+    description: string;
+    duration: number;
+    id: string;
+    name: string;
+    subject: string;
+    updatedAt: Date;
+    video: string;
+}
+export interface Subject{
+    id: string;
+    name: string;
+    createdBy: string;
+    createdAt: Date;
+    banner : string
+    topics : Topic[]
 }

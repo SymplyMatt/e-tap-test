@@ -4,18 +4,20 @@ import search_icon from "../../assets/images/search.svg"
 import { useNavigate } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
 import makeRequest from '../../services/request'
+import axiosRequest from '../../services/axios'
 import { Context } from '../../context/DashboardContext'
 import utils from '../../utils/utils'
 import Skeleton from '../../components/dashboard/projects/Skeleton'
 import SubjectItem from '../../components/dashboard/projects/details/SubjectItem'
 import DateFilterDropdown from '../../components/dashboard/projects/DateFilterDropdown'
 import LessonStates from './LessonStates'
-import { Project, State } from '../../utils/interfaces'
+import { Project, State, Subject } from '../../utils/interfaces'
 
 const Lessons = () => {
   const { user } = useContext(Context);
   const navigate = useNavigate(); 
   const [projects, setProjects] = useState<Project[]>([]);
+  const [subjects, setSubjects] = useState<Subject[]>([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
   const [search, setSearch] = useState<string>('');
   const [states, setStates] = useState<Array<State>>([{name: 'All',length: 5},{name: 'Completed',length: 5},{name: 'In Progress',length: 5},{name: 'Not Started',length: 5}]);
@@ -23,14 +25,11 @@ const Lessons = () => {
     async function getAllProjects() {
       try {
         setLoadingProjects(true);
-        const res = await makeRequest('GET', `/projects/get-all-organization-projects`, user?.token);
+        const res: any = await axiosRequest('GET', `/subjects`);
+        console.log('res: ', res.data.subjects)
+        setSubjects(res.data.subjects);
         setLoadingProjects(false);
-        if(res.type === 'success'){
-          setProjects(res.data.data.results);
-        }else{
-          utils.createErrorNotification(res.data.message, 1000);
-          setProjects([]);
-        }
+        
       } catch (error) {
         console.log('error: ', error);
       }
@@ -55,11 +54,11 @@ const Lessons = () => {
             <DateFilterDropdown projects={projects} setProjects={setProjects}/>
           </div>
         </div>
-        {!loadingProjects && projects.length > 0 && <div className="flex flex-col px-20 gap-30 mb-[100px]">
+        {!loadingProjects && subjects.length > 0 && <div className="flex flex-col px-20 gap-30 mb-[100px]">
           <LessonStates states={states}/>
           <div className="flex flex-col w-full gap-20">
-            {projects.map((project : any, index : number )=>(
-              <SubjectItem key={index} project={project} search={search} index={index}/>
+            {subjects.map((subject : any, index : number )=>(
+              <SubjectItem key={index} subject={subject} index={index}/>
             ))}
           </div>
         </div>}
