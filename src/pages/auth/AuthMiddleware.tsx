@@ -8,7 +8,7 @@ const AuthMiddleware: React.FC = () => {
     const userInfo = localStorage.getItem('userInfo');
     const token = userInfo ? JSON.parse(userInfo)?.accessToken : null;
     if(token){
-        navigate('/projects');
+        navigate('/subjects');
         setIsAuthenticated(true);
     }else{
         setIsAuthenticated(false);
