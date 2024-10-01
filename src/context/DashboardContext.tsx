@@ -12,24 +12,38 @@ interface userInfo{
   can : string;
   exp : string;
 }
+export interface userDetails{
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  createdAt : Date;
+}
 
 interface ContextValue {
     user: userInfo | null;
     setUser : Function;
+    userDetails: userDetails | null;
+    setUserDetails : Function;
 }
 
 export const Context = createContext<ContextValue>({
     user : null,
-    setUser : ()=>{}
+    setUser : ()=>{},
+    userDetails : null,
+    setUserDetails : ()=>{}
 });
 
 const DashboardContext = ({ children }: PropsWithChildren<{}>) => {
     const [user, setUser] = useState<userInfo | null>(null);
+    const [userDetails, setUserDetails] = useState<userDetails | null>(null);
 
     
     const value: ContextValue = {
         user,
-        setUser
+        setUser,
+        userDetails,
+        setUserDetails
     };
 
   return (

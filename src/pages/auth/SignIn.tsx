@@ -5,7 +5,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from "react";
 import utils from "../../utils/utils";
-import makeRequest from "../../services/request";
+import makeRequest from "../../services/axios";
+import { AxiosResponse } from "axios";
 const SignIn = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
@@ -18,12 +19,12 @@ const SignIn = () => {
         return
       }
       setLoading(true);
-      const res = await makeRequest('POST', '/organization/login','',{email, password});
-      if(res.type !== 'success'){
-        utils.createErrorNotification('Incorrect username or password!', 2000);
+      const res:AxiosResponse | any = await makeRequest('POST', '/auth/login','',{email, firstName:password, role: 'student'});
+      console.log('res: ', res);
+      if(res.status === 200){
+        navigate('/subjects', {state:{user: res.data.user}})
       }else{
-        localStorage.setItem('userInfo',JSON.stringify(res.data.data));
-        navigate('/projects', { replace: true, state: { userInfo : res.data.data  } });
+        utils.createErrorNotification('Invalid credentials', 1000);
       }
       setLoading(false);
     }
@@ -45,16 +46,11 @@ const SignIn = () => {
             <div className="font-poppins text-base font-normal leading-6 text-center text-textFade mt-[-10px]">New to [brand name]? <span className="text-black font-semibold cursor-pointer underline" onClick={()=> navigate('/auth/signup')}>Sign Up</span> </div>
         </div>
         <div className="w-full flex flex-col gap-20">
-          <Input updateFunction={(e)=>setEmail(e)} label="Email"/>
-          <Input updateFunction={(e)=>setPassword(e)} label="Password" type="password"/>
+          <Input updateFunction={(e)=>setPassword(e)} label="First name"/>
+          <Input updateFunction={(e)=>setEmail(e)} label="Email address"/>
           <Button label="Login" onClick={()=>onSubmit()} disabled={disabled || loading} loading={loading}/>
           <div className="font-poppins text-base font-normal leading-6 text-center text-recruitBlue underline mt-[-10px] cursor-pointer">Forgot password or email? </div>
         </div>
-        {/* <div className="w-full flex flex-col gap-10">
-          <div className="flex items-center justify-center gap-10"><div className="h-[1px] w-full bg-borderGray"></div>Or <div className="h-[1px] w-full bg-borderGray"></div></div>
-          <div className="border border-solid border-borderGray rounded-8 h-[45px] flex justify-center items-center px-10 w-full font-semibold gap-10 cursor-pointer"><img src={google} alt="" /> Sign up with Google</div>
-          <div className="border border-solid border-borderGray rounded-8 h-[45px] flex justify-center items-center px-10 w-full font-semibold gap-10 cursor-pointer">Sign in with magic link</div>
-        </div> */}
       </div>
       <ToastContainer />
       <div className="flex flex-col absolute top-[100px] right-[30px] notification-container gap-20"></div>
