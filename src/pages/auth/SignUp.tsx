@@ -1,34 +1,21 @@
 import Button from "../../components/common/Button"
 import Input from "../../components/common/Input"
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import utils from "../../utils/utils";
-import makeRequest from "../../services/request";
+import makeRequest from "../../services/axios";
 interface inputs{
   firstName: string,
   lastName: string,
   email: string,
-  password: string,
-  confirmPassword: string,
-  dateOfBirth: string,
-  phoneNumber: string,
-  gender: string,
-  address: string,
 }
 const SignUp = () => {
-  const location = useLocation();
   const navigate = useNavigate();
   const [inputValues, setInputValues] = useState<inputs>({
     firstName: '',
     lastName: '',
-    email: location.state?.sessionHash && location.state?.email,
-    password: '',
-    confirmPassword: '',
-    dateOfBirth: '',
-    phoneNumber: '',
-    gender: 'male',
-    address: ''
+    email: '',
   });
   const [disabled, setDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -37,17 +24,12 @@ const SignUp = () => {
       utils.createErrorNotification('Enter a valid email!!', 2000);
       return
     }
-    if(inputValues.password !== inputValues.confirmPassword){
-      utils.createErrorNotification('Passwords dont match!!', 2000);
-      return
-    }
     setLoading(true);
-    const payload = {...inputValues, fullName: `${inputValues.firstName} ${inputValues.lastName}`, sessionHash : location.state?.sessionHash}
-    const res: any = await makeRequest('POST', '/organization/register','',payload);
-    if(res.status === 200){
-      utils.createSuccessNotification('Account creation successful!', 1000);
+    const res: any = await makeRequest('POST', '/users/create/student','',inputValues);
+    if(res.status === 201){
+      navigate('/subjects', {state:{user: res.data.newUser}})
     }else{
-      utils.createErrorNotification('Account creation failed!', 2000);
+      utils.createErrorNotification('Account creation failed!', 1000);
     }
     setLoading(false);
   }
@@ -58,14 +40,9 @@ const SignUp = () => {
     const isDisabled = utils.anyFalseyValues(inputValues);
     setDisabled(isDisabled);
   },[inputValues]);
-  useEffect(()=>{
-    if(!location.state?.sessionHash || !location.state?.email ){
-      navigate('/', {replace : true, state: null});
-    }
-  },[]);
   return (
     <>
-      {location.state?.sessionHash && location.state?.email && <div className="flex flex-col items-center justify-center text-center relative px-40 py-20 h-screen overflow-auto">
+      {<div className="flex flex-col items-center justify-center text-center relative px-40 py-20 h-screen overflow-auto">
         <div className="w-full flex justify-between absolute top-0 px-40 py-20">
           <div className="font-inter font-semibold cursor-pointer" onClick={()=> navigate('/')}>LOGO</div>
           <div className="flex items-center gap-20">
@@ -79,6 +56,9 @@ const SignUp = () => {
             <div className="flex flex-col phone-big:flex-row gap-10 w-full">
               <Input updateFunction={(e)=>updateValue('firstName',e)} label="First Name" regex={/^[a-zA-Z]+$/}/>
               <Input updateFunction={(e)=>updateValue('lastName',e)} label="Last Name" regex={/^[a-zA-Z]+$/}/>
+            </div>
+            <div className="flex flex-col phone-big:flex-row gap-10 w-full">
+              <Input updateFunction={(e)=>updateValue('email',e)} label="Email address"/>
             </div>
             <Button label="Create Account" onClick={()=>!loading && onSubmit()} disabled={disabled || loading} loading={loading}/>
             <div className="font-poppins text-base font-normal leading-6 text-center text-textFade mt-[-10px]">Already have an account? <span className="text-black font-semibold cursor-pointer" onClick={()=> navigate('/auth/signin')}>Log In</span> </div>
