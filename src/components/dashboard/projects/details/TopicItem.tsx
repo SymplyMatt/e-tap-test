@@ -9,7 +9,7 @@ const TopicItem: React.FC<TopicItemProps> = ({ topic }) => {
     const navigate = useNavigate();
     const totalDuration = topic.duration;
     const [userProgress, setUserProgress] = useState<number | null>(null);
-    const [lesson, setLesson] = useState<number | null>(null);
+    const [lesson, setLesson] = useState<any | null>(null);
 
     useEffect(()=>{
         async function getLessonProgress(){
@@ -39,7 +39,7 @@ const TopicItem: React.FC<TopicItemProps> = ({ topic }) => {
                                 : 'bg-red-500 text-red-900'
                                 }`}
                             >
-                                {userProgress === totalDuration ? 'Completed' : userProgress ? 'In Progress' : 'Not Started'}
+                                {lesson?.status === 'completed' ? 'Completed' : userProgress ? 'In Progress' : 'Not Started'}
                             </div>
                             <div className="flex items-center text-24 font-semibold">
                                 {utils.capitalizeEachWord(topic.name)}
