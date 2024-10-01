@@ -44,12 +44,9 @@ const SignUp = () => {
     }
     setLoading(true);
     const payload = {...inputValues, fullName: `${inputValues.firstName} ${inputValues.lastName}`, sessionHash : location.state?.sessionHash}
-    const res = await makeRequest('POST', '/organization/register','',payload);
-    if(res.type === 'success'){
-      setTimeout(()=>{
-        utils.createSuccessNotification('Account creation successful!', 1000);
-        navigate('/subjects', {replace : true});
-      }, 1000)
+    const res: any = await makeRequest('POST', '/organization/register','',payload);
+    if(res.status === 200){
+      utils.createSuccessNotification('Account creation successful!', 1000);
     }else{
       utils.createErrorNotification('Account creation failed!', 2000);
     }
@@ -84,26 +81,9 @@ const SignUp = () => {
               <Input updateFunction={(e)=>updateValue('firstName',e)} label="First Name" regex={/^[a-zA-Z]+$/}/>
               <Input updateFunction={(e)=>updateValue('lastName',e)} label="Last Name" regex={/^[a-zA-Z]+$/}/>
             </div>
-            <div className="flex flex-col phone-big:flex-row gap-10 w-full">
-              <Input updateFunction={(e)=>updateValue('phoneNumber',e)} label="Phone Number"/>
-              <Input value={location.state?.email}/>
-            </div>
-            <div className="flex flex-col phone-big:flex-row gap-10 w-full">
-              <Input updateFunction={(e)=>updateValue('dateOfBirth',e)} label="Date of Birth" type="date"/>
-              <Select options={['Male', 'Female']} updateFunction={(e)=>updateValue('gender',e)} inFocus={false}/>
-            </div>
-            <Input updateFunction={(e)=>updateValue('address',e)} label="Address"/>
-            <div className="flex flex-col phone-big:flex-row gap-10 w-full">
-              <Input updateFunction={(e)=>updateValue('password',e)} label="Password" type="password"/>
-              <Input updateFunction={(e)=>updateValue('confirmPassword',e)} label="Re-Enter Password" placeholder="Re-Enter Password" type="password"/>
-            </div>
             <Button label="Create Account" onClick={()=>!loading && onSubmit()} disabled={disabled || loading} loading={loading}/>
             <div className="font-poppins text-base font-normal leading-6 text-center text-textFade mt-[-10px]">Already have an account? <span className="text-black font-semibold cursor-pointer" onClick={()=> navigate('/auth/signin')}>Log In</span> </div>
           </div>
-          {/* <div className="w-full flex flex-col gap-10">
-            <div className="flex items-center justify-center gap-10"><div className="h-[1px] w-full bg-borderGray"></div>Or <div className="h-[1px] w-full bg-borderGray"></div></div>
-            <div className="border border-solid border-borderGray rounded-8 h-[45px] flex justify-center items-center px-10 w-full font-semibold gap-10 cursor-pointer"><img src={google} alt="" /> Sign up with Google</div>
-          </div> */}
         </div>
       </div>}
     </>
