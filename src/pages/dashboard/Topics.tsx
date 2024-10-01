@@ -12,7 +12,6 @@ import DateFilterDropdown from '../../components/dashboard/projects/DateFilterDr
 import ProjectStates from './LessonStates'
 import { Project, State, Subject, Topic } from '../../utils/interfaces'
 import TopicItem from '../../components/dashboard/projects/details/TopicItem'
-import { useLocation, useNavigate } from 'react-router-dom'
 
 const Topics = () => {
   const [projects, setProjects] = useState<Project[]>([]);
