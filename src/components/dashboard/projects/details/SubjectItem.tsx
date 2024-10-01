@@ -59,10 +59,10 @@ const LessonItem: React.FC<SubjectItemProps> = ({ subject }) => {
                                 </div>
                                 <div className="flex flex-col gap-10 h-full justify-between whitespace-nowrap ml-20">
                                     <div className="whitespace-nowrap">
-                                        {!userProgress ? '0%' : Math.floor((userProgress/totalDuration) * 100) + '%'}, {userProgress}min
+                                        {!userProgress ? '0%' : Math.floor((userProgress/totalDuration) * 100) + '%'}, {utils.formatTimeToLongString(userProgress)}
                                     </div>
                                     <div className="whitespace-nowrap">
-                                        100%, {totalDuration}min
+                                        100%, {utils.formatTimeToLongString(totalDuration)}
                                     </div>
                                 </div>
                             </div>
