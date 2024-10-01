@@ -48,7 +48,7 @@ const SignUp = () => {
     if(res.type === 'success'){
       setTimeout(()=>{
         utils.createSuccessNotification('Account creation successful!', 1000);
-        navigate('/projects', {replace : true});
+        navigate('/subjects', {replace : true});
       }, 1000)
     }else{
       utils.createErrorNotification('Account creation failed!', 2000);
