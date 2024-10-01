@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import project_line from '../../../../assets/images/project_line.svg';
-import utils, { biologyTopics, img } from '../../../../utils/utils';
-import { ProjectItemProps, TopicItemProps } from '../../../../utils/interfaces';
+import utils, { img } from '../../../../utils/utils';
+import { TopicItemProps } from '../../../../utils/interfaces';
 import { useEffect, useState } from 'react';
 import makeRequest from '../../../../services/axios';
 
-const TopicItem: React.FC<TopicItemProps> = ({ topic, search }) => {
+const TopicItem: React.FC<TopicItemProps> = ({ topic }) => {
     const navigate = useNavigate();
     const totalDuration = topic.duration;
     const [userProgress, setUserProgress] = useState<number | null>(null);

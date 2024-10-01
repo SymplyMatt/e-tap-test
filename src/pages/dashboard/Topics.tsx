@@ -1,17 +1,14 @@
 import Dashboard from './Dashboard'
 import projects_icon from "../../assets/images/projects.svg"
 import search_icon from "../../assets/images/search.svg"
-import Button from '../../components/common/Button'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { useContext, useEffect, useState } from 'react'
-import makeRequest from '../../services/request'
-import { Context } from '../../context/DashboardContext'
-import utils from '../../utils/utils'
+import { useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import Skeleton from '../../components/dashboard/projects/Skeleton'
 import DateFilterDropdown from '../../components/dashboard/projects/DateFilterDropdown'
 import ProjectStates from './LessonStates'
-import { Project, State, Subject, Topic } from '../../utils/interfaces'
+import { Project, Subject, Topic } from '../../utils/interfaces'
 import TopicItem from '../../components/dashboard/projects/details/TopicItem'
+import { states } from '../../utils/utils'
 
 const Topics = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -20,7 +17,6 @@ const Topics = () => {
   const [search, setSearch] = useState<string>('');
   const [subject, setSubject] = useState<Subject | null>(null);
   const [topics, setTopics] = useState<Topic[]>([]);
-  const [states, setStates] = useState<Array<State>>([{name: 'All'},{name: 'Completed'},{name: 'In Progress'},{name: 'Not Started'}]);
   useEffect(()=>{
     if(location.state.subject){
       setSubject(location.state.subject);
@@ -34,7 +30,7 @@ const Topics = () => {
         <div className="h-[25px] w-full"></div>
         <div className="flex h-[65px] items-center">
           <img src={projects_icon} alt="" className="h-35"/>    
-          <div className="">Topics</div> 
+          <div className="">{subject?.name} Topics</div> 
         </div>
       </div>
       <div className="w-full flex flex-col gap-20 create-project">
