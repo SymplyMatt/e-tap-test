@@ -9,13 +9,16 @@ const TopicItem: React.FC<TopicItemProps> = ({ topic }) => {
     const navigate = useNavigate();
     const totalDuration = topic.duration;
     const [userProgress, setUserProgress] = useState<number | null>(null);
+    const [lesson, setLesson] = useState<number | null>(null);
 
     useEffect(()=>{
         async function getLessonProgress(){
             const res:any = await makeRequest('GET',`/lessons/get/topic?topicId=${topic.id}`);
             if(res.status == 200){
+                setLesson(res.data);
                 setUserProgress(res.data.progress);
             }else{
+                setLesson(null);
                 setUserProgress(0);
             }
         }
@@ -65,7 +68,7 @@ const TopicItem: React.FC<TopicItemProps> = ({ topic }) => {
                         <div className="flex gap-20 items-center">
                             <div
                                 className="flex items-center justify-center w-[180px] border-[1.4px] border-recruitBlue p-5 h-[40px] rounded-8 gap-10 cursor-pointer"
-                                onClick={() => navigate(`/subjects/topic/${topic.id}`, { state: { topic } })}
+                                onClick={() => navigate(`/subjects/topic/${topic.id}`, { state: { topic, lesson } })}
                             >
                                 {userProgress === totalDuration ? 'Rewatch' : userProgress ? 'Continue' : 'Start' } Lesson <i className="fa-solid fa-arrow-right"></i>
                             </div>

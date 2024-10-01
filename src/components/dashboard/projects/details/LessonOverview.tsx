@@ -1,10 +1,21 @@
-import { Topic } from '../../../../utils/interfaces'
+import { useEffect, useRef } from 'react';
+import { Topic } from '../../../../utils/interfaces';
+import { useLocation } from 'react-router-dom';
 
 interface Props {
   topic: Topic;
 }
 
 function LessonOverview({ topic }: Props) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const location = useLocation();
+  useEffect(() => {
+    const progress = !location.state.lesson?.progress ? 0 : location.state.lesson?.progress === topic.duration ? 0 : location.state.lesson?.progress;
+    if (videoRef.current) {
+      videoRef.current.currentTime = progress;
+    }
+  }, [topic]);
+
   return (
     <div className="flex flex-col w-full gap-30">
       <div className="bg-white flex flex-col py-10 gap-40 w-full rounded-12">
@@ -18,11 +29,13 @@ function LessonOverview({ topic }: Props) {
         </div>
 
         <div className="w-full">
-          <video id="cloudinaryVideo" className="w-full h-auto" controls>
-            <source
-              src={topic.video}
-              type="video/mp4"
-            />
+          <video
+            ref={videoRef}
+            id="cloudinaryVideo"
+            className="w-full h-auto"
+            controls
+          >
+            <source src={topic.video} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
