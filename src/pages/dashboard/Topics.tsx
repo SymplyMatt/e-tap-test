@@ -1,7 +1,7 @@
 import Dashboard from './Dashboard'
 import projects_icon from "../../assets/images/projects.svg"
 import search_icon from "../../assets/images/search.svg"
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Skeleton from '../../components/dashboard/projects/Skeleton'
 import DateFilterDropdown from '../../components/dashboard/projects/DateFilterDropdown'
@@ -17,11 +17,14 @@ const Topics = () => {
   const [search, setSearch] = useState<string>('');
   const [subject, setSubject] = useState<Subject | null>(null);
   const [topics, setTopics] = useState<Topic[]>([]);
+  const navigate = useNavigate();
   useEffect(()=>{
-    if(location.state.subject){
+    if(location.state?.subject){
       setSubject(location.state.subject);
       setTopics(location.state.subject.topics);
       setLoadingProjects(false);
+    }else{
+      navigate('/subjects', {replace : true})
     }
   },[]);
   return (

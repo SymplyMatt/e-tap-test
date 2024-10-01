@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom";
 import SignUp from "../pages/auth/SignUp";
 import AuthContext from "../context/AuthContext";
 import SignIn from "../pages/auth/SignIn";
@@ -14,11 +14,14 @@ const Routes = (): JSX.Element => {
   const pageRoutes = [
     {
       path: "/",
-      element: <AuthMiddleware />,
+      element: 
+        <DashboardContext>
+          <DashboardMiddleware />
+        </DashboardContext>,
       children: [
         {
           path: "",
-          element: <Lessons />,
+          element:<Navigate to="/subjects" />,
         },
         {
           path: "*",
