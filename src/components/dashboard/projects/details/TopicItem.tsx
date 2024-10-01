@@ -14,6 +14,7 @@ const TopicItem: React.FC<TopicItemProps> = ({ topic, search }) => {
         async function getLessonProgress(){
             const res:any = await makeRequest('GET',`/lessons/get/topic?topicId=${topic.id}`);
             if(res.status == 200){
+                console.log('res from lesson:  ', res.data);
                 setUserProgress(res.data.progress);
             }else{
                 setUserProgress(0);
@@ -22,53 +23,51 @@ const TopicItem: React.FC<TopicItemProps> = ({ topic, search }) => {
         getLessonProgress()
     },[]);
     return (
-        <>
-            {userProgress !== null && <div className={`bg-white flex flex-col py-20 gap-20 rounded-12`}>
-                <div className="flex grid-cols-2 gap-20 items-end">
-                    <img src={img} alt="" className="w-[180px] h-[180px] rounded-50 object-cover" />
-                    <div className="flex gap-30 justify-between align-center h-full w-full">
-                        <div className="flex flex-col gap-10 h-full justify-between">
+        <div className={`bg-white flex flex-col py-20 gap-20 rounded-12`}>
+            <div className="flex grid-cols-2 gap-20 items-end">
+                <img src={img} alt="" className="w-[180px] h-[180px] rounded-50 object-cover" />
+                <div className="flex gap-30 justify-between align-center h-full w-full">
+                    <div className="flex flex-col gap-10 h-full justify-between">
                         <div className={`flex items-center text-14 font-semibold justify-center h-[25px] w-fit-content p-[6px] rounded-5
-                                ${userProgress === totalDuration
-                                ? 'bg-activeBg text-activeText'
-                                : userProgress
-                                ? 'bg-yellow-500 text-yellow-900'
-                                : 'bg-red-500 text-red-900'
-                                }`}
-                            >
-                                {userProgress === totalDuration ? 'Completed' : userProgress ? 'In Progress' : 'Not Started'}
+                            ${userProgress === totalDuration
+                            ? 'bg-activeBg text-activeText'
+                            : userProgress
+                            ? 'bg-yellow-500 text-yellow-900'
+                            : 'bg-red-400 text-red-900'
+                            }`}
+                        >
+                            {userProgress === totalDuration ? 'Completed' : userProgress ? 'In Progress' : 'Not Started'}
+                        </div>
+                        <div className="flex items-center text-24 font-semibold">
+                            {utils.capitalizeEachWord(topic.name)}
+                        </div>
+                        <div className="flex gap-10 h-full">
+                            <div className="h-full">
+                                <img src={project_line} alt="" className="h-full" />
                             </div>
-                            <div className="flex items-center text-24 font-semibold">
-                                {utils.capitalizeEachWord(topic.name)}
+                            <div className="flex flex-col gap-10 h-full justify-between text-recruitBlue font-semibold">
+                                <div>Progress</div>
+                                <div>Complete</div>
                             </div>
-                            <div className="flex gap-10 h-full">
-                                <div className="h-full">
-                                    <img src={project_line} alt="" className="h-full" />
+                            <div className="flex flex-col gap-10 h-full justify-between whitespace-nowrap ml-20">
+                                <div className="whitespace-nowrap">
+                                    {!userProgress ? '0%' : Math.floor((userProgress/totalDuration) * 100) + '%'}, {userProgress}min
                                 </div>
-                                <div className="flex flex-col gap-10 h-full justify-between text-recruitBlue font-semibold">
-                                    <div>Progress</div>
-                                    <div>Complete</div>
+                                <div className="whitespace-nowrap">
+                                    100%, {totalDuration}min
                                 </div>
-                                <div className="flex flex-col gap-10 h-full justify-between whitespace-nowrap ml-20">
-                                    <div className="whitespace-nowrap">
-                                        {!userProgress ? '0%' : Math.floor((userProgress/totalDuration) * 100) + '%'}, {userProgress}min
-                                    </div>
-                                    <div className="whitespace-nowrap">
-                                        100%, {totalDuration}min
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="flex items-center text-14 text-recruitBlue gap-10">
-                                {topic.description.substring(0,200)}...
                             </div>
                         </div>
-                        <div className="flex gap-20 items-center">
-                            <div
-                                className="flex items-center justify-center w-[180px] border-[1.4px] border-recruitBlue p-5 h-[40px] rounded-8 gap-10 cursor-pointer"
-                                onClick={() => navigate(`/subjects/topic/${topic.id}`, { state: { topic } })}
-                            >
-                                {userProgress === totalDuration ? 'Rewatch' : userProgress ? 'Continue' : 'Start' } Lesson <i className="fa-solid fa-arrow-right"></i>
-                            </div>
+                        <div className="flex items-center text-14 text-recruitBlue gap-10">
+                            {topic.description.substring(0,200)}...
+                        </div>
+                    </div>
+                    <div className="flex gap-20 items-center">
+                        <div
+                            className="flex items-center justify-center w-[180px] border-[1.4px] border-recruitBlue p-5 h-[40px] rounded-8 gap-10 cursor-pointer"
+                            onClick={() => navigate(`/subjects/topic/${topic.id}`, { state: { topic } })}
+                        >
+                            {userProgress === totalDuration ? 'Rewatch lesson' : userProgress ? 'Continue Lesson' : 'Start Lesson'} <i className="fa-solid fa-arrow-right"></i>
                         </div>
                     </div>
                 </div>

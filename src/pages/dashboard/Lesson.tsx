@@ -13,7 +13,7 @@ const Lesson = () => {
     if(location.state?.project){
       setProjectInfo(location.state?.project);
     }else{
-      navigate('/projects', {replace : true});
+      navigate('/subjects', {replace : true});
     }
   },[])
   return (

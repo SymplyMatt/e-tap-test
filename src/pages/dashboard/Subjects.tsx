@@ -1,23 +1,20 @@
 import Dashboard from './Dashboard'
 import projects_icon from "../../assets/images/projects.svg"
 import search_icon from "../../assets/images/search.svg"
-import { useNavigate } from 'react-router-dom'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axiosRequest from '../../services/axios'
-import { Context } from '../../context/DashboardContext'
 import Skeleton from '../../components/dashboard/projects/Skeleton'
 import SubjectItem from '../../components/dashboard/projects/details/SubjectItem'
 import DateFilterDropdown from '../../components/dashboard/projects/DateFilterDropdown'
 import LessonStates from './LessonStates'
-import { Project, State, Subject } from '../../utils/interfaces'
-import utils from '../../utils/utils'
+import { Project, Subject } from '../../utils/interfaces'
+import utils, { states } from '../../utils/utils'
 
 const Lessons = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
   const [search, setSearch] = useState<string>('');
-  const [states, setStates] = useState<Array<State>>([{name: 'All'},{name: 'Completed'},{name: 'In Progress'},{name: 'Not Started'}]);
   useEffect(()=>{
     async function getAllProjects() {
       try {
@@ -41,7 +38,7 @@ const Lessons = () => {
         <div className="h-[25px] w-full"></div>
         <div className="flex h-[65px] items-center">
           <img src={projects_icon} alt="" className="h-35"/>    
-          <div className="">Projects</div> 
+          <div className="">Subjects</div> 
         </div>
       </div>
       <div className="w-full flex flex-col gap-20 create-project">
