@@ -12,19 +12,19 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 const Topics = () => {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [loadingProjects, setLoadingProjects] = useState(true);
+  const [loadingProjects, setLoadingProjects] = useState(false);
   const [search, setSearch] = useState<string>('');
   const location = useLocation();
   const subject: SubjectInterface | null= location.state?.subject || null;
   const topics: Topic[]= location.state?.subject.topics || [];
   const navigate = useNavigate();
-  useEffect(()=>{
-    if(location.state?.subject){
-      setLoadingProjects(false);
-    }else{
-      navigate('/subjects');
-    }
-  },[]);
+  // useEffect(()=>{
+  //   if(location.state?.subject){
+  //     setLoadingProjects(false);
+  //   }else{
+  //     navigate('/subjects');
+  //   }
+  // },[]);
   return (
     <Dashboard>
       <div className="text-20 font-medium flex flex-col gap-5 w-full justify-start h-[90px] px-20"> 
@@ -43,7 +43,7 @@ const Topics = () => {
             <DateFilterDropdown projects={projects} setProjects={setProjects}/>
           </div>
         </div>
-        {!loadingProjects && topics.length > 0 && <div className="flex flex-col px-20 gap-30 mb-[100px]">
+        {!loadingProjects && <div className="flex flex-col px-20 gap-30 mb-[100px]">
           <ProjectStates states={states}/>
           <div className="flex flex-col w-full gap-20">
             {topics.map((topic : any, index : number )=>(

@@ -20,7 +20,6 @@ const Lessons = () => {
       try {
         setLoadingProjects(true);
         const res: any = await axiosRequest('GET', `/subjects`);
-        console.log('res: ', res.data.subjects)
         if(res.status === 200){
           setSubjects(res.data.subjects);
           setLoadingProjects(false);
