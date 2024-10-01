@@ -1,38 +1,29 @@
 import Dashboard from './Dashboard'
 import projects_icon from "../../assets/images/projects.svg"
 import search_icon from "../../assets/images/search.svg"
-import { useContext, useEffect, useState } from 'react'
-import makeRequest from '../../services/request'
-import { Context } from '../../context/DashboardContext'
+import { useEffect, useState } from 'react'
 import utils, { states } from '../../utils/utils'
 import Skeleton from '../../components/dashboard/projects/Skeleton'
 import DateFilterDropdown from '../../components/dashboard/projects/DateFilterDropdown'
 import ProjectStates from './LessonStates'
-import { Project} from '../../utils/interfaces'
+import { Project, Subject as SubjectInterface, Topic} from '../../utils/interfaces'
 import TopicItem from '../../components/dashboard/projects/details/TopicItem'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const Topics = () => {
-  const { user } = useContext(Context); 
   const [projects, setProjects] = useState<Project[]>([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
   const [search, setSearch] = useState<string>('');
+  const location = useLocation();
+  const subject: SubjectInterface | null= location.state?.subject || null;
+  const topics: Topic[]= location.state?.subject.topics || [];
+  const navigate = useNavigate();
   useEffect(()=>{
-    async function getAllProjects() {
-      try {
-        setLoadingProjects(true);
-        const res = await makeRequest('GET', `/projects/get-all-organization-projects`, user?.token);
-        setLoadingProjects(false);
-        if(res.type === 'success'){
-          setProjects(res.data.data.results);
-        }else{
-          utils.createErrorNotification(res.data.message, 1000);
-          setProjects([]);
-        }
-      } catch (error) {
-        console.log('error: ', error);
-      }
+    if(location.state?.subject){
+      setLoadingProjects(false);
+    }else{
+      navigate('/subjects');
     }
-    getAllProjects();
   },[]);
   return (
     <Dashboard>
@@ -40,7 +31,7 @@ const Topics = () => {
         <div className="h-[25px] w-full"></div>
         <div className="flex h-[65px] items-center">
           <img src={projects_icon} alt="" className="h-35"/>    
-          <div className="">Projects</div> 
+          <div className="">{utils.capitalizeEachWord(subject?.name || '')} Topics</div> 
         </div>
       </div>
       <div className="w-full flex flex-col gap-20 create-project">
@@ -52,11 +43,11 @@ const Topics = () => {
             <DateFilterDropdown projects={projects} setProjects={setProjects}/>
           </div>
         </div>
-        {!loadingProjects && projects.length > 0 && <div className="flex flex-col px-20 gap-30 mb-[100px]">
+        {!loadingProjects && topics.length > 0 && <div className="flex flex-col px-20 gap-30 mb-[100px]">
           <ProjectStates states={states}/>
           <div className="flex flex-col w-full gap-20">
-            {projects.map((project : any, index : number )=>(
-              <TopicItem key={index} project={project} search={search} index={index}/>
+            {topics.map((topic : any, index : number )=>(
+              <TopicItem key={index} topic={topic} search={search}/>
             ))}
           </div>
         </div>}

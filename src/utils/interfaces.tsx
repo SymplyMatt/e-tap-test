@@ -22,6 +22,10 @@ export interface SubjectItemProps {
     subject: Subject;
     index: number
 }
+export interface TopicItemProps {
+    topic: Topic;
+    search: string;
+}
 export interface inputs{
     name: string,
     description: string,

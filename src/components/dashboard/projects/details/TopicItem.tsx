@@ -1,23 +1,45 @@
 import { useNavigate } from 'react-router-dom';
 import project_line from '../../../../assets/images/project_line.svg';
 import utils, { biologyTopics, img } from '../../../../utils/utils';
-import { ProjectItemProps } from '../../../../utils/interfaces';
+import { ProjectItemProps, TopicItemProps } from '../../../../utils/interfaces';
+import { useEffect, useState } from 'react';
+import makeRequest from '../../../../services/axios';
 
-const TopicItem: React.FC<ProjectItemProps> = ({ project, index }) => {
+const TopicItem: React.FC<TopicItemProps> = ({ topic, search }) => {
     const navigate = useNavigate();
-            
+    const totalDuration = topic.duration;
+    const [userProgress, setUserProgress] = useState<number | null>(null);
 
+    useEffect(()=>{
+        async function getLessonProgress(){
+            const res:any = await makeRequest('GET',`/lessons/get/topic?topicId=${topic.id}`);
+            if(res.status == 200){
+                console.log('res from lesson:  ', res.data);
+                setUserProgress(res.data.progress);
+            }else{
+                setUserProgress(0);
+            }
+        }
+        getLessonProgress()
+    },[]);
     return (
         <div className={`bg-white flex flex-col py-20 gap-20 rounded-12`}>
             <div className="flex grid-cols-2 gap-20 items-end">
                 <img src={img} alt="" className="w-[180px] h-[180px] rounded-50 object-cover" />
                 <div className="flex gap-30 justify-between align-center h-full w-full">
                     <div className="flex flex-col gap-10 h-full justify-between">
-                        <div className="flex items-center text-24 font-semibold bg-activeBg text-activeText text-[10px] justify-center h-[25px] w-fit-content p-[6px] rounded-5">
-                            Completed
+                        <div className={`flex items-center text-14 font-semibold justify-center h-[25px] w-fit-content p-[6px] rounded-5
+                            ${userProgress === totalDuration
+                            ? 'bg-activeBg text-activeText'
+                            : userProgress
+                            ? 'bg-yellow-500 text-yellow-900'
+                            : 'bg-red-400 text-red-900'
+                            }`}
+                        >
+                            {userProgress === totalDuration ? 'Completed' : userProgress ? 'In Progress' : 'Not Started'}
                         </div>
                         <div className="flex items-center text-24 font-semibold">
-                            {utils.capitalizeEachWord(biologyTopics[index].topic)}
+                            {utils.capitalizeEachWord(topic.name)}
                         </div>
                         <div className="flex gap-10 h-full">
                             <div className="h-full">
@@ -29,23 +51,23 @@ const TopicItem: React.FC<ProjectItemProps> = ({ project, index }) => {
                             </div>
                             <div className="flex flex-col gap-10 h-full justify-between whitespace-nowrap ml-20">
                                 <div className="whitespace-nowrap">
-                                    26%, 1hr, 03min
+                                    {!userProgress ? '0%' : Math.floor((userProgress/totalDuration) * 100) + '%'}, {userProgress}min
                                 </div>
                                 <div className="whitespace-nowrap">
-                                    100%, 3hr, 30min
+                                    100%, {totalDuration}min
                                 </div>
                             </div>
                         </div>
                         <div className="flex items-center text-14 text-recruitBlue gap-10">
-                            {biologyTopics[index].description.substring(0,200)}...
+                            {topic.description.substring(0,200)}...
                         </div>
                     </div>
                     <div className="flex gap-20 items-center">
                         <div
                             className="flex items-center justify-center w-[180px] border-[1.4px] border-recruitBlue p-5 h-[40px] rounded-8 gap-10 cursor-pointer"
-                            onClick={() => navigate(`/topics/${project.id}/${project.id}`, { state: { project } })}
+                            onClick={() => navigate(`/subjects/topic/${topic.id}`, { state: { topic } })}
                         >
-                            Start Lesson <i className="fa-solid fa-arrow-right"></i>
+                            {userProgress === totalDuration ? 'Rewatch lesson' : userProgress ? 'Continue Lesson' : 'Start Lesson'} <i className="fa-solid fa-arrow-right"></i>
                         </div>
                     </div>
                 </div>
