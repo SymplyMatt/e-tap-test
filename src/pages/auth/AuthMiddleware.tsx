@@ -1,24 +1,36 @@
-import {  Outlet, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import {  Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { Context} from '../../context/DashboardContext';
+import makeRequest from '../../services/axios';
 
+export const getLoggedInUser = async () =>{
+  const res:any = await makeRequest('GET',`/auth/getLoggedInUser`);
+  console.log('res: ', res);
+  return res.data?.user
+}
 const AuthMiddleware: React.FC = () => {
+  const {setUserDetails, userDetails} = useContext(Context);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const location = useLocation();
   const navigate = useNavigate();
   useEffect(()=>{
-    const userInfo = localStorage.getItem('userInfo');
-    const token = userInfo ? JSON.parse(userInfo)?.accessToken : null;
-    if(token){
-        navigate('/subjects');
+    async function getUserDetails(){
+      const user= userDetails || location.state?.user || await getLoggedInUser();
+      if(user){
+        setUserDetails(user);
         setIsAuthenticated(true);
-    }else{
+        navigate('/subjects', {replace : true});
+      }else{
         setIsAuthenticated(false);
+      }    
     }
+    getUserDetails();
   },[location.pathname]);
 
-  if (isAuthenticated === false) {
+  if (isAuthenticated || isAuthenticated === null) {
+    return <></>;
+  }else{
       return <Outlet />;
-    }else{
-      return <></>;
   }
 
 };
