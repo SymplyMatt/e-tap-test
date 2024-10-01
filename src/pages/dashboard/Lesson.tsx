@@ -3,7 +3,7 @@ import LessonOverview from '../../components/dashboard/projects/details/LessonOv
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import utils from '../../utils/utils'
-import { Project as ProjectDetails, Topic } from '../../utils/interfaces'
+import { Topic } from '../../utils/interfaces'
 
 const Lesson = () => {
   const [topicInfo, setTopicInfo] = useState<Topic | null>(null);

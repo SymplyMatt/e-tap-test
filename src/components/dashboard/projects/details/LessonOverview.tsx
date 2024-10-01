@@ -1,5 +1,4 @@
-import { Project, Topic } from '../../../../utils/interfaces'
-import { biologyTopics, img } from '../../../../utils/utils'
+import { Topic } from '../../../../utils/interfaces'
 
 interface Props {
   topic: Topic;

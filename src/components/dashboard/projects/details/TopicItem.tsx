@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import project_line from '../../../../assets/images/project_line.svg';
-import utils, { img } from '../../../../utils/utils';
+import utils from '../../../../utils/utils';
 import { TopicItemProps } from '../../../../utils/interfaces';
 import { useEffect, useState } from 'react';
 import makeRequest from '../../../../services/axios';
