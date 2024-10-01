@@ -65,7 +65,7 @@ const LessonItem: React.FC<SubjectItemProps> = ({ subject, index }) => {
                     <div className="flex gap-20 items-center">
                         <div
                             className="flex items-center justify-center w-[180px] border-[1.4px] border-recruitBlue p-5 h-[40px] rounded-8 gap-10 cursor-pointer"
-                            onClick={() => navigate(`/topics/${subject.id}`, { state: { subject } })}
+                            onClick={() => navigate(`/subjects/${subject.id}`, { state: { subject } })}
                         >
                             View Topics <i className="fa-solid fa-arrow-right"></i>
                         </div>

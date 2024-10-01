@@ -9,6 +9,7 @@ const DashboardMiddleware: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(()=>{
+    console.log('user details: ', userDetails);
     if(!userDetails){
         if (location.state?.user) {
             const userInfo: userDetails = location.state?.user;

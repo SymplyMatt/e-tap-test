@@ -14,8 +14,7 @@ const Routes = (): JSX.Element => {
   const pageRoutes = [
     {
       path: "/",
-      element: 
-          <AuthMiddleware />,
+      element: <AuthMiddleware />,
       children: [
         {
           path: "",
@@ -31,10 +30,11 @@ const Routes = (): JSX.Element => {
   const authRoutes = [
     {
       path: "/auth",
-      element: 
+      element: (
         <AuthContext>
           <AuthMiddleware />
-        </AuthContext>,
+        </AuthContext>
+      ),
       children: [
         {
           path: "",
@@ -55,54 +55,33 @@ const Routes = (): JSX.Element => {
       ],
     },
   ];
+
   const subjectRoutes = [
     {
       path: "/subjects",
-      element: 
+      element: (
         <DashboardContext>
           <DashboardMiddleware />
-        </DashboardContext>,
+        </DashboardContext>
+      ),
       children: [
         {
-          path: "",
-          element: <Lessons />,
-        }
-      ],
-    },
-  ];
-  const topicRoutes = [
-    {
-      path: "/topics",
-      element: 
-        <DashboardContext>
-          <DashboardMiddleware />
-        </DashboardContext>,
-      children: [
-        {
-          path: "",
-          element: <Lessons />,
+          path: "", 
+          element: <Lessons />, 
         },
         {
-          path: ":id", 
-          element: 
-            <DashboardContext>
-              <DashboardMiddleware />
-            </DashboardContext>,
-          children: [
-            {
-              path: "", 
-              element: <Topics />, 
-            },
-            {
-              path: ":subId", 
-              element: <Lesson />, 
-            },
-          ],
-        }
+          path: ":subjectId", 
+          element: <Topics />, 
+        },
+        {
+          path: "topic/:topicId", 
+          element: <Lesson />, 
+        },
       ],
     },
   ];
-  const router = createBrowserRouter([...pageRoutes,...authRoutes,...subjectRoutes,...topicRoutes]);
+
+  const router = createBrowserRouter([...pageRoutes, ...authRoutes, ...subjectRoutes]);
 
   return <RouterProvider router={router} />;
 };
