@@ -5,7 +5,6 @@ import makeRequest from '../../services/axios';
 
 export const getLoggedInUser = async () =>{
   const res:any = await makeRequest('GET',`/auth/getLoggedInUser`);
-  console.log('res: ', res);
   return res.data?.user
 }
 const DashboardMiddleware: React.FC = () => {

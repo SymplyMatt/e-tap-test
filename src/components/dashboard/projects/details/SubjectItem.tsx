@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import project_line from '../../../../assets/images/project_line.svg';
-import utils, { img } from '../../../../utils/utils';
+import utils from '../../../../utils/utils';
 import { SubjectItemProps } from '../../../../utils/interfaces';
 import { useEffect, useState } from 'react';
 import makeRequest from '../../../../services/axios';
@@ -14,7 +14,14 @@ const LessonItem: React.FC<SubjectItemProps> = ({ subject }) => {
         async function getLessonProgress(){
             const res:any = await makeRequest('GET',`/lessons/get/subject/user?subjectId=${subject.id}`);
             if(res.status == 200){
-                setUserProgress(res.data.lessons.map((i:any) => i.progress).reduce((acc : number, curr:number) => acc + curr, 0));
+                const uniqueLessons = res.data.lessons.reduce((acc: any[], lesson: any) => {
+                    if (!acc.some((l) => l.topic === lesson.topic)) {
+                        acc.push(lesson);
+                    }
+                    return acc;
+                }, []);
+                const totalProgress = uniqueLessons.map((lesson: any) => lesson.progress).reduce((acc: number, curr: number) => acc + curr, 0);
+                setUserProgress(totalProgress);
             }else{
                 setUserProgress(0);
             }
@@ -26,7 +33,7 @@ const LessonItem: React.FC<SubjectItemProps> = ({ subject }) => {
         <>
             {userProgress !== null && <div className={`bg-white flex flex-col py-20 gap-20 rounded-12`}>
                 <div className="flex grid-cols-2 gap-20 items-end">
-                    <img src={img} alt="" className="w-[180px] h-[180px] rounded-50 object-cover" />
+                    <img src={subject.banner} alt="" className="w-[180px] h-[180px] rounded-50 object-cover" />
                     <div className="flex gap-10 justify-between align-center h-full w-full">
                         <div className="flex flex-col gap-10 h-full justify-between">
                             <div className={`flex items-center text-14 font-semibold justify-center h-[25px] w-fit-content p-[6px] rounded-5
