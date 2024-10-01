@@ -25,7 +25,7 @@ const TopicItem: React.FC<TopicItemProps> = ({ topic }) => {
         <>
             {userProgress !== null && <div className={`bg-white flex flex-col py-20 gap-20 rounded-12`}>
                 <div className="flex grid-cols-2 gap-20 items-end">
-                    <img src={img} alt="" className="w-[180px] h-[180px] rounded-50 object-cover" />
+                    <img src={topic.banner} alt="" className="w-[180px] h-[180px] rounded-50 object-cover" />
                     <div className="flex gap-30 justify-between align-center h-full w-full">
                         <div className="flex flex-col gap-10 h-full justify-between">
                         <div className={`flex items-center text-14 font-semibold justify-center h-[25px] w-fit-content p-[6px] rounded-5
