@@ -26,7 +26,7 @@ const LessonItem: React.FC<SubjectItemProps> = ({ subject }) => {
                     }
                     return acc;
                 }, []);
-                const totalProgress = uniqueLessons.map((lesson: any) => lesson.progress).reduce((acc: number, curr: number) => acc + curr, 0);
+                const totalProgress = uniqueLessons.map((lesson: any) => lesson.status === 'completed' ? (subject.topics.find(i=>i.id === lesson.topic)?.duration || 0) : lesson.progress).reduce((acc: number, curr: number) => acc + curr, 0);
                 setUserProgress(totalProgress);
             } else {
                 setUserProgress(0);
@@ -78,7 +78,7 @@ const LessonItem: React.FC<SubjectItemProps> = ({ subject }) => {
                                         <img src={project_line} alt="" className="h-full" />
                                     </div>
                                     <div className="flex flex-col gap-10 h-full justify-between text-recruitBlue font-semibold">
-                                        <div>Progress</div>
+                                        <div>{userProgress === totalDuration ? 'Last memory' :  'Your progress'}</div>
                                         <div>Complete</div>
                                     </div>
                                     <div className="flex flex-col gap-10 h-full justify-between whitespace-nowrap ml-20">
@@ -91,7 +91,7 @@ const LessonItem: React.FC<SubjectItemProps> = ({ subject }) => {
                                     </div>
                                 </div>
                                 <div className="flex items-center text-14 text-recruitBlue gap-10">
-                                    {subject.topics.length} Topics
+                                    {subject.topics.length} Topic{subject.topics.length > 1  && 's'}
                                 </div>
                             </div>
                             <div className="flex gap-20 items-center">
