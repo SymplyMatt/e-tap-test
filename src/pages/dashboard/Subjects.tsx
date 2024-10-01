@@ -3,33 +3,33 @@ import projects_icon from "../../assets/images/projects.svg"
 import search_icon from "../../assets/images/search.svg"
 import { useNavigate } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
-import makeRequest from '../../services/request'
 import axiosRequest from '../../services/axios'
 import { Context } from '../../context/DashboardContext'
-import utils from '../../utils/utils'
 import Skeleton from '../../components/dashboard/projects/Skeleton'
 import SubjectItem from '../../components/dashboard/projects/details/SubjectItem'
 import DateFilterDropdown from '../../components/dashboard/projects/DateFilterDropdown'
 import LessonStates from './LessonStates'
 import { Project, State, Subject } from '../../utils/interfaces'
+import utils from '../../utils/utils'
 
 const Lessons = () => {
-  const { user } = useContext(Context);
-  const navigate = useNavigate(); 
   const [projects, setProjects] = useState<Project[]>([]);
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
   const [search, setSearch] = useState<string>('');
-  const [states, setStates] = useState<Array<State>>([{name: 'All',length: 5},{name: 'Completed',length: 5},{name: 'In Progress',length: 5},{name: 'Not Started',length: 5}]);
+  const [states, setStates] = useState<Array<State>>([{name: 'All'},{name: 'Completed'},{name: 'In Progress'},{name: 'Not Started'}]);
   useEffect(()=>{
     async function getAllProjects() {
       try {
         setLoadingProjects(true);
         const res: any = await axiosRequest('GET', `/subjects`);
         console.log('res: ', res.data.subjects)
-        setSubjects(res.data.subjects);
-        setLoadingProjects(false);
-        
+        if(res.status === 200){
+          setSubjects(res.data.subjects);
+          setLoadingProjects(false);
+        }else{
+          utils.createErrorNotification('Unable to retrieve subjects', 1000);
+        }
       } catch (error) {
         console.log('error: ', error);
       }

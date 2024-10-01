@@ -45,7 +45,6 @@ export interface DashboardLayoutProps {
 
 export interface State {
     name: string;
-    length: number
   }
 export interface ProjectStatesComponentProps {
 states?: State[];
