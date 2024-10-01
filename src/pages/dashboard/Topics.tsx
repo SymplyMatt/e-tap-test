@@ -8,7 +8,7 @@ import DateFilterDropdown from '../../components/dashboard/projects/DateFilterDr
 import ProjectStates from './LessonStates'
 import { Project, Subject, Topic } from '../../utils/interfaces'
 import TopicItem from '../../components/dashboard/projects/details/TopicItem'
-import { states } from '../../utils/utils'
+import utils, { states } from '../../utils/utils'
 
 const Topics = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -30,7 +30,7 @@ const Topics = () => {
         <div className="h-[25px] w-full"></div>
         <div className="flex h-[65px] items-center">
           <img src={projects_icon} alt="" className="h-35"/>    
-          <div className="">{subject?.name} Topics</div> 
+          <div className="">{utils.capitalizeEachWord(subject?.name || '')} Topics</div> 
         </div>
       </div>
       <div className="w-full flex flex-col gap-20 create-project">
