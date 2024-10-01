@@ -7,15 +7,14 @@ import Skeleton from '../../components/dashboard/projects/Skeleton'
 import SubjectItem from '../../components/dashboard/projects/details/SubjectItem'
 import DateFilterDropdown from '../../components/dashboard/projects/DateFilterDropdown'
 import LessonStates from './LessonStates'
-import { Project, State, Subject } from '../../utils/interfaces'
-import utils from '../../utils/utils'
+import { Project, Subject } from '../../utils/interfaces'
+import utils, { states } from '../../utils/utils'
 
 const Lessons = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
   const [search, setSearch] = useState<string>('');
-  const states:State[] = [{name: 'All'},{name: 'Completed'},{name: 'In Progress'},{name: 'Not Started'}];
   useEffect(()=>{
     async function getAllProjects() {
       try {

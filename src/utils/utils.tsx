@@ -1,3 +1,5 @@
+import { State } from "./interfaces";
+
 export default class utils {
     static anyFalseyValues(obj: { [key: string]: any }): boolean {
         for (const key in obj) {
@@ -269,3 +271,4 @@ export const biologyTopics = [
     description: "Developmental biology is the study of the processes by which organisms grow and develop, starting from a single fertilized egg and culminating in a fully formed organism. This field focuses on how cells divide, differentiate, and organize into tissues and organs during embryonic development. It also examines how genetic and environmental factors influence these processes, as well as how development can go awry, leading to birth defects or diseases. Insights from developmental biology are important for regenerative medicine, including the use of stem cells to repair or replace damaged tissues."
   }
 ];
+export const states:State[] = [{name: 'All'},{name: 'Completed'},{name: 'In Progress'},{name: 'Not Started'}];

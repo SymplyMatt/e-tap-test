@@ -1,16 +1,14 @@
 import Dashboard from './Dashboard'
 import projects_icon from "../../assets/images/projects.svg"
 import search_icon from "../../assets/images/search.svg"
-import Button from '../../components/common/Button'
-import { useNavigate } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
 import makeRequest from '../../services/request'
 import { Context } from '../../context/DashboardContext'
-import utils from '../../utils/utils'
+import utils, { states } from '../../utils/utils'
 import Skeleton from '../../components/dashboard/projects/Skeleton'
 import DateFilterDropdown from '../../components/dashboard/projects/DateFilterDropdown'
 import ProjectStates from './LessonStates'
-import { Project, State } from '../../utils/interfaces'
+import { Project} from '../../utils/interfaces'
 import TopicItem from '../../components/dashboard/projects/details/TopicItem'
 
 const Topics = () => {
@@ -18,7 +16,6 @@ const Topics = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
   const [search, setSearch] = useState<string>('');
-  const [states, setStates] = useState<Array<State>>([{name: 'All',length: 5},{name: 'Completed',length: 5},{name: 'In Progress',length: 5},{name: 'Not Started',length: 5}]);
   useEffect(()=>{
     async function getAllProjects() {
       try {
