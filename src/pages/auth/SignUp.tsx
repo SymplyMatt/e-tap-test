@@ -29,7 +29,7 @@ const SignUp = () => {
     if(res.status === 201){
       navigate('/subjects', {state:{user: res.data.newUser}})
     }else{
-      utils.createErrorNotification('Account creation failed!', 1000);
+      utils.createErrorNotification(res.response.data?.message, 1500);
     }
     setLoading(false);
   }
@@ -64,6 +64,7 @@ const SignUp = () => {
             <div className="font-poppins text-base font-normal leading-6 text-center text-textFade mt-[-10px]">Already have an account? <span className="text-black font-semibold cursor-pointer" onClick={()=> navigate('/auth/signin')}>Log In</span> </div>
           </div>
         </div>
+        <div className="flex flex-col absolute top-[100px] right-[30px] notification-container gap-20"></div>
       </div>}
     </>
   )

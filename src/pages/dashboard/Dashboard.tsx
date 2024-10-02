@@ -3,7 +3,7 @@ import TopMain from "../../components/dashboard/TopMain"
 import { DashboardLayoutProps } from "../../utils/interfaces";
 
 const Dashboard: React.FC<DashboardLayoutProps> = ({children = [<></>, <></>, <></>]}) => {
-    const [header, content, overlay] = children;
+    const [header, content] = children;
 return (
     <>
         <div className="grid grid-cols-10 w-screen h-screen relative">
