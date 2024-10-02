@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Topic } from '../../../../utils/interfaces';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import makeRequest from '../../../../services/axios';
 import utils from '../../../../utils/utils';
 
