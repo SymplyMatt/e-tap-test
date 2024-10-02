@@ -19,7 +19,7 @@ const LessonItem: React.FC<SubjectItemProps> = ({ subject }) => {
     useEffect(() => {
         async function getLessonProgress() {
             const res: any = await makeRequest('GET', `/lessons/get/subject/user?subjectId=${subject.id}`);
-            if (res.status === 200) {
+            if (res.status === 200) {                
                 const uniqueLessons = res.data.lessons.reduce((acc: any[], lesson: any) => {
                     if (!acc.some((l) => l.topic === lesson.topic)) {
                         acc.push(lesson);

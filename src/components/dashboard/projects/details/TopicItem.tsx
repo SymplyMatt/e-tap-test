@@ -63,7 +63,7 @@ const TopicItem: React.FC<TopicItemProps> = ({ topic }) => {
                                         : 'bg-red-500 text-red-900'
                                     }`}
                                 >
-                                    {lesson?.status === 'completed' ? 'Completed' : userProgress ? 'In Progress' : 'Not Started'}
+                                    {lesson?.status === 'completed' ? 'Completed' : (userProgress || lesson?.status === 'in-progress') ? 'In Progress' : 'Not Started'}
                                 </div>
                                 <div className="flex items-center text-24 font-semibold">
                                     {utils.capitalizeEachWord(topic.name)}

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Topic } from '../../../../utils/interfaces';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import makeRequest from '../../../../services/axios';
 import utils from '../../../../utils/utils';
 
@@ -10,6 +10,7 @@ interface Props {
 
 function LessonOverview({ topic }: Props) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const navigate = useNavigate();
   const location = useLocation();
   const [lesson, setLesson] = useState<any>(null);
   const [hasLoadedProgress, setHasLoadedProgress] = useState(false);
@@ -17,23 +18,33 @@ function LessonOverview({ topic }: Props) {
   useEffect(() => {
     if (location.state?.lesson) {
       setLesson(location.state.lesson);
-    } else {
-      async function createLesson() {
-        const res: any = await makeRequest('POST', '/lessons/start', null, { topicId: topic.id });
-        if (res.status === 200) {
-          setLesson(res.data);
-        } else {
-          utils.createErrorNotification('Unable to start lesson', 1000);
-        }
-      }
-      createLesson();
-    }
-    setHasLoadedProgress(true);
+      setHasLoadedProgress(true);
+    } 
   }, [location.state, topic.id]);
+  async function createLesson() {
+    try {
+      const res: any = await makeRequest('POST', '/lessons/start', null, { topicId: topic.id });
+      if (res.status === 200) {
+        setLesson(res.data);
+        setHasLoadedProgress(true);
+        return res.data
+      } else {
+        utils.createErrorNotification('Unable to start lesson', 1000);
+        navigate('/subjects');
+      }
+    } catch (error) {     
+    }
+  }
 
   async function updateProgress(progress: number) {
-    if (!lesson) return;
-    const res: any = await makeRequest('POST', '/lessons/update-progress', null, { lessonId: lesson.id, progress : Math.floor(progress) });
+    let newLesson;
+    const lessonData = lesson || location?.state?.lesson;
+    if (!lessonData) {
+      newLesson = await createLesson();
+    };
+    const data = { lessonId: lesson?.id || newLesson?.userLesson?.id, progress : Math.floor(progress) };
+    if(!lesson?.id && !newLesson?.userLesson?.id) return
+    const res: any = await makeRequest('POST', '/lessons/update-progress', null, data);
     if (res.status !== 200) utils.createErrorNotification('Unable to update lesson progress', 1000);
   }
 
@@ -62,16 +73,6 @@ function LessonOverview({ topic }: Props) {
         }
       };
 
-      const startProgressUpdates = () => {
-        if (!updateIntervalRef.current) {
-          updateIntervalRef.current = setInterval(() => {
-            if (videoElement && !videoElement.paused && !videoElement.ended) {
-              updateProgress(videoElement.currentTime);
-            }
-          }, 10000); 
-        }
-      };
-
 
       const stopProgressUpdates = () => {
         if (updateIntervalRef.current) {
@@ -85,14 +86,10 @@ function LessonOverview({ topic }: Props) {
 
       videoElement.addEventListener('seeked', handleSeek);
       videoElement.addEventListener('ended', handleVideoEnd);
-      videoElement.addEventListener('play', startProgressUpdates);
-      videoElement.addEventListener('pause', stopProgressUpdates);
 
       return () => {
         videoElement.removeEventListener('seeked', handleSeek);
         videoElement.removeEventListener('ended', handleVideoEnd);
-        videoElement.removeEventListener('play', startProgressUpdates);
-        videoElement.removeEventListener('pause', stopProgressUpdates);
         stopProgressUpdates(); 
       };
     }
