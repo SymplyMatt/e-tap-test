@@ -28,7 +28,7 @@ const LessonItem: React.FC<SubjectItemProps> = ({ subject }) => {
                 }, []);
                 const totalProgress = uniqueLessons.map((lesson: any) => lesson.status === 'completed' ? (subject.topics.find(i=>i.id === lesson.topic)?.duration || 0) : lesson.progress).reduce((acc: number, curr: number) => acc + curr, 0);
                 setUserProgress(totalProgress);
-                setStatus(uniqueLessons.every(i=>i.status === 'completed') ? 'completed' : uniqueLessons.some(i=>i.status === 'in-progress') ? 'in-progress' : 'not-started')
+                setStatus(uniqueLessons.length ===  0 ? 'not-started' : uniqueLessons.every(i=>i.status === 'completed') ? 'completed' : uniqueLessons.some(i=>i.status === 'in-progress') ? 'in-progress' : 'not-started')
             } else {
                 setUserProgress(0);
             }

@@ -10,7 +10,6 @@ interface Props {
 
 function LessonOverview({ topic }: Props) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const navigate = useNavigate();
   const location = useLocation();
   const [lesson, setLesson] = useState<any>(null);
   const [hasLoadedProgress, setHasLoadedProgress] = useState(false);
@@ -28,9 +27,6 @@ function LessonOverview({ topic }: Props) {
         setLesson(res.data);
         setHasLoadedProgress(true);
         return res.data
-      } else {
-        utils.createErrorNotification('Unable to start lesson', 1000);
-        navigate('/subjects');
       }
     } catch (error) {     
     }

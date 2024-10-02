@@ -50,13 +50,13 @@ const TopMain = () => {
           </div>
           <div className="flex flex-col items-center h-[45px] relative" ref={userdropdownRef}>
             <div
-              className="flex items-center justify-center gap-10 cursor-pointer h-full"
+              className="flex items-center justify-center gap-10 cursor-pointer h-full w-full"
               onClick={() => setShowUserDropDown(!showUserDropDown)}
             >
-              {userDetails?.firstName || '' + userDetails?.lastName + ''} <i className={`fa-solid ${showUserDropDown ? "fa-caret-up" : "fa-caret-down"}`}></i>
+              {userDetails?.firstName }  {userDetails?.lastName } <i className={`fa-solid ${showUserDropDown ? "fa-caret-up" : "fa-caret-down"}`}></i>
             </div>
             {showUserDropDown && (
-              <div className="overflow-visible bg-white flex flex-col border border-borderGray z-10 shadow w-full items-center justify-center rounded-8 dropdown-menu absolute top-[60px]">
+              <div className="overflow-visible bg-white flex flex-col border border-borderGray z-10 shadow w-full items-center justify-center rounded-8 dropdown-menu absolute top-[60px] px-20">
                 <div className="p-10 hover:bg-borderGray w-full flex items-center justify-center cursor-pointer">
                   Settings
                 </div>
