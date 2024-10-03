@@ -18,6 +18,7 @@ const SignUp = () => {
     email: '',
   });
   const [disabled, setDisabled] = useState(true);
+  const [admin, setAdmin] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const onSubmit = async () =>{
     if( !utils.isValidEmail(inputValues.email)){
@@ -25,7 +26,7 @@ const SignUp = () => {
       return
     }
     setLoading(true);
-    const res: any = await makeRequest('POST', '/users/create/student','',inputValues);
+    const res: any = await makeRequest('POST', `/users/create/${admin ? 'admin' : 'student'}`,'',inputValues);
     if(res.status === 201){
       navigate('/subjects', {state:{user: res.data.newUser}})
     }else{
@@ -60,6 +61,7 @@ const SignUp = () => {
             <div className="flex flex-col phone-big:flex-row gap-10 w-full">
               <Input updateFunction={(e)=>updateValue('email',e)} label="Email address"/>
             </div>
+            <div className="flex justify-start gap-10"><input type="checkbox" checked={admin} onChange={(e)=>setAdmin(e.currentTarget.checked)}/> I am an admin/teacher</div>
             <Button label="Create Account" onClick={()=>!loading && onSubmit()} disabled={disabled || loading} loading={loading}/>
             <div className="font-poppins text-base font-normal leading-6 text-center text-textFade mt-[-10px]">Already have an account? <span className="text-black font-semibold cursor-pointer" onClick={()=> navigate('/auth/signin')}>Log In</span> </div>
           </div>
