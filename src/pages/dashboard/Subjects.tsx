@@ -4,13 +4,11 @@ import { useEffect, useState } from 'react'
 import axiosRequest from '../../services/axios'
 import Skeleton from '../../components/dashboard/projects/Skeleton'
 import SubjectItem from '../../components/dashboard/projects/details/SubjectItem'
-import DateFilterDropdown from '../../components/dashboard/projects/DateFilterDropdown'
 import LessonStates from './LessonStates'
-import { Project, Subject } from '../../utils/interfaces'
+import { Subject } from '../../utils/interfaces'
 import utils, { states } from '../../utils/utils'
 
 const Lessons = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
   useEffect(()=>{
@@ -40,11 +38,6 @@ const Lessons = () => {
         </div>
       </div>
       <div className="w-full flex flex-col gap-20 create-project">
-        <div className="flex w-full justify-between items-center px-20">
-          <div className="flex items-center gap-10">
-            <DateFilterDropdown projects={projects} setProjects={setProjects}/>
-          </div>
-        </div>
         {!loadingProjects && subjects.length > 0 && <div className="flex flex-col px-20 gap-30 mb-[100px]">
           <LessonStates states={states}/>
           <div className="flex flex-col w-full gap-20">
