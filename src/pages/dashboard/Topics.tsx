@@ -4,14 +4,12 @@ import search_icon from "../../assets/images/search.svg"
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Skeleton from '../../components/dashboard/projects/Skeleton'
-import DateFilterDropdown from '../../components/dashboard/projects/DateFilterDropdown'
 import ProjectStates from './LessonStates'
-import { Project, Subject, Topic } from '../../utils/interfaces'
+import { Subject, Topic } from '../../utils/interfaces'
 import TopicItem from '../../components/dashboard/projects/details/TopicItem'
 import utils, { states } from '../../utils/utils'
 
 const Topics = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
   const location = useLocation();
   const [loadingProjects, setLoadingProjects] = useState(true);
   const [search, setSearch] = useState<string>('');
@@ -40,9 +38,6 @@ const Topics = () => {
         <div className="flex w-full justify-between items-center px-20">
           <div className="flex items-center gap-10">
             <div className="border border-borderGray px-16 py-10 rounded-8 flex gap-10 items-center cursor-pointer font-normal bg-white"><img src={search_icon } alt=""/> <input type="text" placeholder='Search topic' className={`outline-none border-none bg-inherit ${search ? 'text-black' : 'text-borderGray'}  cursor-pointer`} value={search} onChange={(e)=>setSearch(e.currentTarget.value)}/></div>
-          </div>
-          <div className="flex items-center gap-10">
-            <DateFilterDropdown projects={projects} setProjects={setProjects}/>
           </div>
         </div>
         {!loadingProjects && topics.length > 0 && <div className="flex flex-col px-20 gap-30 mb-[100px]">
