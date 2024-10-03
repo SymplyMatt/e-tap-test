@@ -1,8 +1,8 @@
-import axios, { AxiosResponse, AxiosError } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 type RequestType = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
-const BASE_URL = 'http://localhost:1234';
+const BASE_URL = 'https://e-tap-46ce93b99242.herokuapp.com';
 
 export default async function makeRequest(
   type: RequestType,
@@ -19,7 +19,6 @@ export default async function makeRequest(
         ...(token && { Authorization: `Bearer ${token}` }),
       },
       data: body,
-      // Ensure cookies are included
       withCredentials: true,
     };
 

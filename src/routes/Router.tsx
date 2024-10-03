@@ -2,7 +2,6 @@ import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom"
 import SignUp from "../pages/auth/SignUp";
 import AuthContext from "../context/AuthContext";
 import SignIn from "../pages/auth/SignIn";
-import Verify from "../pages/auth/Verify";
 import DashboardContext from "../context/DashboardContext";
 import Lessons from "../pages/dashboard/Subjects";
 import Subjects from "../pages/dashboard/admin/Subjects";
@@ -53,11 +52,7 @@ const Routes = (): JSX.Element => {
         {
           path: "signin",
           element: <SignIn />,
-        },
-        {
-          path: "verify",
-          element: <Verify />,
-        },
+        }
       ],
     },
   ];
