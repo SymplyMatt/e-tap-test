@@ -36,8 +36,8 @@ const TopMain = () => {
     <div className="h-60 flex items-center px-20 w-full justify-between border-b border-borderGray">
       <div className="flex flex-col items-center h-[45px]">
         <div
-          className="border border-borderGray px-16 py-10 rounded-8 flex gap-10 items-center cursor-pointer font-semibold h-full">
-          {utils.camelCaseToFirstLast('student')}
+          className="border border-borderGray px-16 py-10 rounded-8 flex gap-10 items-center font-semibold h-full">
+          {utils.camelCaseToFirstLast(userDetails?.role || 'student')}
         </div>
       </div>
       <div className="flex items-center justify-center gap-20 h-full">
