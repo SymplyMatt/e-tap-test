@@ -1,6 +1,5 @@
 import Dashboard from '../Dashboard'
 import projects_icon from "../../../assets/images/projects.svg"
-import search_icon from "../../../assets/images/search.svg"
 import { useEffect, useState } from 'react'
 import axiosRequest from '../../../services/axios'
 import Skeleton from '../../../components/dashboard/projects/Skeleton'
@@ -11,7 +10,6 @@ import utils from '../../../utils/utils'
 const Lessons = () => {
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
-  const [search, setSearch] = useState<string>('');
   useEffect(()=>{
     async function getAllProjects() {
       try {
@@ -39,11 +37,6 @@ const Lessons = () => {
         </div>
       </div>
       <div className="w-full flex flex-col gap-20 create-project">
-        <div className="flex w-full justify-between items-center px-20">
-          <div className="flex items-center gap-10">
-            <div className="border border-borderGray px-16 py-10 rounded-8 flex gap-10 items-center cursor-pointer font-normal bg-white"><img src={search_icon } alt=""/> <input type="text" placeholder='Search subject' className={`outline-none border-none bg-inherit ${search ? 'text-black' : 'text-borderGray'}  cursor-pointer`} value={search} onChange={(e)=>setSearch(e.currentTarget.value)}/></div>
-          </div>
-        </div>
         {!loadingProjects && subjects.length > 0 && <div className="flex flex-col px-20 gap-30 mb-[100px]">
             <div className="flex flex-col w-full gap-20">
             {subjects.filter(i=>i.topics.length).map((subject : any, index : number )=>(
