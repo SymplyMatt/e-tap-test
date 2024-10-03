@@ -63,7 +63,7 @@ const Ranking = () => {
                                                 <td className='text-left py-16 font-normal'>{student.studentEmail}</td>
                                                 <td className='text-left py-16 font-normal'>{(!lesson.status || lesson.status === 'not-started') ? 'Not Enrolled' : lesson.status === 'completed' ? 'Completed' : 'In Progress'}</td>
                                                 <td className='text-left py-16 font-normal'>
-                                                    {lesson.progress ? (Math.floor((lesson.progress / lesson.duration) * 100) + '%,') : ''} {lesson.progress ? utils.formatTimeToLongString(lesson.progress) : 'Not started'}
+                                                    {lesson.progress ? (Math.floor((lesson.progress / lesson.duration) * 100) + '%,') : ''} {lesson.progress ? utils.formatTimeToLongString(lesson.progress) : 'Not played'}
                                                 </td>
                                             </tr>
                                         );
