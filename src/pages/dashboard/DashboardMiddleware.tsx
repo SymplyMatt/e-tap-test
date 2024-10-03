@@ -17,6 +17,7 @@ const DashboardMiddleware: React.FC = () => {
       const user= userDetails || location.state?.user || await getLoggedInUser();
       if(user){
         setUserDetails(user);
+        (user?.role === 'admin' || user?.role === 'teacher') && navigate('/admin/subjects', {replace : true});
         setIsAuthenticated(true);
       }else{
         navigate('/auth/signin', {replace : true});

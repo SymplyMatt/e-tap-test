@@ -18,6 +18,7 @@ const AuthMiddleware: React.FC = () => {
       if(user){
         setUserDetails(user);
         setIsAuthenticated(true);
+        (user?.role === 'admin' || user?.role === 'teacher') && navigate('/admin/subjects', {replace : true});
         navigate('/subjects', {replace : true});
       }else{
         setIsAuthenticated(false);

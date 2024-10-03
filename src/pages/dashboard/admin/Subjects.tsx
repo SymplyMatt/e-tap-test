@@ -46,9 +46,6 @@ const Lessons = () => {
           <div className="flex items-center gap-10">
             <div className="border border-borderGray px-16 py-10 rounded-8 flex gap-10 items-center cursor-pointer font-normal bg-white"><img src={search_icon } alt=""/> <input type="text" placeholder='Search project' className={`outline-none border-none bg-inherit ${search ? 'text-black' : 'text-borderGray'}  cursor-pointer`} value={search} onChange={(e)=>setSearch(e.currentTarget.value)}/></div>
           </div>
-          <div className="flex items-center gap-10">
-            <DateFilterDropdown projects={projects} setProjects={setProjects}/>
-          </div>
         </div>
         {!loadingProjects && subjects.length > 0 && <div className="flex flex-col px-20 gap-30 mb-[100px]">
           <LessonStates states={states}/>
