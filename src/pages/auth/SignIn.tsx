@@ -10,6 +10,7 @@ import { AxiosResponse } from "axios";
 const SignIn = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
+    const [admin, setAdmin] = useState<boolean>(false);
     const [password, setPassword] = useState('');
     const [disabled, setDisabled] = useState(true);
     const [loading, setLoading] = useState(false);
@@ -19,7 +20,7 @@ const SignIn = () => {
         return
       }
       setLoading(true);
-      const res:AxiosResponse | any = await makeRequest('POST', '/auth/login','',{email, firstName:password, role: 'student'});
+      const res:AxiosResponse | any = await makeRequest('POST', '/auth/login','',{email, firstName:password, role: admin ? 'admin' : 'student'});
       if(res.status === 200){
         navigate('/subjects', {state:{user: res.data.user}})
       }else{
@@ -47,6 +48,7 @@ const SignIn = () => {
         <div className="w-full flex flex-col gap-20">
           <Input updateFunction={(e)=>setPassword(e)} label="First name"/>
           <Input updateFunction={(e)=>setEmail(e)} label="Email address"/>
+          <div className="flex justify-start gap-10"><input type="checkbox" checked={admin} onChange={(e)=>setAdmin(e.currentTarget.checked)}/> I am an admin/teacher</div>
           <Button label="Login" onClick={()=>onSubmit()} disabled={disabled || loading} loading={loading}/>
           <div className="font-poppins text-base font-normal leading-6 text-center text-recruitBlue underline mt-[-10px] cursor-pointer">Forgot password or email? </div>
         </div>
