@@ -6,7 +6,7 @@ import makeRequest from '../../../../services/axios';
 const SubjectItemAdmin: React.FC<SubjectItemProps> = ({ subject }) => {
     const navigate = useNavigate();
     const totalDuration = subject.topics.map(i => i.duration).reduce((acc, curr) => acc + curr, 0);
-    const [studentsEnrolled, setStudentsEnrolled] = useState<number | null>(null);
+    const [studentsEnrolled, setStudentsEnrolled] = useState<any[] | null>(null);
     useEffect(()=>{
         async function getStudents(){
             const res: any = await makeRequest('GET', `/lessons/get/subject?subjectId=${subject.id}`);
@@ -14,7 +14,7 @@ const SubjectItemAdmin: React.FC<SubjectItemProps> = ({ subject }) => {
                 const studentsEnrolled: any[] = res.data.results.filter((student: any) => 
                     student.lessons.some((lesson:any) => lesson.createdAt !== null)
                 );
-                setStudentsEnrolled(studentsEnrolled.length);
+                setStudentsEnrolled(studentsEnrolled);
             }
         }
         getStudents();
@@ -45,13 +45,13 @@ const SubjectItemAdmin: React.FC<SubjectItemProps> = ({ subject }) => {
                                 </div>
                             </div>
                             <div className="flex items-center text-14 text-recruitBlue gap-10">
-                                {studentsEnrolled} students enrolled
+                                {studentsEnrolled?.length || 0} students enrolled
                             </div>
                         </div>
                         <div className="flex gap-20 items-center">
                             <div
                                 className="flex items-center justify-center w-[180px] border-[1.4px] border-recruitBlue p-5 h-[40px] rounded-8 gap-10 cursor-pointer"
-                                onClick={() => navigate(`/subjects/${subject.id}`, { state: { subject } })}
+                                onClick={() => navigate(`/admin/ranking/${subject.id}`, { state: { subject, studentsEnrolled } })}
                             >
                                 View Ranking <i className="fa-solid fa-arrow-right"></i>
                             </div>

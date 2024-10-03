@@ -11,6 +11,7 @@ import DashboardMiddleware from "../pages/dashboard/DashboardMiddleware";
 import AuthMiddleware from "../pages/auth/AuthMiddleware";
 import Topics from "../pages/dashboard/Topics";
 import AdminMiddleware from "../pages/dashboard/admin/AdminMiddleware";
+import Ranking from "../pages/dashboard/admin/Ranking";
 
 const Routes = (): JSX.Element => {
   const pageRoutes = [
@@ -100,7 +101,11 @@ const Routes = (): JSX.Element => {
         {
           path: "subjects", 
           element: <Subjects />, 
-        }
+        },
+        {
+          path: "ranking/:subjectId", 
+          element: <Ranking />, 
+        },
       ],
     },
   ];
