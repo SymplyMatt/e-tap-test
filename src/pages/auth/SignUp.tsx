@@ -6,9 +6,10 @@ import { useEffect } from "react";
 import utils from "../../utils/utils";
 import makeRequest from "../../services/axios";
 interface inputs{
-  firstName: string,
-  lastName: string,
-  email: string,
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
 }
 const SignUp = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const SignUp = () => {
     firstName: '',
     lastName: '',
     email: '',
+    role: 'admin'
   });
   const [disabled, setDisabled] = useState(true);
   const [admin, setAdmin] = useState<boolean>(false);
