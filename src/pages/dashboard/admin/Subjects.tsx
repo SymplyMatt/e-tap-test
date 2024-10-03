@@ -4,7 +4,7 @@ import search_icon from "../../../assets/images/search.svg"
 import { useEffect, useState } from 'react'
 import axiosRequest from '../../../services/axios'
 import Skeleton from '../../../components/dashboard/projects/Skeleton'
-import SubjectItem from '../../../components/dashboard/projects/details/SubjectItem'
+import SubjectItemAdmin from '../../../components/dashboard/projects/details/SubjectItemAdmin'
 import { Subject } from '../../../utils/interfaces'
 import utils from '../../../utils/utils'
 
@@ -47,7 +47,7 @@ const Lessons = () => {
         {!loadingProjects && subjects.length > 0 && <div className="flex flex-col px-20 gap-30 mb-[100px]">
             <div className="flex flex-col w-full gap-20">
             {subjects.filter(i=>i.topics.length).map((subject : any, index : number )=>(
-                <SubjectItem key={index} subject={subject} index={index}/>
+                <SubjectItemAdmin key={index} subject={subject} index={index}/>
             ))}
             </div>
         </div>}
