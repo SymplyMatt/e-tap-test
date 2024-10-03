@@ -22,7 +22,7 @@ const SignIn = () => {
       setLoading(true);
       const res:AxiosResponse | any = await makeRequest('POST', '/auth/login','',{email, firstName:password, role: admin ? 'admin' : 'student'});
       if(res.status === 200){
-        navigate('/subjects', {state:{user: res.data.user}})
+        navigate(res.data.user?.roles === 'admin' || res.data.user?.roles === 'teacher' ? '/admin/subjects' : '/subjects', {state:{user: res.data.user}});
       }else{
         utils.createErrorNotification('Invalid credentials', 1000);
       }

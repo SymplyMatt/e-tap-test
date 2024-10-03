@@ -9,6 +9,7 @@ import Lesson from "../pages/dashboard/Lesson";
 import DashboardMiddleware from "../pages/dashboard/DashboardMiddleware";
 import AuthMiddleware from "../pages/auth/AuthMiddleware";
 import Topics from "../pages/dashboard/Topics";
+import AdminMiddleware from "../pages/dashboard/admin/AdminMiddleware";
 
 const Routes = (): JSX.Element => {
   const pageRoutes = [
@@ -58,7 +59,6 @@ const Routes = (): JSX.Element => {
       ],
     },
   ];
-
   const subjectRoutes = [
     {
       path: "/subjects",
@@ -83,8 +83,28 @@ const Routes = (): JSX.Element => {
       ],
     },
   ];
+  const adminRoutes = [
+    {
+      path: "/admin",
+      element: (
+        <DashboardContext>
+          <AdminMiddleware />
+        </DashboardContext>
+      ),
+      children: [
+        {
+          path: "", 
+          element: <Lessons />, 
+        },
+        {
+          path: "subjects", 
+          element: <Lessons />, 
+        }
+      ],
+    },
+  ];
 
-  const router = createBrowserRouter([...pageRoutes, ...authRoutes, ...subjectRoutes]);
+  const router = createBrowserRouter([...pageRoutes, ...authRoutes, ...subjectRoutes, ...adminRoutes]);
 
   return <RouterProvider router={router} />;
 };
