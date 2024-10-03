@@ -44,7 +44,7 @@ const Lessons = () => {
       <div className="w-full flex flex-col gap-20 create-project">
         <div className="flex w-full justify-between items-center px-20">
           <div className="flex items-center gap-10">
-            <div className="border border-borderGray px-16 py-10 rounded-8 flex gap-10 items-center cursor-pointer font-normal bg-white"><img src={search_icon } alt=""/> <input type="text" placeholder='Search project' className={`outline-none border-none bg-inherit ${search ? 'text-black' : 'text-borderGray'}  cursor-pointer`} value={search} onChange={(e)=>setSearch(e.currentTarget.value)}/></div>
+            <div className="border border-borderGray px-16 py-10 rounded-8 flex gap-10 items-center cursor-pointer font-normal bg-white"><img src={search_icon } alt=""/> <input type="text" placeholder='Search subject' className={`outline-none border-none bg-inherit ${search ? 'text-black' : 'text-borderGray'}  cursor-pointer`} value={search} onChange={(e)=>setSearch(e.currentTarget.value)}/></div>
           </div>
           <div className="flex items-center gap-10">
             <DateFilterDropdown projects={projects} setProjects={setProjects}/>

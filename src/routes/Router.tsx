@@ -5,6 +5,7 @@ import SignIn from "../pages/auth/SignIn";
 import Verify from "../pages/auth/Verify";
 import DashboardContext from "../context/DashboardContext";
 import Lessons from "../pages/dashboard/Subjects";
+import Subjects from "../pages/dashboard/admin/Subjects";
 import Lesson from "../pages/dashboard/Lesson";
 import DashboardMiddleware from "../pages/dashboard/DashboardMiddleware";
 import AuthMiddleware from "../pages/auth/AuthMiddleware";
@@ -94,11 +95,11 @@ const Routes = (): JSX.Element => {
       children: [
         {
           path: "", 
-          element: <Lessons />, 
+          element: <Subjects />, 
         },
         {
           path: "subjects", 
-          element: <Lessons />, 
+          element: <Subjects />, 
         }
       ],
     },
