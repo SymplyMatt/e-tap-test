@@ -33,7 +33,8 @@ const LessonItem: React.FC<SubjectItemProps> = ({ subject }) => {
                 const topicsEnrolled = uniqueLessons.map(i => i.topic);
                 const topicsNotEnrolled = subject.topics.filter(topic => !topicsEnrolled.includes(topic.id)).map(i => {
                     return {
-                        status: 'not-enrolled'
+                        status: 'not-enrolled',
+                        id:i
                     }
                 });
                 const allLessons = [...uniqueLessons,topicsNotEnrolled];
