@@ -9,8 +9,6 @@ const DashboardMiddleware: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const getLoggedInUser = async () =>{
-    console.log('called from dashboard middleware');
-    
     const res:any = await makeRequest('GET',`/auth/getLoggedInUser`, location.state?.token);
     return res.data?.user
   }
