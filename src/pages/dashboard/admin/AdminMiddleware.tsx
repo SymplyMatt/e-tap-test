@@ -9,13 +9,15 @@ const AdminMiddleware: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const getLoggedInUser = async () =>{
-    const res:any = await makeRequest('GET',`/auth/getLoggedInUser`,userDetails?.token);
+    const res:any = await makeRequest('GET',`/auth/getLoggedInUser`,userDetails?.token || location.state?.token);
     return res.data?.user
   }
   useEffect(()=>{
     async function getUserDetails(){
       const user = userDetails || location.state?.user || await getLoggedInUser();
+      const token = userDetails?.token || location?.state?.token || ' ';
       if(user){
+        user.token = token;
         setUserDetails(user);
         (user?.role === 'admin' || user?.role === 'teacher') && setIsAuthenticated(true);
         (user?.role !== 'admin' && user?.role !== 'teacher') && navigate('/subjects', {replace : true});
