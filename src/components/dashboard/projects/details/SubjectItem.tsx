@@ -30,7 +30,14 @@ const LessonItem: React.FC<SubjectItemProps> = ({ subject }) => {
                 }, []);
                 const totalProgress = uniqueLessons.map((lesson: any) => lesson.status === 'completed' ? (subject.topics.find(i=>i.id === lesson.topic)?.duration || 0) : lesson.progress).reduce((acc: number, curr: number) => acc + curr, 0);
                 setUserProgress(totalProgress);
-                setStatus(uniqueLessons.length ===  0 ? 'not-started' : uniqueLessons.every(i=>i.status === 'completed') ? 'completed' : uniqueLessons.some(i=>i.status === 'in-progress') ? 'in-progress' : 'not-started')
+                const topicsEnrolled = uniqueLessons.map(i => i.topic);
+                const topicsNotEnrolled = subject.topics.filter(topic => !topicsEnrolled.includes(topic.id)).map(i => {
+                    return {
+                        status: 'not-enrolled'
+                    }
+                });
+                const allLessons = [...uniqueLessons,topicsNotEnrolled];
+                setStatus(allLessons.length ===  0 ? 'not-started' : allLessons.every(i=>i.status === 'completed') ? 'completed' : allLessons.some(i=>i.status === 'in-progress' || i.status === 'completed') ? 'in-progress' : 'not-started');
             } else {
                 setUserProgress(0);
             }
