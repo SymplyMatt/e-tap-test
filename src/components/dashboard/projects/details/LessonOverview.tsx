@@ -16,36 +16,39 @@ function LessonOverview({ topic }: Props) {
   const [lesson, setLesson] = useState<any>(null);
   const [hasLoadedProgress, setHasLoadedProgress] = useState(false);
   const updateIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     if (location.state?.lesson) {
       setLesson(location.state.lesson);
       setHasLoadedProgress(true);
-    } 
+    }
   }, [location.state, topic.id]);
+
   async function createLesson() {
     try {
       const res: any = await makeRequest('POST', '/lessons/start', userDetails?.token, { topicId: topic.id });
       if (res.status === 200) {
         setLesson(res.data);
         setHasLoadedProgress(true);
-        return res.data
+        return res.data;
       }
-    } catch (error) {     
+    } catch (error) {
+      console.log('error: ', error);
     }
   }
 
   async function updateProgress(progress: number) {
+    console.log('updating video progress');
     let newLesson;
     const lessonData = lesson || location?.state?.lesson;
     if (!lessonData) {
       newLesson = await createLesson();
-    };
-    const data = { lessonId: lesson?.id || newLesson?.userLesson?.id, progress : Math.floor(progress) };
-    if(!lesson?.id && !newLesson?.userLesson?.id) return
+    }
+    const data = { lessonId: lesson?.id || newLesson?.userLesson?.id, progress: Math.floor(progress) };
+    if (!lesson?.id && !newLesson?.userLesson?.id) return;
     const res: any = await makeRequest('POST', '/lessons/update-progress', userDetails?.token, data);
     if (res.status !== 200) utils.createErrorNotification('Unable to update lesson progress', 1000);
   }
-
 
   useEffect(() => {
     if (!lesson || !hasLoadedProgress) return;
@@ -55,9 +58,9 @@ function LessonOverview({ topic }: Props) {
     }
   }, [lesson, hasLoadedProgress, topic.duration]);
 
-
   useEffect(() => {
     const videoElement = videoRef.current;
+
     if (videoElement) {
       const handleSeek = () => {
         if (videoElement) {
@@ -71,6 +74,11 @@ function LessonOverview({ topic }: Props) {
         }
       };
 
+      const handlePlay = () => {
+        if (videoElement) {
+          updateProgress(videoElement.currentTime); 
+        }
+      };
 
       const stopProgressUpdates = () => {
         if (updateIntervalRef.current) {
@@ -78,17 +86,26 @@ function LessonOverview({ topic }: Props) {
           updateIntervalRef.current = null;
         }
         if (videoElement) {
-          updateProgress(videoElement.currentTime); 
+          updateProgress(videoElement.currentTime);
         }
       };
 
       videoElement.addEventListener('seeked', handleSeek);
       videoElement.addEventListener('ended', handleVideoEnd);
+      videoElement.addEventListener('play', handlePlay);
+      videoElement.addEventListener('pause', handlePlay);
+
+      updateIntervalRef.current = setInterval(() => {
+        if (videoElement) {
+          updateProgress(videoElement.currentTime);
+        }
+      }, 10000); 
 
       return () => {
         videoElement.removeEventListener('seeked', handleSeek);
         videoElement.removeEventListener('ended', handleVideoEnd);
-        stopProgressUpdates(); 
+        videoElement.removeEventListener('play', handlePlay);
+        stopProgressUpdates();
       };
     }
   }, [lesson, topic.duration]);
