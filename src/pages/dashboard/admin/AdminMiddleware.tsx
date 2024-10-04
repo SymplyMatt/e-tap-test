@@ -3,15 +3,15 @@ import { useContext, useEffect, useState } from 'react';
 import { Context} from '../../../context/DashboardContext';
 import makeRequest from '../../../services/axios';
 
-export const getLoggedInUser = async () =>{
-  const res:any = await makeRequest('GET',`/auth/getLoggedInUser`);
-  return res.data?.user
-}
 const AdminMiddleware: React.FC = () => {
   const {setUserDetails, userDetails} = useContext(Context);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const getLoggedInUser = async () =>{
+    const res:any = await makeRequest('GET',`/auth/getLoggedInUser`,userDetails?.token);
+    return res.data?.user
+  }
   useEffect(()=>{
     async function getUserDetails(){
       const user = userDetails || location.state?.user || await getLoggedInUser();
