@@ -30,7 +30,7 @@ const SignUp = () => {
     setLoading(true);
     const res: any = await makeRequest('POST', `/users/create/${admin ? 'admin' : 'student'}`,'',inputValues);
     if(res.status === 201){
-      navigate('/subjects', {state:{user: res.data.newUser, token: res.data.token}});
+      navigate(res.data.user?.roles === 'admin' || res.data.user?.roles === 'teacher' ? '/admin/subjects' :'/subjects', {state:{user: res.data.newUser, token: res.data.token}});
     }else{
       utils.createErrorNotification(res.response.data?.message, 1500);
     }
