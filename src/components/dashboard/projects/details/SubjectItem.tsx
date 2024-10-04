@@ -2,10 +2,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import project_line from '../../../../assets/images/project_line.svg';
 import utils from '../../../../utils/utils';
 import { SubjectItemProps } from '../../../../utils/interfaces';
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import makeRequest from '../../../../services/axios';
+import { Context } from '../../../../context/DashboardContext';
 
 const LessonItem: React.FC<SubjectItemProps> = ({ subject }) => {
+    const { userDetails } = useContext(Context);
     const navigate = useNavigate();
     const totalDuration = subject.topics.map(i => i.duration).reduce((acc, curr) => acc + curr, 0);
     const [userProgress, setUserProgress] = useState<number | null>(null);
@@ -18,7 +20,7 @@ const LessonItem: React.FC<SubjectItemProps> = ({ subject }) => {
 
     useEffect(() => {
         async function getLessonProgress() {
-            const res: any = await makeRequest('GET', `/lessons/get/subject/user?subjectId=${subject.id}`);
+            const res: any = await makeRequest('GET', `/lessons/get/subject/user?subjectId=${subject.id}`, userDetails?.token);
             if (res.status === 200) {                
                 const uniqueLessons: any[] = res.data.lessons.reduce((acc: any[], lesson: any) => {
                     if (!acc.some((l) => l.topic === lesson.topic)) {

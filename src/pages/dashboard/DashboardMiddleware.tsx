@@ -15,6 +15,8 @@ const DashboardMiddleware: React.FC = () => {
   useEffect(()=>{
     async function getUserDetails(){
       const user= userDetails || location.state?.user || await getLoggedInUser();
+      const token = userDetails?.token || location?.state?.token || ' ';
+      user.token = token;
       if(user){
         setUserDetails(user);
         (user?.role === 'admin' || user?.role === 'teacher') && navigate('/admin/subjects', {replace : true});

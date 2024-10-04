@@ -1,15 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import utils from '../../../../utils/utils';
 import { SubjectItemProps } from '../../../../utils/interfaces';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import makeRequest from '../../../../services/axios';
+import { Context } from '../../../../context/DashboardContext';
 const SubjectItemAdmin: React.FC<SubjectItemProps> = ({ subject }) => {
+    const { userDetails } = useContext(Context);
     const navigate = useNavigate();
     const totalDuration = subject.topics.map(i => i.duration).reduce((acc, curr) => acc + curr, 0);
     const [studentsEnrolled, setStudentsEnrolled] = useState<any[] | null>(null);
     useEffect(()=>{
         async function getStudents(){
-            const res: any = await makeRequest('GET', `/lessons/get/subject?subjectId=${subject.id}`);
+            const res: any = await makeRequest('GET', `/lessons/get/subject?subjectId=${subject.id}`,userDetails?.token);
             if(res.status === 200){
                 const studentsEnrolled: any[] = res.data.results.filter((student: any) => 
                     student.lessons.some((lesson:any) => lesson.createdAt !== null)

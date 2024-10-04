@@ -2,10 +2,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import project_line from '../../../../assets/images/project_line.svg';
 import utils from '../../../../utils/utils';
 import { TopicItemProps } from '../../../../utils/interfaces';
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import makeRequest from '../../../../services/axios';
+import { Context } from '../../../../context/DashboardContext';
 
 const TopicItem: React.FC<TopicItemProps> = ({ topic }) => {
+    const { userDetails } = useContext(Context);
     const navigate = useNavigate();
     const location = useLocation();
     const totalDuration = topic.duration;
@@ -19,7 +21,7 @@ const TopicItem: React.FC<TopicItemProps> = ({ topic }) => {
 
     useEffect(() => {
         async function getLessonProgress() {
-            const res: any = await makeRequest('GET', `/lessons/get/topic?topicId=${topic.id}`);
+            const res: any = await makeRequest('GET', `/lessons/get/topic?topicId=${topic.id}`, userDetails?.token);
             if (res.status == 200) {
                 setLesson(res.data);
                 setUserProgress(res.data.progress);

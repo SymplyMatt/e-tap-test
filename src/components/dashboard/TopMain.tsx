@@ -27,7 +27,7 @@ const TopMain = () => {
   }, [showUserDropDown]);
   const logout = async () =>{
     localStorage.clear();
-    const res: any = await makeRequest('POST', '/auth/logout');
+    const res: any = await makeRequest('POST', '/auth/logout', userDetails?.token);
     console.log(res);
     setUserDetails(null);
     navigate('/auth/login');

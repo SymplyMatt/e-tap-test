@@ -1,14 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Topic } from '../../../../utils/interfaces';
 import { useLocation } from 'react-router-dom';
 import makeRequest from '../../../../services/axios';
 import utils from '../../../../utils/utils';
+import { Context } from '../../../../context/DashboardContext';
 
 interface Props {
   topic: Topic;
 }
 
 function LessonOverview({ topic }: Props) {
+  const { userDetails } = useContext(Context);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const location = useLocation();
   const [lesson, setLesson] = useState<any>(null);
@@ -22,7 +24,7 @@ function LessonOverview({ topic }: Props) {
   }, [location.state, topic.id]);
   async function createLesson() {
     try {
-      const res: any = await makeRequest('POST', '/lessons/start', null, { topicId: topic.id });
+      const res: any = await makeRequest('POST', '/lessons/start', userDetails?.token, { topicId: topic.id });
       if (res.status === 200) {
         setLesson(res.data);
         setHasLoadedProgress(true);
@@ -40,7 +42,7 @@ function LessonOverview({ topic }: Props) {
     };
     const data = { lessonId: lesson?.id || newLesson?.userLesson?.id, progress : Math.floor(progress) };
     if(!lesson?.id && !newLesson?.userLesson?.id) return
-    const res: any = await makeRequest('POST', '/lessons/update-progress', null, data);
+    const res: any = await makeRequest('POST', '/lessons/update-progress', userDetails?.token, data);
     if (res.status !== 200) utils.createErrorNotification('Unable to update lesson progress', 1000);
   }
 

@@ -19,6 +19,7 @@ export interface userDetails{
   email: string;
   createdAt : Date;
   role?: string;
+  token:string;
 }
 
 interface ContextValue {
