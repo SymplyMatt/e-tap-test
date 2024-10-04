@@ -26,7 +26,7 @@ const AdminMiddleware: React.FC = () => {
       }    
     }
     getUserDetails();
-  },[location.pathname]);
+  },[location.pathname, location.state]);
 
   if (!isAuthenticated) {
     return <></>;
