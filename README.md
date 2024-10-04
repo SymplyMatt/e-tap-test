@@ -1,30 +1,42 @@
-# React + TypeScript + Vite
+# E-TAP Frontend Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This frontend application is developed for the E-TAP technical interview. It provides a user-friendly interface for interacting with the backend API.
 
-Currently, two official plugins are available:
+## Technology Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Language**: TypeScript
+- **Framework**: React
 
-## Expanding the ESLint configuration
+## Design
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- This is a **desktop-only design**, optimized for larger screens.
+- **Note**: This design does not cover the entire backend application. Only core student features are included in this design. Additional admin features (such as subject creation, topic creation, etc.) can be found and tested in the Swagger documentation.
 
-- Configure the top-level `parserOptions` property like this:
+## Live Deployment
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+You can access the live deployment of the application at the following URL:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+[Live Deployment](https://e-tap-test.vercel.app/)
+
+## Hosting
+
+The application is hosted on **Vercel** (free tier, so it may be prone to disappointments).
+
+## Documentation
+
+For further details about the backend API and to test additional features, please refer to the Swagger documentation:
+
+[API Documentation](https://e-tap-46ce93b99242.herokuapp.com/docs)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/your-repo-name.git
